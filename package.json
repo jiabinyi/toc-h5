@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "license": "MIT",
   "author": "mopon-front-end",
-  "description": "Developing with Vue 3 and Typescript in Vite.",
+  "description": "知旅云-H5,互动活动，即时预览",
   "scripts": {
     "dev": "vite",
     "start": "npm run dev",
@@ -49,7 +49,7 @@
     "sass": "^1.45.0",
     "typescript": "^4.5.2",
     "unplugin-vue-components": "^0.21.1",
-    "vite": "^2.7.3",
+    "vite": "^3.0.3",
     "vite-plugin-style-import": "^2.0.0",
     "vue-eslint-parser": "^8.0.1",
     "vue-tsc": "^0.29.8",
