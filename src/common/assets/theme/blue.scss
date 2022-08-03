@@ -1,0 +1,9 @@
+.blue-mode{
+  .index-bg{
+    width:100vw;
+    height: 100vh;
+    background: url("../images/blue/blue-index-bg.png") no-repeat;
+    background-size: cover;
+  }
+  --lottery-main-bg:url("../images/blue/blue-lottery-bg.png");
+}
