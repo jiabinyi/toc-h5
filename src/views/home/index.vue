@@ -108,10 +108,8 @@ const endTurns = () => {
     background: none !important;
   }
   :deep(.start) {
-    width: 88px;
-    height: 88px;
+    @include lottery-btn-bg;
     background: var(--lottery-btn-default) no-repeat;
-    background-size: cover;
     position: relative;
     color: white;
     font-weight: 500;
@@ -119,15 +117,29 @@ const endTurns = () => {
     line-height: 88px;
   }
   :deep(.disabledDraw) {
-    width: 88px;
-    height: 88px;
+    @include lottery-btn-bg;
     background: var(--lottery-btn-disabled) no-repeat;
-    background-size: cover;
     color: black;
   }
-  :deep(li) {
-    background: #fff;
-    border-radius: 2px;
+  :deep(ul) {
+    & li {
+      background: #fff;
+      border-radius: 4px;
+    }
+    & .gift-1,
+    .gift-2,
+    .gift-3 {
+      top: 15px;
+    }
+    & .gift-4,
+    .gift-8 {
+      top: 105px;
+    }
+    & .gift-5,
+    .gift-6,
+    .gift-7 {
+      top: 200px;
+    }
     & .desc {
       color: #6684dd;
     }
@@ -136,8 +148,10 @@ const endTurns = () => {
     }
   }
   :deep(.active) {
-    background: #d94f0f;
-    border-radius: 2px;
+    background: #c87b58;
+    border-radius: 4px;
+    color: #000;
+    font-weight: 500;
   }
 }
 </style>
