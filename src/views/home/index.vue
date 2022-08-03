@@ -88,7 +88,7 @@ const startTurns = () => {
   prizeIndex.value = Math.floor(Math.random() * PRIZE_lIST_SIZE);
 };
 const endTurns = () => {
-  proxy.$toast.text('中奖了');
+  proxy.$toast.text('喜从天降，运气爆棚，恭喜你中奖了！');
 };
 </script>
 <style lang="scss" scoped>
@@ -103,6 +103,7 @@ const endTurns = () => {
     background: var(--lottery-main-bg) no-repeat !important;
     background-size: cover;
     top: -95px;
+    left: -15px;
   }
   :deep(.marqueeBg) {
     background: none !important;
@@ -111,6 +112,7 @@ const endTurns = () => {
     @include lottery-btn-bg;
     background: var(--lottery-btn-default) no-repeat;
     position: relative;
+    text-align: center;
     color: white;
     font-weight: 500;
     font-size: 14px;
@@ -129,16 +131,16 @@ const endTurns = () => {
     & .gift-1,
     .gift-2,
     .gift-3 {
-      top: 15px;
+      top: 10px;
     }
     & .gift-4,
     .gift-8 {
-      top: 105px;
+      top: 100px;
     }
     & .gift-5,
     .gift-6,
     .gift-7 {
-      top: 200px;
+      top: 195px;
     }
     & .desc {
       color: #6684dd;
