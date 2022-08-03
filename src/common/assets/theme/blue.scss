@@ -1,11 +1,12 @@
 @mixin  lottery-btn-bg {
   width: 95px;
   height: 95px;
-  background-size: cover;
+  background-size: cover !important;
 }
 .blue-mode{
     margin: 0;
     padding: 0;
+    background: #127bfe;
   .index-bg{
     width:100vw;
     height: 100vh;

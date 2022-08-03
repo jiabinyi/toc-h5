@@ -98,12 +98,12 @@ const endTurns = () => {
     height: 326px;
   }
   :deep(.bgContent) {
-    width: 346px;
-    height: 423px;
+    width: 355px;
+    height: 444px;
     background: var(--lottery-main-bg) no-repeat !important;
     background-size: cover;
-    top: -95px;
-    left: -15px;
+    top: -85px;
+    left: -8px;
   }
   :deep(.marqueeBg) {
     background: none !important;
