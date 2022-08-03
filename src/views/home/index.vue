@@ -108,16 +108,21 @@ const endTurns = () => {
     background: none !important;
   }
   :deep(.start) {
-    background: v-bind(background);
+    width: 88px;
+    height: 88px;
+    background: var(--lottery-btn-default) no-repeat;
+    background-size: cover;
     position: relative;
     color: white;
     font-weight: 500;
     font-size: 14px;
-    line-height: 2rem;
-    border-radius: 50%;
+    line-height: 88px;
   }
   :deep(.disabledDraw) {
-    background: #eee;
+    width: 88px;
+    height: 88px;
+    background: var(--lottery-btn-disabled) no-repeat;
+    background-size: cover;
     color: black;
   }
   :deep(li) {
