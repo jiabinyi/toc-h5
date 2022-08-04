@@ -15,6 +15,12 @@ const routes: Array<RouteRecordRaw> = [
     name: 'home',
     component: () => import('@/views/home/index.vue'),
     meta: {}
+  },
+  {
+    path: '/largeTurntable',
+    name: 'largeTurntable',
+    component: () => import('@/views/largeTurntable/index.vue'),
+    meta: {}
   }
 ];
 const router: Router = createRouter({
