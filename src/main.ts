@@ -3,6 +3,7 @@ import App from '@/App.vue';
 import router from '@/router';
 import dayjs from 'dayjs';
 import 'dayjs/locale/zh-cn';
+import 'amfe-flexible';
 import NutUI from '@nutui/nutui';
 import { Marquee } from '@nutui/nutui-bingo';
 import '@nutui/nutui/dist/style.css';

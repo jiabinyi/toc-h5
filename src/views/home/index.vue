@@ -1,15 +1,19 @@
 <template>
   <div class="home-container index-bg">
     <div class="home-header"></div>
-    <nutbig-marquee
-      :prize-list="prizeList"
-      :prize-index="prizeIndex"
-      :speed="150"
-      :circle="40"
-      @start-turns="startTurns"
-      @end-turns="endTurns"
-    >
-    </nutbig-marquee>
+    <div class="home-lottery">
+      <div class="lottery-content">
+        <nutbig-marquee
+          :prize-list="prizeList"
+          :prize-index="prizeIndex"
+          :speed="150"
+          :circle="40"
+          @start-turns="startTurns"
+          @end-turns="endTurns"
+        >
+        </nutbig-marquee>
+      </div>
+    </div>
   </div>
 </template>
 <script lang="ts" setup name="Home">
@@ -28,7 +32,6 @@ const setLottery = () => {
 };
 const { proxy } = getCurrentInstance();
 
-const background = ref('#3eacfb');
 // 转盘上要展示的奖品数据
 const prizeList = ref([
   {
@@ -95,15 +98,27 @@ const endTurns = () => {
 .home-container {
   & .home-header {
     width: 100vw;
-    height: 326px;
+    height: 216px;
+  }
+  & .home-lottery {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .lottery-content {
+      width: 345px;
+      height: 423px;
+      background-position: center 0;
+      background-attachment: inherit;
+      background-repeat: no-repeat;
+      background-image: var(--lottery-main-bg) !important;
+      background-size: cover;
+    }
+  }
+  :deep(.nutbig-marquee) {
+    margin-top: 100px;
   }
   :deep(.bgContent) {
-    width: 355px;
-    height: 444px;
-    background: var(--lottery-main-bg) no-repeat !important;
-    background-size: cover;
-    top: -85px;
-    left: -8px;
+    background: none;
   }
   :deep(.marqueeBg) {
     background: none !important;

@@ -10,7 +10,10 @@
   .index-bg{
     width:100vw;
     height: 100vh;
-    background: url("../images/blue/blue-index-bg.png") no-repeat;
+    background-position: center 0;
+    background-attachment: inherit;
+    background-repeat: no-repeat;
+    background-image: url("../images/blue/blue-index-bg.png");
     background-size: cover;
   }
   --lottery-main-bg:url("../images/blue/blue-lottery-bg.png");

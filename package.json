@@ -5,10 +5,10 @@
   "author": "mopon-front-end",
   "description": "知旅云-H5,互动活动，即时预览",
   "scripts": {
-    "dev": "vite",
-    "start": "npm run dev",
+    "dev": "vite --host",
+    "start": "npm run dev --host",
     "build": "vue-tsc --noEmit && vite build",
-    "serve": "vite preview",
+    "serve": "vite preview --host",
     "lint": "eslint --ext .js,.jsx,.vue,.ts,.tsx src",
     "generate": "plop"
   },
@@ -16,6 +16,7 @@
     "@nutui/nutui": "^3.2.0",
     "@nutui/nutui-bingo": "^1.0.5",
     "@vueuse/router": "^9.0.2",
+    "amfe-flexible": "^2.2.1",
     "axios": "^0.24.0",
     "consola": "^2.15.3",
     "dayjs": "^1.10.7",
