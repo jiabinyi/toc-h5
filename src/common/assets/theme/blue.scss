@@ -1,7 +1,13 @@
 @mixin  lottery-btn-bg {
-  width: 95px;
-  height: 95px;
+  width: 98px;
+  height: 98px;
   background-size: cover !important;
+}
+@mixin  toc-images-background {
+  background-position: center 0;
+  background-attachment: inherit;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 .blue-mode{
     margin: 0;
@@ -10,13 +16,13 @@
   .index-bg{
     width:100vw;
     height: 100vh;
-    background-position: center 0;
-    background-attachment: inherit;
-    background-repeat: no-repeat;
+    @include toc-images-background;
     background-image: url("../images/blue/blue-index-bg.png");
-    background-size: cover;
   }
+  --lottery-desc-color:#2055e2;
   --lottery-main-bg:url("../images/blue/blue-lottery-bg.png");
   --lottery-btn-default:url("../images/blue/lottery-btn-default.png");
   --lottery-btn-disabled:url("../images/blue/lottery-btn-disabled.png");
+  --receive-tab:url("../images/blue/blue-receive-tab-activation.png");
+  --marquee-item:url("../images/blue/marquee-item-bg.png");
 }

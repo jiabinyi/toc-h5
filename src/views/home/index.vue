@@ -1,7 +1,7 @@
 <template>
-  <div class="home-container index-bg">
-    <div class="home-header"></div>
-    <div class="home-lottery">
+  <div class="lottery-container index-bg">
+    <div class="lottery-header"></div>
+    <div class="lottery-main">
       <div class="lottery-content">
         <nutbig-marquee
           :prize-list="prizeList"
@@ -13,6 +13,9 @@
         >
         </nutbig-marquee>
       </div>
+    </div>
+    <div class="lottery-footer">
+      <div class="lottery-tab"></div>
     </div>
   </div>
 </template>
@@ -95,27 +98,24 @@ const endTurns = () => {
 };
 </script>
 <style lang="scss" scoped>
-.home-container {
-  & .home-header {
+.lottery-container {
+  & .lottery-header {
     width: 100vw;
     height: 216px;
   }
-  & .home-lottery {
+  & .lottery-main {
     display: flex;
     justify-content: center;
     align-items: center;
     .lottery-content {
       width: 345px;
       height: 423px;
-      background-position: center 0;
-      background-attachment: inherit;
-      background-repeat: no-repeat;
+      @include toc-images-background;
       background-image: var(--lottery-main-bg) !important;
-      background-size: cover;
     }
   }
   :deep(.nutbig-marquee) {
-    margin-top: 100px;
+    margin-top: 95px;
   }
   :deep(.bgContent) {
     background: none;
@@ -129,9 +129,11 @@ const endTurns = () => {
     position: relative;
     text-align: center;
     color: white;
-    font-weight: 500;
+    font-weight: 600;
     font-size: 14px;
-    line-height: 88px;
+    line-height: 98px;
+    top: 5px;
+    left: 4px;
   }
   :deep(.disabledDraw) {
     @include lottery-btn-bg;
@@ -140,28 +142,45 @@ const endTurns = () => {
   }
   :deep(ul) {
     & li {
-      background: #fff;
-      border-radius: 4px;
+      width: 100px;
+      height: 100px;
+      @include toc-images-background;
+      background-image: var(--marquee-item);
     }
     & .gift-1,
     .gift-2,
     .gift-3 {
-      top: 10px;
+      top: 0px;
     }
     & .gift-4,
     .gift-8 {
-      top: 100px;
+      top: 105px;
     }
     & .gift-5,
     .gift-6,
     .gift-7 {
-      top: 195px;
+      top: 210px;
+    }
+    & .gift-1,
+    .gift-7,
+    .gift-8 {
+      left: 0px;
+    }
+    & .gift-2,
+    .gift-6 {
+      left: 103px;
     }
     & .desc {
-      color: #6684dd;
+      font-size: 14px;
+      font-weight: 400;
+      color: var(--lottery-desc-color);
     }
-    & img {
-      object-fit: cover;
+    & .gift-img {
+      width: 64px;
+      height: 48px;
+      & img {
+        object-fit: cover;
+      }
     }
   }
   :deep(.active) {
@@ -169,6 +188,18 @@ const endTurns = () => {
     border-radius: 4px;
     color: #000;
     font-weight: 500;
+  }
+  & .lottery-footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 29px;
+    & .lottery-tab {
+      width: 288px;
+      height: 40px;
+      @include toc-images-background;
+      background-image: var(--receive-tab) !important;
+    }
   }
 }
 </style>
