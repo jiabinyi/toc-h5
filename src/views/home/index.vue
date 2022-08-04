@@ -88,7 +88,7 @@ const prizeList = ref([
   }
 ]);
 // 中奖的奖品的index(此数据可根据后台返回的值重新赋值)
-const prizeIndex = ref(0);
+const prizeIndex = ref(-1);
 const startTurns = () => {
   const PRIZE_lIST_SIZE = prizeList.value.length;
   prizeIndex.value = Math.floor(Math.random() * PRIZE_lIST_SIZE);
@@ -184,8 +184,9 @@ const endTurns = () => {
     }
   }
   :deep(.active) {
-    background: #c87b58;
-    border-radius: 4px;
+    background: rgba(232, 243, 255, 0.32);
+    box-shadow: 0px 2px 5px 0 rgba(232, 243, 255, 0.32);
+    border-radius: 6px;
     color: #000;
     font-weight: 500;
   }
