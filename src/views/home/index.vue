@@ -7,7 +7,7 @@
 import useTheme from '@/utils/hooks/useTheme'
 import { useRouteQuery } from '@vueuse/router'
 onMounted(() => {
-  const theme: any = useRouteQuery('theme')
+  const theme = useRouteQuery('theme') as any
   const { setBodyClassName } = useTheme()
   setBodyClassName(theme.value ?? 'blue')
 })
