@@ -20,20 +20,19 @@
   </div>
 </template>
 <script lang="ts" setup name="Home">
-import { ref, onMounted, getCurrentInstance } from 'vue';
-import { useRouteQuery } from '@vueuse/router';
-import useTheme from '@/utils/hooks/useTheme';
+import { useRouteQuery } from '@vueuse/router'
+import useTheme from '@/utils/hooks/useTheme'
 onMounted(() => {
-  const theme = useRouteQuery('theme');
-  const { setBodyClassName } = useTheme();
-  setBodyClassName(theme.value ?? 'green');
-  setLottery();
-});
+  const theme = useRouteQuery('theme')
+  const { setBodyClassName } = useTheme()
+  setBodyClassName(theme.value ?? 'green')
+  setLottery()
+})
 const setLottery = () => {
-  const lotteryBtn = document.getElementsByClassName('start');
-  lotteryBtn[0].innerHTML = '立即抽奖';
-};
-const { proxy } = getCurrentInstance();
+  const lotteryBtn = document.getElementsByClassName('start')
+  lotteryBtn[0].innerHTML = '立即抽奖'
+}
+const { proxy } = getCurrentInstance()
 
 // 转盘上要展示的奖品数据
 const prizeList = ref([
@@ -86,16 +85,16 @@ const prizeList = ref([
     prizeImg:
       'https://img2.baidu.com/it/u=1985555842,143515817&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=667'
   }
-]);
+])
 // 中奖的奖品的index(此数据可根据后台返回的值重新赋值)
-const prizeIndex = ref(-1);
+const prizeIndex = ref(-1)
 const startTurns = () => {
-  const PRIZE_lIST_SIZE = prizeList.value.length;
-  prizeIndex.value = Math.floor(Math.random() * PRIZE_lIST_SIZE);
-};
+  const PRIZE_lIST_SIZE: number = prizeList.value.length
+  prizeIndex.value = Math.floor(Math.random() * PRIZE_lIST_SIZE)
+}
 const endTurns = () => {
-  proxy.$toast.text('喜从天降，运气爆棚，恭喜你中奖了！');
-};
+  proxy.$toast.text('喜从天降，运气爆棚，恭喜你中奖了！')
+}
 </script>
 <style lang="scss" scoped>
 .lottery-container {

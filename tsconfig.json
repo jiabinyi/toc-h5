@@ -30,7 +30,7 @@
     "src/**/*.ts",
     "src/**/*.d.ts",
     "src/**/*.tsx",
-    "src/**/*.vue",
+    "src/**/*.vue", "./typing.d.ts",
   ],
   "exclude": [
     "node_modules",

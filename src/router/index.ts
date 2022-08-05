@@ -16,6 +16,7 @@ const routes: Array<RouteRecordRaw> = [
     component: () => import('@/views/home/index.vue'),
     meta: {}
   },
+  // 大转盘活动
   {
     path: '/largeTurntable',
     name: 'largeTurntable',
