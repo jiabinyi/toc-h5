@@ -20,19 +20,14 @@
   </div>
 </template>
 <script lang="ts" setup name="Home">
-import { useRouteQuery } from '@vueuse/router'
-import useTheme from '@/utils/hooks/useTheme'
 onMounted(() => {
-  const theme = useRouteQuery('theme')
-  const { setBodyClassName } = useTheme()
-  setBodyClassName(theme.value ?? 'green')
   setLottery()
 })
 const setLottery = () => {
-  const lotteryBtn = document.getElementsByClassName('start')
+  const lotteryBtn: any = document.getElementsByClassName('start')
   lotteryBtn[0].innerHTML = '立即抽奖'
 }
-const { proxy } = getCurrentInstance()
+const { proxy } = getCurrentInstance() as any
 
 // 转盘上要展示的奖品数据
 const prizeList = ref([
