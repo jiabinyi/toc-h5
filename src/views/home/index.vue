@@ -20,6 +20,6 @@ onMounted(() => {
   store.setUserInfo({ name: '张三疯', age: 120 })
 })
 const toPage = () => {
-  router.push({ path: '/largeTurntable', query: { theme: 'blue' } })
+  router.push({ path: '/marquee', query: {} })
 }
 </script>

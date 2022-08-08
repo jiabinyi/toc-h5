@@ -1,28 +1,68 @@
-@mixin  lottery-btn-bg {
+@mixin lottery-btn-bg {
   width: 98px;
   height: 98px;
   background-size: cover !important;
 }
-@mixin  toc-images-background {
+@mixin toc-images-background {
   background-position: center 0;
   background-attachment: inherit;
   background-repeat: no-repeat;
   background-size: cover;
 }
-.blue-mode{
-    margin: 0;
-    padding: 0;
-    background: #127bfe;
-  .index-bg{
-    width:100vw;
+.blue-mode {
+  margin: 0;
+  padding: 0;
+  background: #127bfe;
+  .index-bg {
+    width: 100vw;
     height: 100vh;
     @include toc-images-background;
-    background-image: url("../images/blue/blue-index-bg.png");
+    background-image: url('../images/blue/blue-index-bg.png');
   }
-  --lottery-desc-color:#2055e2;
-  --lottery-main-bg:url("../images/blue/blue-lottery-bg.png");
-  --lottery-btn-default:url("../images/blue/lottery-btn-default.png");
-  --lottery-btn-disabled:url("../images/blue/lottery-btn-disabled.png");
-  --receive-tab:url("../images/blue/blue-receive-tab-activation.png");
-  --marquee-item:url("../images/blue/marquee-item-bg.png");
+  --lottery-desc-color: #2055e2;
+  --lottery-main-bg: url('../images/blue/blue-lottery-bg.png');
+  --lottery-btn-default: url('../images/blue/lottery-btn-default.png');
+  --lottery-btn-disabled: url('../images/blue/lottery-btn-disabled.png');
+  --active-tab: url('../images/blue/active-tab-bg.png');
+  --marquee-item: url('../images/blue/marquee-item-bg.png');
+  .lottery-tab-item {
+    background: #60c2fa;
+    box-shadow: 0 -2px 2px 2px #93d5fc;
+    height: 30px;
+    line-height: 30px;
+    color: #fff;
+    border-radius: 8px 8px 0 0;
+    padding: 0 5px;
+    margin-left: 4px;
+    text-align: center;
+    border: 3px solid #60c2fa;
+    border-bottom: 4px solid #46abf9;
+    &:first-child {
+      margin-left: 0px;
+    }
+  }
+  & .active-tab {
+    position: relative;
+    height: 36px;
+    line-height: 42px;
+    font-size: 16px;
+    font-weight: 500;
+    &::before {
+      content: "";
+      @include toc-images-background;
+      position: absolute;
+      height: 12px;
+      width: 14px;
+      left: -1px;
+      top: 2px;
+      background-image: var(--active-tab);
+    }
+  }
+  & .footer-content {
+    width: 345px;
+    min-height: 200px;
+    margin:0 auto;
+    background: #FFFFFF;
+    border-radius: 10px;
+  }
 }

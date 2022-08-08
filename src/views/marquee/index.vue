@@ -15,7 +15,17 @@
       </div>
     </div>
     <div class="lottery-footer">
-      <div class="lottery-tab"></div>
+      <div class="lottery-tab">
+        <div
+          :class="['lottery-tab-item', { 'active-tab': isActive === index }]"
+          @click="handleActive(index)"
+          v-for="(tab, index) in tabs"
+          :key="tab.name"
+        >
+          <div class="lottery-tab-item-text">{{ tab.name }}</div>
+        </div>
+      </div>
+      <div class="footer-content"></div>
     </div>
   </div>
 </template>
@@ -28,7 +38,17 @@ const setLottery = () => {
   lotteryBtn[0].innerHTML = '立即抽奖'
 }
 const { proxy } = getCurrentInstance() as any
+const isActive = ref(0)
+const tabs: Array<ObjTy> = [
+  { name: '领取免费次数', path: '/lottery/free' },
+  { name: '活动奖品', path: '/lottery/prize' },
+  { name: '我的奖品', path: '/lottery/my' }
+]
 
+// 选择的Tab
+const handleActive = (index: number) => {
+  isActive.value = index
+}
 // 转盘上要展示的奖品数据
 const prizeList = ref([
   {
@@ -186,10 +206,16 @@ const endTurns = () => {
   }
   & .lottery-footer {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     margin-top: 29px;
+    padding-bottom: 50px;
     & .lottery-tab {
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+      font-size: 14px;
       width: 288px;
       height: 40px;
       @include toc-images-background;
