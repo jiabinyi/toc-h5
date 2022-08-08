@@ -40,9 +40,9 @@ const setLottery = () => {
 const { proxy } = getCurrentInstance() as any
 const isActive = ref(0)
 const tabs: Array<ObjTy> = [
-  { name: '领取免费次数', path: '/lottery/free' },
-  { name: '活动奖品', path: '/lottery/prize' },
-  { name: '我的奖品', path: '/lottery/my' }
+  { name: '领取免费次数' },
+  { name: '活动奖品' },
+  { name: '我的奖品' }
 ]
 
 // 选择的Tab
