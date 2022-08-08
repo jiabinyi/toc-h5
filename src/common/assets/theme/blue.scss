@@ -26,14 +26,15 @@
   --active-tab: url('../images/blue/active-tab-bg.png');
   --marquee-item: url('../images/blue/marquee-item-bg.png');
   .lottery-tab-item {
+    position: relative;
     background: #60c2fa;
-    box-shadow: 0 -2px 2px 2px #93d5fc;
+    box-shadow: -1px -2px 2px 2px #93d5fc;
     height: 30px;
     line-height: 30px;
     color: #fff;
     border-radius: 8px 8px 0 0;
     padding: 0 5px;
-    margin-left: 4px;
+    margin-left: 2px;
     text-align: center;
     border: 3px solid #60c2fa;
     border-bottom: 4px solid #46abf9;
@@ -46,7 +47,7 @@
     height: 36px;
     line-height: 42px;
     font-size: 16px;
-    font-weight: 500;
+    font-weight: 600;
     &::before {
       content: "";
       @include toc-images-background;
