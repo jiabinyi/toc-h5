@@ -1,28 +1,44 @@
-@mixin  lottery-btn-bg {
+@mixin lottery-btn-bg {
   width: 98px;
   height: 98px;
   background-size: cover !important;
 }
-@mixin  toc-images-background {
+
+@mixin toc-images-background {
   background-position: center 0;
   background-attachment: inherit;
   background-repeat: no-repeat;
   background-size: cover;
 }
-.blue-mode{
-    margin: 0;
-    padding: 0;
-    background: #127bfe;
-  .index-bg{
-    width:100vw;
+
+@mixin flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.blue-mode {
+  margin: 0;
+  padding: 0;
+  background: #127bfe;
+
+  .index-bg {
+    width: 100vw;
     height: 100vh;
     @include toc-images-background;
     background-image: url("../images/blue/blue-index-bg.png");
   }
+
   --lottery-desc-color:#2055e2;
   --lottery-main-bg:url("../images/blue/blue-lottery-bg.png");
   --lottery-btn-default:url("../images/blue/lottery-btn-default.png");
   --lottery-btn-disabled:url("../images/blue/lottery-btn-disabled.png");
-  --receive-tab:url("../images/blue/blue-receive-tab-activation.png");
+  --blue-my-tab-activation:url("../images/blue/blue-my-tab-activation.png");
+  --blue-prize-tab-prize-activation:url("../images/blue/blue-prize-tab-prize-activation.png");
+  --blue-receive-tab-activation:url("../images/blue/blue-receive-tab-activation.png");
   --marquee-item:url("../images/blue/marquee-item-bg.png");
+  --blue-end-date-bg:url("../images/blue/blue-end-date-bg.png");
+  --blue-delalllotteryinfo-bg:url("../images/blue/blue-delalllotteryinfo-bg.png");
+  --blue-rule-btn:url("../images/blue/blue-rule-btn.png");
+
 }

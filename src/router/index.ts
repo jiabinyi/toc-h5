@@ -8,7 +8,7 @@ import {
 const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
-    redirect: '/home'
+    redirect: '/marquee'
   },
   {
     path: '/home',
@@ -17,9 +17,9 @@ const routes: Array<RouteRecordRaw> = [
     meta: {}
   },
   {
-    path: '/largeTurntable',
-    name: 'largeTurntable',
-    component: () => import('@/views/largeTurntable/index.vue'),
+    path: '/marquee',
+    name: 'marquee',
+    component: () => import('@/views/marquee/index.vue'),
     meta: {}
   }
 ];
