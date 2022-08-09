@@ -185,16 +185,22 @@
 
   & .lottery-footer {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     margin-top: 29px;
-    flex-direction: column;
-    padding-bottom: 20px;
+    padding-bottom: 50px;
 
     & .lottery-tab {
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+      font-size: 14px;
       width: 288px;
       height: 40px;
       @include toc-images-background;
+      background-image: var(--receive-tab) !important;
+
 
       &.lottery-tab-0 {
         background-image: var(--blue-receive-tab-activation) !important;

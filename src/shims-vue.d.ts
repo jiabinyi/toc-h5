@@ -1,4 +1,4 @@
-import dayjs from "dayjs";
+import dayjs from 'dayjs'
 
 declare module '@vue/runtime-core' {
   export interface ComponentCustomProperties {

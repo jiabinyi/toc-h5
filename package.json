@@ -10,28 +10,50 @@
     "build": "vue-tsc --noEmit && vite build",
     "serve": "vite preview --host",
     "lint": "eslint --ext .js,.jsx,.vue,.ts,.tsx src",
+    "eslint": "eslint --ext .js,.vue --ignore-path .gitignore --fix src",
+    "prettier:comment": "自动格式化当前目录下的所有文件",
+    "prettier": "prettier --write",
+    "commit:comment": "引导设置规范化的提交信息",
+    "commit": "git-cz",
     "generate": "plop"
+  },
+  "config": {
+    "commitizen": {
+      "path": "node_modules/cz-customizable"
+    }
+  },
+  "lint-staged": {
+    "*.{js,jsx,vue,ts,tsx}": [
+      "pnpm run eslint",
+      "pnpm run prettier"
+    ]
   },
   "dependencies": {
     "@nutui/nutui": "^3.2.0",
     "@nutui/nutui-bingo": "^1.0.5",
+    "@vueuse/core": "9.1.0",
     "@vueuse/router": "^9.0.2",
     "amfe-flexible": "^2.2.1",
     "axios": "^0.24.0",
     "consola": "^2.15.3",
     "dayjs": "^1.10.7",
+    "mosowejs": "^1.4.0",
+    "pinia": "^2.0.17",
     "vant": "^3.3.7",
     "vue": "^3.2.26",
+    "vue-global-api": "^0.4.1",
     "vue-router": "^4.0.12",
     "vuex": "^4.0.2"
   },
   "devDependencies": {
     "@babel/core": "^7.16.5",
     "@babel/preset-env": "^7.16.5",
+    "@commitlint/cli": "^17.0.3",
+    "@commitlint/config-conventional": "^17.0.3",
     "@types/node": "^16.11.14",
     "@typescript-eslint/eslint-plugin": "^5.7.0",
     "@typescript-eslint/parser": "^5.7.0",
-    "@vitejs/plugin-vue": "^2.0.1",
+    "@vitejs/plugin-vue": "3.0.0-beta.1",
     "@vitejs/plugin-vue-jsx": "^1.3.2",
     "@vue/babel-plugin-jsx": "^1.1.1",
     "@vue/compiler-sfc": "^3.2.26",
@@ -39,16 +61,22 @@
     "@vue/eslint-config-typescript": "^9.1.0",
     "autoprefixer": "^10.4.0",
     "babel-plugin-dynamic-import-node": "^2.3.3",
+    "commitizen": "^4.2.5",
+    "commitlint-config-cz": "^0.13.3",
+    "cz-conventional-changelog": "^3.3.0",
+    "cz-customizable": "^6.9.1",
     "eslint": "^8.4.1",
     "eslint-plugin-prettier": "^3.1.0",
     "eslint-plugin-vue": "^8.2.0",
-    "lint-staged": "^12.1.2",
+    "husky": "^8.0.1",
+    "lint-staged": "^12.5.0",
     "plop": "^3.0.5",
     "postcss": "^8.4.5",
     "postcss-pxtorem": "^6.0.0",
     "prettier": "^2.5.1",
     "sass": "^1.45.0",
     "typescript": "^4.5.2",
+    "unplugin-auto-import": "0.10.3",
     "unplugin-vue-components": "^0.21.1",
     "vite": "^3.0.3",
     "vite-plugin-style-import": "^2.0.0",
@@ -58,11 +86,6 @@
   },
   "gitHooks": {
     "pre-commit": "lint-staged"
-  },
-  "lint-staged": {
-    "*.{js,jsx,vue,ts,tsx}": [
-      "eslint"
-    ]
   },
   "engines": {
     "node": ">=14.17.0"

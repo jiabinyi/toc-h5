@@ -1,5 +1,5 @@
 // eslint-disable-next-line @typescript-eslint/no-var-requires
-const { notEmpty } = require('../utils');
+const { notEmpty } = require('../utils')
 
 module.exports = {
   description: 'generate Vue3 component',
@@ -36,26 +36,26 @@ module.exports = {
           value.indexOf('script') === -1 &&
           value.indexOf('template') === -1
         ) {
-          return 'Components require at least a script or template tag.';
+          return 'Components require at least a script or template tag.'
         }
-        return true;
+        return true
       }
     }
   ],
   actions: data => {
-    const name = '{{properCase name}}';
+    const name = '{{properCase name}}'
     return [
       {
         type: 'add',
         path: `src/components/${name}/${name}.vue`,
         templateFile: 'templates/component/index.hbs',
         data: {
-          name: name,
+          name,
           template: data.blocks.includes('template'),
           script: data.blocks.includes('script'),
           style: data.blocks.includes('style')
         }
       }
-    ];
+    ]
   }
-};
+}

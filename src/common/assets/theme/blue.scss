@@ -11,12 +11,6 @@
   background-size: cover;
 }
 
-@mixin flex-center {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
 .blue-mode {
   margin: 0;
   padding: 0;
@@ -33,12 +27,61 @@
   --lottery-main-bg:url("../images/blue/blue-lottery-bg.png");
   --lottery-btn-default:url("../images/blue/lottery-btn-default.png");
   --lottery-btn-disabled:url("../images/blue/lottery-btn-disabled.png");
-  --blue-my-tab-activation:url("../images/blue/blue-my-tab-activation.png");
-  --blue-prize-tab-prize-activation:url("../images/blue/blue-prize-tab-prize-activation.png");
-  --blue-receive-tab-activation:url("../images/blue/blue-receive-tab-activation.png");
+  --receive-tab:url("../images/blue/blue-receive-tab-activation.png");
   --marquee-item:url("../images/blue/marquee-item-bg.png");
-  --blue-end-date-bg:url("../images/blue/blue-end-date-bg.png");
-  --blue-delalllotteryinfo-bg:url("../images/blue/blue-delalllotteryinfo-bg.png");
-  --blue-rule-btn:url("../images/blue/blue-rule-btn.png");
 
+  .lottery-tab-item {
+    position: relative;
+    background: #60c2fa;
+    box-shadow: -1px -2px 2px 2px #93d5fc;
+    height: 30px;
+    line-height: 30px;
+    color: #fff;
+    border-radius: 8px 8px 0 0;
+    padding: 0 5px;
+    margin-left: 5px;
+    text-align: center;
+    border: 3px solid #60c2fa;
+    border-bottom: 4px solid #46abf9;
+
+    &:first-child {
+      margin-left: 0px;
+    }
+
+  }
+
+  & .active-tab {
+    position: relative;
+    height: 36px;
+    line-height: 42px;
+    font-size: 16px;
+    font-weight: 600;
+
+    &::before {
+      content: "";
+      @include toc-images-background;
+      position: absolute;
+      height: 12px;
+      width: 14px;
+      left: -1px;
+      top: 2px;
+      background-image: var(--active-tab);
+    }
+  }
+
+  & .footer-content {
+    width: 345px;
+    min-height: 200px;
+    margin: 0 auto;
+    background: #FFFFFF;
+    border-radius: 10px;
+  }
+}
+
+
+
+@mixin flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
