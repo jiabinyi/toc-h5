@@ -4,6 +4,7 @@ import { InfoList } from './model.d'
 interface UserState {
   userInfo: Nullable<InfoList>
 }
+
 export const useUserStore = defineStore({
   id: 'user',
   state: (): UserState => ({ userInfo: null }),

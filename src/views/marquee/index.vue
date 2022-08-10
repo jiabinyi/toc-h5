@@ -130,7 +130,7 @@ const tabs: Array<ObjTy> = [
   { name: '我的奖品' }
 ]
 const dialogNewUserAwardVisible = ref(false)
-const dialogPosterVisible = ref(true)
+const dialogPosterVisible = ref(false)
 
 // 选择的Tab
 const handleActive = (index: number) => {

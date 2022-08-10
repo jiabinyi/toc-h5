@@ -1,5 +1,5 @@
 <template>
-  <nut-swiper
+  <!-- <nut-swiper
     class="awardsMarquee"
     :init-page="page4"
     :loop="true"
@@ -18,25 +18,40 @@
         <div class="txt">15220453577</div>
       </div>
     </nut-swiper-item>
-  </nut-swiper>
+  </nut-swiper> -->
+  <marquee>
+    <div class="awardsMarquee">
+      <div class="nut-swiper-item" v-for="item in Array.from({ length: 3 })">
+        <div class="user">
+          <div class="avatar">
+            <img
+              src="https://ecmb.bdimg.com/tam-ogel/519917739_1170906296_367_252.jpg"
+            />
+          </div>
+          <div class="txt">15220453577</div>
+        </div>
+      </div>
+    </div>
+  </marquee>
 </template>
 <script lang="ts" setup name="Home">
-import { ref, onMounted, getCurrentInstance, Ref } from 'vue';
-import { useRouteQuery } from '@vueuse/router';
-import useTheme from '@/utils/hooks/useTheme';
+import { ref, onMounted, getCurrentInstance, Ref } from 'vue'
+import { useRouteQuery } from '@vueuse/router'
+import useTheme from '@/utils/hooks/useTheme'
 
-import { reactive, toRefs } from 'vue';
+import { reactive, toRefs } from 'vue'
 const state = reactive({
   page4: 0
-});
-const { page4 } = toRefs(state);
+})
+const { page4 } = toRefs(state)
 </script>
 <style lang="scss" scoped>
 .awardsMarquee {
   margin-top: 5px;
-
+  display: flex;
   .nut-swiper-item {
     line-height: 30px;
+    margin-right: 20px;
     .user {
       height: 30px;
       display: flex;
@@ -46,7 +61,7 @@ const { page4 } = toRefs(state);
         height: 22px;
         border-radius: 22px;
         overflow: hidden;
-        margin-left: 20px;
+        margin-left: 0px;
         img {
           width: 100%;
           height: 100%;
@@ -54,7 +69,7 @@ const { page4 } = toRefs(state);
         }
       }
       .txt {
-        width: 181px;
+        max-width: 181px;
         height: 17px;
         font-size: 12px;
         font-family: PingFangSC-Medium, PingFang SC;
