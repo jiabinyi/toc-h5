@@ -5,7 +5,6 @@
 import axios from 'axios'
 import dayjs from 'dayjs'
 import api from './apiNames'
-import url from './url'
 
 // 服务器状态码
 const codeMessage: any = {
@@ -27,13 +26,13 @@ const codeMessage: any = {
 }
 // 接口返回状态码
 const apiCode: any = {
-  toast: 101, // 错误信息，需要toast提示
-  loginFail: 10086 // 登录失效
+  toast: -1, // 错误信息，需要toast提示
+  loginFail: 'errorText' // 登录失效
 }
 
 const request: any = axios.create({
-  baseURL: url,
-  timeout: 2e4,
+  baseURL: import.meta.env.VITE_APP_BASE_URL,
+  timeout: 60000,
   responseType: 'json'
 })
 
@@ -55,28 +54,6 @@ const errorHandler = (response: any) => {
     }
   }
   return response
-}
-
-// 取消请求
-const cancelAxios: any = []
-request.interceptors.request.use(
-  (config: any) => {
-    const c = config
-    c.cancelToken = new axios.CancelToken((cancel: any) => {
-      cancelAxios.push(cancel)
-    })
-    return c
-  },
-  () => {
-    // console.log(error);
-  }
-)
-// 触发axios取消事件，挂载到window
-window.$cancelRequest = () => {
-  cancelAxios.forEach((element: any, index: number) => {
-    element('cancel')
-    delete cancelAxios[index]
-  })
 }
 
 // 过滤导出excel错误提示，文件流下载接口声明列表

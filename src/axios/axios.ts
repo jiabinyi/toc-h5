@@ -10,6 +10,7 @@ interface api {
 
 const httpConfig = (method: string, params?: any) => {
   const token = sessions.get('token')
+  console.log('token-axios: ', token)
   let data: any = null
   if (method !== 'FILE') {
     // 非文件上传
@@ -24,7 +25,7 @@ const httpConfig = (method: string, params?: any) => {
         ...data,
         headers: {
           'Content-Type': 'application/json;charset=UTF-8',
-          Authorization: token ? token : 'Basic aHc6aHc=',
+          authorization: token ? token : 'Basic aHc6aHc=',
           ...params.header
         }
       })
@@ -41,7 +42,7 @@ const httpConfig = (method: string, params?: any) => {
       method: 'post',
       data: params.data,
       requestType: 'form',
-      headers: { Authorization: token ? token : 'Basic aHc6aHc=' }
+      headers: { authorization: token ? token : 'Basic aHc6aHc=' }
     })
       .then((res: any) => {
         resolve(res)
