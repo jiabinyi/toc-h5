@@ -9,13 +9,13 @@
 <script lang="ts" setup name="App">
 import $store from '@/store/store'
 import { useAppStore } from '@/store/modules/app.ts'
+import { sessions } from 'mosowejs'
 import useTheme from '@/utils/hooks/useTheme'
-const theme: any = computed(() => {
-  const route = useRoute()
-  return route?.query?.theme ?? 'blue'
-})
+import useGetQuery from '@/utils/hooks/useGetQuery'
+const { getUrlParam } = useGetQuery()
 const { setBodyClassName } = useTheme()
-setBodyClassName(theme.value ?? 'blue')
+setBodyClassName(getUrlParam('theme') ?? 'blue')
+sessions.set('token', getUrlParam('token'))
 const $storeApp = useAppStore()
 $storeApp.$tenantCode = ''
 $storeApp.$authorization = ''
