@@ -228,7 +228,7 @@
       }
     }
 
-    &>.lottery-tab-content {
+    &>.footer-content {
       background-color: #fff;
       width: 345px;
       flex-shrink: 0;
@@ -237,75 +237,75 @@
       flex-direction: column;
       border-radius: 10px;
 
-      &.task {
-        .item {
-          padding-bottom: 10px;
-          padding-top: 10px;
-          display: flex;
-          width: 345px;
-          align-items: center;
 
-          .icon {
-            padding-left: 10px;
-            width: 40px;
-            height: 40px;
-            padding-right: 10px;
+      .item {
+        padding-bottom: 10px;
+        padding-top: 10px;
+        display: flex;
+        width: 345px;
+        align-items: center;
 
-            img {
-              width: 100%;
-            }
-          }
+        .icon {
+          padding-left: 10px;
+          width: 40px;
+          height: 40px;
+          padding-right: 10px;
 
-          .txt {
-            font-size: 14px;
-            font-family: PingFangSC-Medium, PingFang SC;
-            font-weight: 500;
-            color: #333333;
-            line-height: 14px;
-            flex-grow: 1;
-
-            .title {
-              font-size: 14px;
-              color: #333333;
-              line-height: 14px;
-              margin-bottom: 3px;
-            }
-
-            .desc {
-              font-size: 12px;
-              font-weight: 400;
-              color: #999999;
-              line-height: 12px;
-            }
-          }
-
-          .right {
-            padding-right: 20px;
-
-            .txt {
-              padding-bottom: 5px;
-              font-size: 12px;
-              font-family: PingFangSC-Regular, PingFang SC;
-              font-weight: 400;
-              color: #333333;
-              line-height: 12px;
-              flex-grow: 1;
-            }
-
-            .btn {
-              width: 68px;
-              height: 30px;
-              background: #ffc10a;
-              border-radius: 16px;
-              @include flex-center;
-              font-size: 12px;
-              font-family: PingFangSC-Medium, PingFang SC;
-              font-weight: 500;
-              color: #ffffff;
-              line-height: 14px;
-            }
+          img {
+            width: 100%;
           }
         }
+
+        .txt {
+          font-size: 14px;
+          font-family: PingFangSC-Medium, PingFang SC;
+          font-weight: 500;
+          color: #333333;
+          line-height: 14px;
+          flex-grow: 1;
+
+          .title {
+            font-size: 14px;
+            color: #333333;
+            line-height: 14px;
+            margin-bottom: 3px;
+          }
+
+          .desc {
+            font-size: 12px;
+            font-weight: 400;
+            color: #999999;
+            line-height: 12px;
+          }
+        }
+
+        .right {
+          padding-right: 20px;
+
+          .txt {
+            padding-bottom: 5px;
+            font-size: 12px;
+            font-family: PingFangSC-Regular, PingFang SC;
+            font-weight: 400;
+            color: #333333;
+            line-height: 12px;
+            flex-grow: 1;
+          }
+
+          .btn {
+            width: 68px;
+            height: 30px;
+            background: #ffc10a;
+            border-radius: 16px;
+            @include flex-center;
+            font-size: 12px;
+            font-family: PingFangSC-Medium, PingFang SC;
+            font-weight: 500;
+            color: #ffffff;
+            line-height: 14px;
+          }
+        }
+
       }
     }
   }

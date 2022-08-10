@@ -35,17 +35,20 @@
     </div>
     <!--E 抽奖箱  -->
 
-    <!--S 抽奖信息  -->
-    <!-- <div class="lottery-footer">
-      <div class="lottery-tab" :class="'lottery-tab-' + tabIndex">
+    <!--S 底部抽奖统计  -->
+    <div class="lottery-footer">
+      <div class="lottery-tab">
         <div
-          class="item"
-          v-for="(item, index) in Array.from({ length: 3 })"
-          :class="{ active: index == tabIndex }"
-          @click="tabIndex = index"
-        ></div>
+          :class="['lottery-tab-item', { 'active-tab': tabIndex === index }]"
+          @click="handleActive(index)"
+          v-for="(tab, index) in tabs"
+          :key="tab.name"
+        >
+          <div class="lottery-tab-item-text">{{ tab.name }}</div>
+        </div>
       </div>
-      <div class="lottery-tab-content task" v-if="tabIndex == 0">
+      <!-- 领取免费次数 -->
+      <div class="footer-content" v-if="tabIndex == 0">
         <div class="item">
           <div class="icon">
             <img src="@/common/assets/images/blue/invitation-icon.png" />
@@ -60,52 +63,84 @@
           </div>
         </div>
       </div>
-    </div> -->
-    <div class="lottery-footer">
-      <div class="lottery-tab">
-        <div
-          :class="['lottery-tab-item', { 'active-tab': isActive === index }]"
-          @click="handleActive(index)"
-          v-for="(tab, index) in tabs"
-          :key="tab.name"
-        >
-          <div class="lottery-tab-item-text">{{ tab.name }}</div>
+      <!-- 活动奖品 -->
+      <div class="footer-content" v-if="tabIndex == 1">
+        <div class="item">
+          <div class="icon">
+            <img src="@/common/assets/images/blue/invitation-icon.png" />
+          </div>
+          <div class="txt">
+            <div class="title">每邀请一位好友参与</div>
+            <div class="desc">免费次数 +1</div>
+          </div>
+          <div class="right">
+            <div class="txt">进行中 (1/3)</div>
+            <div class="btn">立即邀请</div>
+          </div>
         </div>
       </div>
-      <div class="footer-content"></div>
+      <!-- 我的奖品 -->
+      <div class="footer-content" v-if="tabIndex == 2">
+        <div class="item">
+          <div class="icon">
+            <img src="@/common/assets/images/blue/invitation-icon.png" />
+          </div>
+          <div class="txt">
+            <div class="title">每邀请一位好友参与</div>
+            <div class="desc">免费次数 +1</div>
+          </div>
+          <div class="right">
+            <div class="txt">进行中 (1/3)</div>
+            <div class="btn">立即邀请</div>
+          </div>
+        </div>
+      </div>
     </div>
     <!--E 抽奖信息  -->
+    <!-- S 弹窗 首次奖励 -->
+    <dialogNewUserAward
+      v-model:visible="dialogNewUserAwardVisible"
+    ></dialogNewUserAward>
+    <!-- E 弹窗 首次奖励 -->
+    <!-- S 弹窗 海报 -->
+    <dialogPoster v-model:visible="dialogPosterVisible"></dialogPoster>
+    <!-- E 弹窗 海报 -->
   </div>
 </template>
 <script lang="ts" setup name="Home">
 import { ref, onMounted, getCurrentInstance, Ref } from 'vue'
 import { useRouteQuery } from '@vueuse/router'
 import useTheme from '@/utils/hooks/useTheme'
+// 获奖人轮播
 import awardsMarquee from './components/awardsMarquee/index.vue'
+// 弹窗 首次奖励
+import dialogNewUserAward from './components/dialogNewUserAward/index.vue'
+// 弹窗 海报
+import dialogPoster from './components/dialogPoster/index.vue'
 onMounted(() => {
   const theme = useRouteQuery('theme') as Ref<string>
   const { setBodyClassName } = useTheme()
   setBodyClassName(theme.value ?? 'green')
   setLottery()
 })
-const isActive = ref(0)
+const tabIndex = ref(0)
 const tabs: Array<ObjTy> = [
   { name: '领取免费次数' },
   { name: '活动奖品' },
   { name: '我的奖品' }
 ]
+const dialogNewUserAwardVisible = ref(false)
+const dialogPosterVisible = ref(true)
 
 // 选择的Tab
 const handleActive = (index: number) => {
-  isActive.value = index
+  tabIndex.value = index
 }
 const setLottery = () => {
   const lotteryBtn = document.getElementsByClassName('start')
   lotteryBtn[0].innerHTML = '立即抽奖'
 }
 const { proxy } = getCurrentInstance() as { proxy: any }
-// tab index
-const tabIndex = ref(0)
 
 // 转盘上要展示的奖品数据
 const prizeList = ref([

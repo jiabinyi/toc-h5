@@ -1,16 +1,13 @@
-import { defineConfig } from 'vite';
-import AutoImport from 'unplugin-auto-import/vite';
-import Components from 'unplugin-vue-components/vite';
-import vue from '@vitejs/plugin-vue';
-import {
-  createStyleImportPlugin,
-  NutuiResolve
-} from 'vite-plugin-style-import';
+import { defineConfig } from 'vite'
+import AutoImport from 'unplugin-auto-import/vite'
+import Components from 'unplugin-vue-components/vite'
+import vue from '@vitejs/plugin-vue'
+import { createStyleImportPlugin, NutuiResolve } from 'vite-plugin-style-import'
 // eslint-disable-next-line @typescript-eslint/no-var-requires
-const path = require('path');
+const path = require('path')
 
 function resolve(dir: string) {
-  return path.join(__dirname, dir);
+  return path.join(__dirname, dir)
 }
 // https://vitejs.dev/config/
 // https://github.com/vitejs/vite/issues/1930 .env
@@ -63,4 +60,4 @@ export default defineConfig({
       '@views': resolve('./src/views')
     }
   }
-});
+})
