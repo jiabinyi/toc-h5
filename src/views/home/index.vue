@@ -18,7 +18,6 @@ onMounted(() => {
   getActivityTaskList()
 })
 const getActivityTaskList = async () => {
-  console.log('api.activityTaskList: ', api.getToken)
   const params = {
     url: api.getToken,
     data: {}

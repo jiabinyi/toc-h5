@@ -9,11 +9,9 @@
 <script lang="ts" setup name="App">
 import { sessions } from 'mosowejs'
 import useTheme from '@/utils/hooks/useTheme'
-const route = useRoute()
+import useGetQuery from '@/utils/hooks/useGetQuery'
+const { getUrlParam } = useGetQuery()
 const { setBodyClassName } = useTheme()
-const theme = computed(() => route?.query?.theme ?? 'blue')
-const token = computed(() => route?.query?.token ?? '--')
-console.log('token: ', token.value)
-setBodyClassName(theme.value ?? 'blue')
-sessions.set('token', token.value)
+setBodyClassName(getUrlParam('theme') ?? 'blue')
+sessions.set('token', getUrlParam('token'))
 </script>
