@@ -52,22 +52,25 @@ setTimeout(() => {
   renderPoster()
 }, 2000)
 
-let canvasID: any = {}
+let canvasID: HTMLElement
 const renderPoster = () => {
-  canvasID = document.getElementById('canvas')
+  canvasID = document.getElementById('canvas') ?? document.body
+
   const opts = {
     tainttest: true, // 检测每张图片都已经加载完成
     useCORS: true, // 跨域处理，可以加载网络图片
     logging: true // 日志开关
   }
-  html2canvas(canvasID, opts).then(canvas => {
-    let image = new Image()
-    const dom = document.getElementById('canvas_pic')
+  if (canvasID !== document.body) {
+    html2canvas(canvasID, opts).then(canvas => {
+      const image = new Image()
+      const dom = document.getElementById('canvas_pic')
 
-    image.src = canvas.toDataURL()
+      image.src = canvas.toDataURL()
 
-    dom?.appendChild(image)
-  })
+      dom?.appendChild(image)
+    })
+  }
 }
 
 const visible = ref(true)

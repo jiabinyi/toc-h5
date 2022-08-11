@@ -23,7 +23,7 @@ const props = defineProps({
   // 数据-活动规则
   data: {
     type: Object,
-    default: {}
+    default: () => new Object()
   }
 })
 // prop响应式

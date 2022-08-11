@@ -16,7 +16,6 @@
   </nut-dialog>
 </template>
 <script lang="ts" setup name="Home">
-import { ref, onMounted, getCurrentInstance, Ref } from 'vue'
 const props = defineProps({
   visible: {
     type: Boolean,

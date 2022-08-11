@@ -1,14 +1,17 @@
 <template>
   <nut-swiper
     class="awardsMarquee"
-    :init-page="page4"
+    :init-page="0"
     :loop="true"
     auto-play="3000"
     direction="vertical"
     height="30"
     style="height: 30px"
   >
-    <nut-swiper-item v-for="item in Array.from({ length: 3 })">
+    <nut-swiper-item
+      v-for="(item, index) in Array.from({ length: 3 })"
+      :key="index"
+    >
       <div class="user">
         <div class="avatar">
           <img
@@ -19,36 +22,8 @@
       </div>
     </nut-swiper-item>
   </nut-swiper>
-  <!-- <marquee class="marquee">
-    <div class="awardsMarquee">
-      <div
-        class="nut-swiper-item"
-        v-for="item in Array.from({ length: 3 })"
-        noWrap="true"
-      >
-        <div class="user">
-          <div class="avatar">
-            <img
-              src="https://ecmb.bdimg.com/tam-ogel/519917739_1170906296_367_252.jpg"
-            />
-          </div>
-          <div class="txt">15220453577</div>
-        </div>
-      </div>
-    </div>
-  </marquee> -->
 </template>
-<script lang="ts" setup name="awardsMarquee">
-import { ref, onMounted, getCurrentInstance, Ref } from 'vue'
-import { useRouteQuery } from '@vueuse/router'
-import useTheme from '@/utils/hooks/useTheme'
-
-import { reactive, toRefs } from 'vue'
-const state = reactive({
-  page4: 0
-})
-const { page4 } = toRefs(state)
-</script>
+<script lang="ts" setup name="awardsMarquee"></script>
 <style lang="scss" scoped>
 .marquee {
   width: 25px;
