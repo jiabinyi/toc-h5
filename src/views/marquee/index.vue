@@ -123,9 +123,7 @@
     <!-- E 弹窗 活动结束 -->
 
     <!-- S 弹窗 恭喜中奖 -->
-    <dialogTipActivityFinish
-      v-model:visible="dialogTipActFishVisible"
-    ></dialogTipActivityFinish>
+    <dialogAward v-model:visible="dialogAwardVisible"></dialogAward>
     <!-- E 弹窗 恭喜中奖 -->
   </div>
 </template>
@@ -145,6 +143,8 @@ import dialogPoster from './components/dialogPoster/index.vue'
 import dialogThanksParticipant from './components/dialogThanksParticipant/index.vue'
 // 弹窗 活动结束
 import dialogTipActivityFinish from './components/dialogTipActivityFinish/index.vue'
+// 弹窗 恭喜中奖
+import dialogAward from './components/dialogAward/index.vue'
 onMounted(() => {
   const theme = useRouteQuery('theme') as Ref<string>
   const { setBodyClassName } = useTheme()
@@ -162,6 +162,8 @@ const dialogPosterVisible = ref(false) // 变量-弹窗 海报
 const dialogActivityRulesVisible = ref(false) // 变量-弹窗 活动规则
 const dialogThanksPartiVisible = ref(false) // 变量-弹窗 谢谢参与
 const dialogTipActFishVisible = ref(false) // 变量-弹窗 活动结束
+const dialogAwardVisible = ref(true) // 变量-弹窗 恭喜中奖
+
 // 选择的Tab
 const handleActive = (index: number) => {
   tabIndex.value = index
@@ -170,8 +172,7 @@ const setLottery = () => {
   const lotteryBtn = document.getElementsByClassName('start')
   lotteryBtn[0].innerHTML = '立即抽奖'
 }
-const { proxy } = getCurrentInstance() as { proxy: any }
-
+const { proxy } = getCurrentInstance() as any
 // 转盘上要展示的奖品数据
 const prizeList = ref([
   {

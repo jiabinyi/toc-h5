@@ -1,14 +1,16 @@
 <template>
-  <nut-swiper
+  <nut-noticebar
     class="awardsMarquee"
-    :init-page="0"
-    :loop="true"
-    auto-play="3000"
     direction="vertical"
-    height="30"
-    style="height: 30px"
+    :height="30"
+    :speed="5"
+    :standTime="3000"
+    :list="[]"
+    :background="`rgba(251, 248, 220, 0)`"
+    :color="`#D9500B`"
   >
-    <nut-swiper-item
+    <div
+      class="item"
       v-for="(item, index) in Array.from({ length: 3 })"
       :key="index"
     >
@@ -20,8 +22,8 @@
         </div>
         <div class="txt">15220453577</div>
       </div>
-    </nut-swiper-item>
-  </nut-swiper>
+    </div>
+  </nut-noticebar>
 </template>
 <script lang="ts" setup name="awardsMarquee"></script>
 <style lang="scss" scoped>
@@ -32,7 +34,7 @@
 .awardsMarquee {
   margin-top: 5px;
   display: flex;
-  .nut-swiper-item {
+  .item {
     line-height: 30px;
     margin-right: 20px;
     .user {
