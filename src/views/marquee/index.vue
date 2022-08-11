@@ -1,7 +1,7 @@
 <template>
   <div class="lottery-container index-bg">
     <!--S 活动规则按钮  -->
-    <div class="rule-btn">
+    <div class="rule-btn" @click="dialogActivityRulesVisible = true">
       <div>活动</div>
       <div>规则</div>
     </div>
@@ -104,19 +104,41 @@
     <!-- E 弹窗 首次奖励 -->
     <!-- S 弹窗 海报 -->
     <dialogPoster v-model:visible="dialogPosterVisible"></dialogPoster>
-    <!-- E 弹窗 海报 -->
+    <!-- S 弹窗 海报 -->
+    <!-- S 弹窗 活动规则 -->
+    <dialogActivityRules
+      v-model:visible="dialogActivityRulesVisible"
+    ></dialogActivityRules>
+    <!-- E 弹窗 活动规则 -->
+    <!-- S 弹窗 谢谢参与 -->
+    <dialogThanksParticipant
+      v-model:visible="dialogThanksPartiVisible"
+    ></dialogThanksParticipant>
+    <!-- E 弹窗 谢谢参与 -->
+
+    <!-- S 弹窗 活动结束 -->
+    <dialogTipActivityFinish
+      v-model:visible="dialogTipActFishVisible"
+    ></dialogTipActivityFinish>
+    <!-- E 弹窗 活动结束 -->
   </div>
 </template>
-<script lang="ts" setup name="Home">
+<script lang="ts" setup name="marquee">
 import { ref, onMounted, getCurrentInstance, Ref } from 'vue'
 import { useRouteQuery } from '@vueuse/router'
 import useTheme from '@/utils/hooks/useTheme'
-// 获奖人轮播
+// 弹窗 活动规则
+import dialogActivityRules from './components/dialogActivityRules/index.vue'
+// 组件 获奖人跑马灯
 import awardsMarquee from './components/awardsMarquee/index.vue'
 // 弹窗 首次奖励
 import dialogNewUserAward from './components/dialogNewUserAward/index.vue'
 // 弹窗 海报
 import dialogPoster from './components/dialogPoster/index.vue'
+// 弹窗 谢谢参与
+import dialogThanksParticipant from './components/dialogThanksParticipant/index.vue'
+// 弹窗 活动结束
+import dialogTipActivityFinish from './components/dialogTipActivityFinish/index.vue'
 onMounted(() => {
   const theme = useRouteQuery('theme') as Ref<string>
   const { setBodyClassName } = useTheme()
@@ -129,9 +151,11 @@ const tabs: Array<ObjTy> = [
   { name: '活动奖品' },
   { name: '我的奖品' }
 ]
-const dialogNewUserAwardVisible = ref(false)
-const dialogPosterVisible = ref(false)
-
+const dialogNewUserAwardVisible = ref(false) //变量-弹窗 首次奖励
+const dialogPosterVisible = ref(false) //变量-弹窗 海报
+const dialogActivityRulesVisible = ref(false) //变量-弹窗 活动规则
+const dialogThanksPartiVisible = ref(false) //变量-弹窗 谢谢参与
+const dialogTipActFishVisible = ref(true) //变量-弹窗 活动结束
 // 选择的Tab
 const handleActive = (index: number) => {
   tabIndex.value = index

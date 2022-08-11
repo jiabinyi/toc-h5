@@ -19,9 +19,13 @@
       </div>
     </nut-swiper-item>
   </nut-swiper> -->
-  <marquee>
+  <marquee class="marquee">
     <div class="awardsMarquee">
-      <div class="nut-swiper-item" v-for="item in Array.from({ length: 3 })">
+      <div
+        class="nut-swiper-item"
+        v-for="item in Array.from({ length: 3 })"
+        noWrap="true"
+      >
         <div class="user">
           <div class="avatar">
             <img
@@ -46,6 +50,10 @@ const state = reactive({
 const { page4 } = toRefs(state)
 </script>
 <style lang="scss" scoped>
+.marquee {
+  width: 230px;
+  margin-left: 10px;
+}
 .awardsMarquee {
   margin-top: 5px;
   display: flex;
