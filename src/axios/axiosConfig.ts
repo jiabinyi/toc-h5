@@ -2,7 +2,9 @@
 /**
  * axios 网络请求工具
  */
+import qs from 'qs'
 import axios from 'axios'
+import { sessions } from 'mosowejs'
 import dayjs from 'dayjs'
 import api from './apiNames'
 
@@ -29,9 +31,11 @@ const apiCode: any = {
   toast: -1, // 错误信息，需要toast提示
   loginFail: 'errorText' // 登录失效
 }
-
+const jsCode = sessions.get('js_code')
 const request: any = axios.create({
-  baseURL: import.meta.env.VITE_APP_BASE_URL,
+  baseURL: jsCode
+    ? import.meta.env.VITE_APP_WX_BASE_URL
+    : import.meta.env.VITE_APP_BASE_URL,
   timeout: 60000,
   responseType: 'json'
 })
@@ -47,7 +51,6 @@ const errorHandler = (response: any) => {
       // 登录失效
       setTimeout(() => {
         window.sessionStorage.clear()
-        window.location.href = `${window.location.origin}/login`
       }, 1e3)
     } else {
       console.log(`请求错误 ${status}: ${url},${errorText}`)
@@ -70,7 +73,11 @@ request.interceptors.request.use(
       // 下载
       config.responseType = 'blob'
     }
-
+    // 是否将 POST 请求参数进行字符串化处理
+    if (config.method === 'post') {
+      config.headers['Content-Type'] = 'application/x-www-form-urlencoded'
+      config.data = qs.stringify(config.data)
+    }
     return config
   },
   (error: any) => {

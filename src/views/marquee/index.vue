@@ -146,9 +146,6 @@ import dialogTipActivityFinish from './components/dialogTipActivityFinish/index.
 // 弹窗 恭喜中奖
 import dialogAward from './components/dialogAward/index.vue'
 onMounted(() => {
-  const theme = useRouteQuery('theme') as Ref<string>
-  const { setBodyClassName } = useTheme()
-  setBodyClassName(theme.value ?? 'green')
   setLottery()
 })
 const tabIndex = ref(0)
