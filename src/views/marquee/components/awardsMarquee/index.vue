@@ -1,5 +1,5 @@
 <template>
-  <!-- <nut-swiper
+  <nut-swiper
     class="awardsMarquee"
     :init-page="page4"
     :loop="true"
@@ -18,8 +18,8 @@
         <div class="txt">15220453577</div>
       </div>
     </nut-swiper-item>
-  </nut-swiper> -->
-  <marquee class="marquee">
+  </nut-swiper>
+  <!-- <marquee class="marquee">
     <div class="awardsMarquee">
       <div
         class="nut-swiper-item"
@@ -36,9 +36,9 @@
         </div>
       </div>
     </div>
-  </marquee>
+  </marquee> -->
 </template>
-<script lang="ts" setup name="Home">
+<script lang="ts" setup name="awardsMarquee">
 import { ref, onMounted, getCurrentInstance, Ref } from 'vue'
 import { useRouteQuery } from '@vueuse/router'
 import useTheme from '@/utils/hooks/useTheme'
@@ -51,8 +51,8 @@ const { page4 } = toRefs(state)
 </script>
 <style lang="scss" scoped>
 .marquee {
-  width: 230px;
-  margin-left: 10px;
+  width: 25px;
+  // margin-left: 10px;
 }
 .awardsMarquee {
   margin-top: 5px;
@@ -64,6 +64,7 @@ const { page4 } = toRefs(state)
       height: 30px;
       display: flex;
       align-items: center;
+      margin-left: 10px;
       .avatar {
         width: 22px;
         height: 22px;
@@ -77,6 +78,7 @@ const { page4 } = toRefs(state)
         }
       }
       .txt {
+        margin-left: 3px;
         max-width: 181px;
         height: 17px;
         font-size: 12px;

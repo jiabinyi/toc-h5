@@ -30,17 +30,18 @@ const emit = defineEmits(['update:visible'])
 const visible = useVModel(props, 'visible', emit)
 
 const time = ref(3)
-// const { pause, resume } = useIntervalFn(
-//   () => {
-//     // 每隔多长时间做什么 回调
-//     time.value--
-//     if (time.value <= 0) {
-//       pause()
-//     }
-//   },
-//   1000,
-//   { immediate: false }
-// )
+const { pause, resume } = useIntervalFn(
+  () => {
+    // 每隔多长时间做什么 回调
+    time.value--
+    if (time.value <= 0) {
+      pause()
+    }
+  },
+  1000,
+  { immediate: false }
+)
+resume()
 </script>
 <style lang="scss" scoped>
 .dialogTipActivityFinish {

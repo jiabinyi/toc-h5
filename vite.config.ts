@@ -19,6 +19,15 @@ export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd())
   return {
     plugins: [
+      // vue({
+      //   template: {
+      //     compilerOptions: {
+      //       // 将所有my-开头的标签作为自定义元素处理
+      //       isCustomElement: tag => ['marquee'].includes(tag)
+      //     }
+      //   }
+      // }),
+
       vue(),
       createStyleImportPlugin({ resolves: [NutuiResolve()] }),
       Components({

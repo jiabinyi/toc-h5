@@ -121,6 +121,12 @@
       v-model:visible="dialogTipActFishVisible"
     ></dialogTipActivityFinish>
     <!-- E 弹窗 活动结束 -->
+
+    <!-- S 弹窗 恭喜中奖 -->
+    <dialogTipActivityFinish
+      v-model:visible="dialogTipActFishVisible"
+    ></dialogTipActivityFinish>
+    <!-- E 弹窗 恭喜中奖 -->
   </div>
 </template>
 <script lang="ts" setup name="marquee">
@@ -155,7 +161,7 @@ const dialogNewUserAwardVisible = ref(false) //变量-弹窗 首次奖励
 const dialogPosterVisible = ref(false) //变量-弹窗 海报
 const dialogActivityRulesVisible = ref(false) //变量-弹窗 活动规则
 const dialogThanksPartiVisible = ref(false) //变量-弹窗 谢谢参与
-const dialogTipActFishVisible = ref(true) //变量-弹窗 活动结束
+const dialogTipActFishVisible = ref(false) //变量-弹窗 活动结束
 // 选择的Tab
 const handleActive = (index: number) => {
   tabIndex.value = index
