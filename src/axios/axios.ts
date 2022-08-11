@@ -26,6 +26,7 @@ const httpConfig = (method: string, params?: any) => {
         headers: {
           'Content-Type': 'application/json;charset=UTF-8',
           authorization: token ? token : 'Basic aHc6aHc=',
+          tenant: import.meta.env.VITE_APP_TENANT,
           ...params.header
         }
       })

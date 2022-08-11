@@ -5,3 +5,8 @@ declare module '@vue/runtime-core' {
     $dayjs: dayjs.Dayjs
   }
 }
+declare module 'qs' {
+  export interface ParsedQs {
+    [key: string]: any
+  }
+}
