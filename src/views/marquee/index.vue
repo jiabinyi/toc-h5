@@ -1,7 +1,7 @@
 <template>
   <div class="lottery-container index-bg">
     <!--S 活动规则按钮  -->
-    <div class="rule-btn" @click="dialogActivityRulesVisible = true">
+    <div class="rule-btn" @click="handleShowRules">
       <div>活动</div>
       <div>规则</div>
     </div>
@@ -96,35 +96,10 @@
         </div>
       </div>
     </div>
-    <!--E 抽奖信息  -->
-    <!-- S 弹窗 首次奖励 -->
-    <dialogNewUserAward
-      v-model:visible="dialogNewUserAwardVisible"
-    ></dialogNewUserAward>
-    <!-- E 弹窗 首次奖励 -->
-    <!-- S 弹窗 海报 -->
-    <dialogPoster v-model:visible="dialogPosterVisible"></dialogPoster>
-    <!-- S 弹窗 海报 -->
-    <!-- S 弹窗 活动规则 -->
-    <dialogActivityRules
-      v-model:visible="dialogActivityRulesVisible"
-    ></dialogActivityRules>
-    <!-- E 弹窗 活动规则 -->
-    <!-- S 弹窗 谢谢参与 -->
-    <dialogThanksParticipant
-      v-model:visible="dialogThanksPartiVisible"
-    ></dialogThanksParticipant>
-    <!-- E 弹窗 谢谢参与 -->
-
-    <!-- S 弹窗 活动结束 -->
-    <dialogTipActivityFinish
-      v-model:visible="dialogTipActFishVisible"
-    ></dialogTipActivityFinish>
-    <!-- E 弹窗 活动结束 -->
-
-    <!-- S 弹窗 恭喜中奖 -->
-    <dialogAward v-model:visible="dialogAwardVisible"></dialogAward>
-    <!-- E 弹窗 恭喜中奖 -->
+    <component
+      :is="dialogComponents[dialogName]"
+      v-model:visible="dialogVisible"
+    />
   </div>
 </template>
 <script lang="ts" setup name="marquee">
@@ -148,13 +123,33 @@ onMounted(() => {
   setLottery()
   getContact()
 })
+const dialogComponents: ObjTy = {
+  dialogActivityRules,
+  dialogNewUserAward,
+  dialogPoster,
+  dialogThanksParticipant,
+  dialogTipActivityFinish,
+  dialogAward
+}
+const dialogName = ref('dialogActivityRules')
+const dialogVisible = ref(false)
+
+/**
+ * 展示活动规则
+ * @param {Object} e
+ */
+const handleShowRules = () => {
+  dialogName.value = 'dialogActivityRules'
+  dialogVisible.value = true
+}
 const getContact = async () => {
   const params = {
     url: api.getContact,
     data: {}
   }
-  const res: ObjTy = (await http.get(params)) as ObjTy
-  console.log('res: ', res)
+  const { data, result }: ObjTy = (await http.get(params)) as ObjTy
+  console.log('data: ', data)
+  console.log('result: ', result)
 }
 const tabIndex = ref(0)
 const tabs: Array<ObjTy> = [
@@ -162,12 +157,6 @@ const tabs: Array<ObjTy> = [
   { name: '活动奖品' },
   { name: '我的奖品' }
 ]
-const dialogNewUserAwardVisible = ref(false) // 变量-弹窗 首次奖励
-const dialogPosterVisible = ref(false) // 变量-弹窗 海报
-const dialogActivityRulesVisible = ref(false) // 变量-弹窗 活动规则
-const dialogThanksPartiVisible = ref(false) // 变量-弹窗 谢谢参与
-const dialogTipActFishVisible = ref(false) // 变量-弹窗 活动结束
-const dialogAwardVisible = ref(true) // 变量-弹窗 恭喜中奖
 
 // 选择的Tab
 const handleActive = (index: number) => {
