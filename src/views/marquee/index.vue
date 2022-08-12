@@ -102,7 +102,7 @@
     />
     <div class="test-contact">
       <div v-for="contact in contacts" :key="contact?.id">
-        {{ contact?.name }}
+        {{ contact?.name ?? '' }}
       </div>
     </div>
   </div>
@@ -124,11 +124,16 @@ import dialogThanksParticipant from './components/dialogThanksParticipant/index.
 import dialogTipActivityFinish from './components/dialogTipActivityFinish/index.vue'
 // 弹窗 恭喜中奖
 import dialogAward from './components/dialogAward/index.vue'
-const contacts = ref([{}])
+
+interface Contact {
+  id: number
+  name: string
+}
+const contacts = ref([] as Contact[])
 const { run } = useRequest(getContact, {
   onSuccess: (res: ResArrData) => {
     console.log(res.data)
-    contacts.value = res?.data
+    contacts.value = res?.data as Contact[]
   }
 })
 onMounted(() => {
