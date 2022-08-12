@@ -1,7 +1,15 @@
 <template>
   <DialogCustom v-model:visible="visible" hideCloseBtn>
     <div class="dialogAward">
-      <div class="content"></div>
+      <div class="content">
+        <div class="img">
+          <img
+            @click="visible = false"
+            src="@/common/assets/images/blue/blue-dialog-close.png"
+          />
+        </div>
+        <div class="txt">特等奖：美图手机 pro600</div>
+      </div>
 
       <div class="line"></div>
       <div class="btn" @click="visible = false">我知道了</div>
@@ -41,6 +49,30 @@ const visible = useVModel(props, 'visible', emit)
     width: 316px;
     height: 428px;
     display: block;
+    .img {
+      height: 380px;
+      box-sizing: border-box;
+      padding-top: 240px;
+      @include flex-center;
+      padding-bottom: 20px;
+      img {
+        height: 68px;
+        width: auto;
+      }
+    }
+    .txt {
+      margin: 0px auto;
+      width: 184px;
+      height: 14px;
+      font-size: 14px;
+      font-family: PingFangSC-Medium, PingFang SC;
+      font-weight: 500;
+      color: #ffffff;
+      line-height: 14px;
+      overflow: auto;
+      word-wrap: normal;
+      word-break: keep-all;
+    }
   }
   .line {
     margin: 0px auto;

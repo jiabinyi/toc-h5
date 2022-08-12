@@ -10,20 +10,14 @@
     "sourceMap": true,
     "resolveJsonModule": true,
     "esModuleInterop": true,
-    "lib": [
-      "esnext",
-      "dom"
-    ],
-    "types": [
-      "vite/client",
-      "node"
-    ],
+    "lib": ["esnext", "dom"],
+    "types": ["vite/client", "node"],
     "paths": {
       "@/*": ["src/*"],
       "@common/*": ["src/common/*"],
       "@components/*": ["src/components/*"],
       "@store/*": ["src/store/*"],
-      "@views/*": ["src/views/*"],
+      "@views/*": ["src/views/*"]
     }
   },
   "include": [
@@ -32,10 +26,7 @@
     "src/**/*.tsx",
     "src/**/*.vue",
     "types/**/*.d.ts",
-    "types/**/*.ts",
+    "types/**/*.ts"
   ],
-  "exclude": [
-    "node_modules",
-    "dist"
-  ]
+  "exclude": ["node_modules", "dist"]
 }

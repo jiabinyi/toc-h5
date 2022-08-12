@@ -7,7 +7,9 @@
     </div>
     <!--E 活动规则按钮  -->
     <div class="lottery-header">
-      <div class="participants-btn">已有200人参与</div>
+      <div class="participants-btn">
+        已有{{ activityData.participants_num }}人参与
+      </div>
       <div class="activity-time">
         <div class="content">2022-05-12 19:00:00</div>
       </div>
@@ -18,7 +20,9 @@
         <div class="marquee">
           <div class="marquee-item">
             <!-- 获奖人轮播  s-->
-            <awards-marquee></awards-marquee>
+            <awards-marquee
+              :data="activityData.cust_win_records"
+            ></awards-marquee>
           </div>
         </div>
         <!-- 奖盘  s-->
@@ -236,6 +240,38 @@ const startTurns = () => {
 const endTurns = () => {
   proxy.$toast.text('喜从天降，运气爆棚，恭喜你中奖了！')
 }
+
+// 获取当前活动内容信息
+const activityData: any = ref({
+  participants_num: 0,
+  cust_win_records: [],
+  turn_prize_vos: []
+}) // 变量-活动内容信息
+const queryTurnActivity = async () => {
+  const params = {
+    url: api.queryTurnActivity,
+    data: {}
+  }
+  const res: any = await http.get(params).catch(err => {
+    proxy.$toast.text(err.result.msg)
+  })
+  if (res) {
+    activityData.value = {
+      participants_num: 0,
+      cust_win_records: [],
+      turn_prize_vos: [],
+      ...res.data
+    }
+    activityData.turn_prize_vos.map((item: any) => ({
+      prizeColor: '',
+      prizeName: item.prize_name,
+      prizeImg: item.prize_cover_url,
+      ...item
+    }))
+  }
+}
+
+queryTurnActivity()
 </script>
 <style lang="scss" scoped>
 @import './index.scss';

@@ -9,23 +9,34 @@
     :background="`rgba(251, 248, 220, 0)`"
     :color="`#D9500B`"
   >
-    <div
-      class="item"
-      v-for="(item, index) in Array.from({ length: 3 })"
-      :key="index"
-    >
+    <div class="item" v-for="(item, index) in data" :key="index">
       <div class="user">
         <div class="avatar">
-          <img
-            src="https://ecmb.bdimg.com/tam-ogel/519917739_1170906296_367_252.jpg"
-          />
+          <img :src="item.head_img_url" />
         </div>
-        <div class="txt">15220453577</div>
+        <div class="txt">
+          {{ hideName(item.nick_name) + ' ' + item.phone_number }}
+        </div>
       </div>
     </div>
   </nut-noticebar>
 </template>
-<script lang="ts" setup name="awardsMarquee"></script>
+<script lang="ts" setup name="awardsMarquee">
+const props = defineProps({
+  // 数据
+  data: {
+    type: Array<any>,
+    default: () => Array.from({ length: 3 })
+  }
+})
+const { data } = toRefs(props)
+// 隐藏姓
+const hideName: any = (name: any) => {
+  name.length
+    ? name.substring(0, 1) + name.substring(1).replace(/./g, '*')
+    : '用户'
+}
+</script>
 <style lang="scss" scoped>
 .marquee {
   width: 25px;

@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import request from './axiosConfig'
 import { sessions } from 'mosowejs'
+import { rejects } from 'assert'
 
 interface api {
   url: string
@@ -19,7 +20,7 @@ const httpConfig = (method: string, params?: any) => {
     } else if (method === 'GET' || method === 'DELETE') {
       data = { params: params.data }
     }
-    return new Promise(resolve => {
+    return new Promise((resolve, reject) => {
       request(params.url, {
         method,
         ...data,
@@ -31,14 +32,14 @@ const httpConfig = (method: string, params?: any) => {
         }
       })
         .then((res: any) => {
-          resolve(res)
+          res.result.code === 'Success' ? resolve(res) : reject(res)
         })
         .catch((err: any) => {
-          console.log(err, '异常')
+          reject(err)
         })
     })
   } // 文件上传
-  return new Promise(resolve => {
+  return new Promise((resolve, reject) => {
     request(params.url, {
       method: 'post',
       data: params.data,
@@ -46,10 +47,10 @@ const httpConfig = (method: string, params?: any) => {
       headers: { authorization: token ? token : 'bearer' }
     })
       .then((res: any) => {
-        resolve(res)
+        res.result.code !== 'Success' ? resolve(res) : reject(res)
       })
       .catch((err: any) => {
-        console.log(err, '异常')
+        reject(err)
       })
   })
 }
