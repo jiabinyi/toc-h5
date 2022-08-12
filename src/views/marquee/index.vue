@@ -100,11 +100,16 @@
       :is="dialogComponents[dialogName]"
       v-model:visible="dialogVisible"
     />
+    <div class="test-contact">
+      <div v-for="contact in contacts" :key="contact?.id">
+        {{ contact?.name }}
+      </div>
+    </div>
   </div>
 </template>
 <script lang="ts" setup name="marquee">
-import http from '@/axios/axios'
-import api from '@/axios/apiNames'
+import { getContact } from '@/axios'
+import { useRequest } from 'vue-request'
 // 弹窗 活动规则
 import dialogActivityRules from './components/dialogActivityRules/index.vue'
 // 组件 获奖人跑马灯
@@ -119,9 +124,16 @@ import dialogThanksParticipant from './components/dialogThanksParticipant/index.
 import dialogTipActivityFinish from './components/dialogTipActivityFinish/index.vue'
 // 弹窗 恭喜中奖
 import dialogAward from './components/dialogAward/index.vue'
+const contacts = ref([{}])
+const { run } = useRequest(getContact, {
+  onSuccess: (res: ResArrData) => {
+    console.log(res.data)
+    contacts.value = res?.data
+  }
+})
 onMounted(() => {
   setLottery()
-  getContact()
+  run()
 })
 const dialogComponents: ObjTy = {
   dialogActivityRules,
@@ -141,15 +153,6 @@ const dialogVisible = ref(false)
 const handleShowRules = () => {
   dialogName.value = 'dialogActivityRules'
   dialogVisible.value = true
-}
-const getContact = async () => {
-  const params = {
-    url: api.getContact,
-    data: {}
-  }
-  const { data, result }: ObjTy = (await http.get(params)) as ObjTy
-  console.log('data: ', data)
-  console.log('result: ', result)
 }
 const tabIndex = ref(0)
 const tabs: Array<ObjTy> = [

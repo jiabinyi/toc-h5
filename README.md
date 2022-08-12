@@ -35,3 +35,4 @@ pnpm generate
 #### UI组件库[【参考】](https://nutui.jd.com/#/zh-CN/guide/intro)
 #### VueUse[【参考】](https://vueuse.org/guide/)
 #### dayjs[【参考】](https://dayjs.fenxianglu.cn/)
+#### vueRequest[【参考】](https://next.attojs.com/guide/introduction.html)

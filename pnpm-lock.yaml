@@ -52,6 +52,7 @@ specifiers:
   vue: ^3.2.26
   vue-eslint-parser: ^8.0.1
   vue-global-api: ^0.4.1
+  vue-request: 2.0.0-rc.3
   vue-router: ^4.0.12
   vue-tsc: ^0.29.8
   vuex: ^4.0.2
@@ -74,6 +75,7 @@ dependencies:
   vant: registry.npmmirror.com/vant/3.5.3_vue@3.2.37
   vue: registry.npmmirror.com/vue/3.2.37
   vue-global-api: registry.npmmirror.com/vue-global-api/0.4.1_vue@3.2.37
+  vue-request: registry.npmmirror.com/vue-request/2.0.0-rc.3_vue@3.2.37
   vue-router: registry.npmmirror.com/vue-router/4.1.3_vue@3.2.37
   vuex: registry.npmmirror.com/vuex/4.0.2_vue@3.2.37
 
@@ -2591,7 +2593,7 @@ packages:
     name: '@vueuse/shared'
     version: 9.0.2
     dependencies:
-      vue-demi: registry.npmmirror.com/vue-demi/0.13.6_vue@3.2.37
+      vue-demi: registry.npmmirror.com/vue-demi/0.13.7_vue@3.2.37
     transitivePeerDependencies:
       - '@vue/composition-api'
       - vue
@@ -2603,7 +2605,7 @@ packages:
     name: '@vueuse/shared'
     version: 9.1.0
     dependencies:
-      vue-demi: registry.npmmirror.com/vue-demi/0.13.6_vue@3.2.37
+      vue-demi: registry.npmmirror.com/vue-demi/0.13.7_vue@3.2.37
     transitivePeerDependencies:
       - '@vue/composition-api'
       - vue
@@ -8228,7 +8230,6 @@ packages:
         optional: true
     dependencies:
       vue: registry.npmmirror.com/vue/3.2.37
-    dev: false
 
   registry.npmmirror.com/vue-eslint-parser/8.3.0_eslint@8.21.0:
     resolution: {integrity: sha512-dzHGG3+sYwSf6zFBa0Gi9ZDshD7+ad14DGOdTLjruRVgZXe2J+DcZ9iUhyR48z5g1PqRa20yt3Njna/veLJL/g==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/vue-eslint-parser/-/vue-eslint-parser-8.3.0.tgz}
@@ -8262,6 +8263,22 @@ packages:
     transitivePeerDependencies:
       - '@vue/composition-api'
       - vue
+    dev: false
+
+  registry.npmmirror.com/vue-request/2.0.0-rc.3_vue@3.2.37:
+    resolution: {integrity: sha512-8ACVzScFWo7/rlUemRzti7J95ZtiH27/B/zaM6LnCOJwUoxE6zU8rRiuFIu40ZTbkHUSbNsvP1h6aY1a0Ig3Ew==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/vue-request/-/vue-request-2.0.0-rc.3.tgz}
+    id: registry.npmmirror.com/vue-request/2.0.0-rc.3
+    name: vue-request
+    version: 2.0.0-rc.3
+    peerDependencies:
+      '@vue/composition-api': ^1.0.0-rc.1
+      vue: ^2.0.0 || >=3.0.0
+    peerDependenciesMeta:
+      '@vue/composition-api':
+        optional: true
+    dependencies:
+      vue: registry.npmmirror.com/vue/3.2.37
+      vue-demi: registry.npmmirror.com/vue-demi/0.13.7_vue@3.2.37
     dev: false
 
   registry.npmmirror.com/vue-router/4.1.3_vue@3.2.37:
