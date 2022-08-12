@@ -104,15 +104,10 @@
       :is="dialogComponents[dialogName]"
       v-model:visible="dialogVisible"
     />
-    <div class="test-contact">
-      <div v-for="contact in contacts" :key="contact?.id">
-        {{ contact?.name ?? '' }}
-      </div>
-    </div>
   </div>
 </template>
 <script lang="ts" setup name="marquee">
-import { getContact } from '@/axios'
+import { getContact, queryTurnActivity } from '@/axios'
 import { useRequest } from 'vue-request'
 // 弹窗 活动规则
 import dialogActivityRules from './components/dialogActivityRules/index.vue'
@@ -128,22 +123,24 @@ import dialogThanksParticipant from './components/dialogThanksParticipant/index.
 import dialogTipActivityFinish from './components/dialogTipActivityFinish/index.vue'
 // 弹窗 恭喜中奖
 import dialogAward from './components/dialogAward/index.vue'
+// 对象-组件代理
+const { proxy } = getCurrentInstance() as any
 
+// 变量-联系人
 interface Contact {
   id: number
   name: string
 }
 const contacts = ref([] as Contact[])
-const { run } = useRequest(getContact, {
+// 请求-联系人
+const getContactRequest = useRequest(getContact, {
   onSuccess: (res: ResArrData) => {
     console.log(res.data)
     contacts.value = res?.data as Contact[]
   }
 })
-onMounted(() => {
-  setLottery()
-  run()
-})
+
+// 集合-弹窗
 const dialogComponents: ObjTy = {
   dialogActivityRules,
   dialogNewUserAward,
@@ -152,7 +149,9 @@ const dialogComponents: ObjTy = {
   dialogTipActivityFinish,
   dialogAward
 }
+// 变量-弹窗名
 const dialogName = ref('dialogActivityRules')
+// 变量-显示弹窗
 const dialogVisible = ref(false)
 
 /**
@@ -163,7 +162,9 @@ const handleShowRules = () => {
   dialogName.value = 'dialogActivityRules'
   dialogVisible.value = true
 }
+// 变量-tab栏 index
 const tabIndex = ref(0)
+// 枚举-tab栏菜单
 const tabs: Array<ObjTy> = [
   { name: '领取免费次数' },
   { name: '活动奖品' },
@@ -174,11 +175,12 @@ const tabs: Array<ObjTy> = [
 const handleActive = (index: number) => {
   tabIndex.value = index
 }
+// 设置转盘
 const setLottery = () => {
   const lotteryBtn = document.getElementsByClassName('start')
   lotteryBtn[0].innerHTML = '立即抽奖'
 }
-const { proxy } = getCurrentInstance() as any
+
 // 转盘上要展示的奖品数据
 const prizeList = ref([
   {
@@ -246,32 +248,32 @@ const activityData: any = ref({
   participants_num: 0,
   cust_win_records: [],
   turn_prize_vos: []
-}) // 变量-活动内容信息
-const queryTurnActivity = async () => {
-  const params = {
-    url: api.queryTurnActivity,
-    data: {}
-  }
-  const res: any = await http.get(params).catch(err => {
-    proxy.$toast.text(err.result.msg)
-  })
-  if (res) {
-    activityData.value = {
-      participants_num: 0,
-      cust_win_records: [],
-      turn_prize_vos: [],
-      ...res.data
+})
+// 变量-活动内容信息
+const queryTurnActivityRequest = useRequest(queryTurnActivity, {
+  onSuccess: (res: ResArrData) => {
+    if (res) {
+      activityData.value = {
+        participants_num: 0,
+        cust_win_records: [],
+        turn_prize_vos: [],
+        ...res.data
+      }
+      activityData.turn_prize_vos.map((item: any) => ({
+        prizeColor: '',
+        prizeName: item.prize_name,
+        prizeImg: item.prize_cover_url,
+        ...item
+      }))
     }
-    activityData.turn_prize_vos.map((item: any) => ({
-      prizeColor: '',
-      prizeName: item.prize_name,
-      prizeImg: item.prize_cover_url,
-      ...item
-    }))
   }
-}
+})
 
-queryTurnActivity()
+onMounted(() => {
+  setLottery()
+  getContactRequest.run()
+  queryTurnActivityRequest.run()
+})
 </script>
 <style lang="scss" scoped>
 @import './index.scss';
