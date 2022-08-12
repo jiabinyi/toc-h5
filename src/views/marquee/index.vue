@@ -133,7 +133,7 @@ interface Contact {
 }
 const contacts = ref([] as Contact[])
 // 请求-联系人
-const getContactRequest = useRequest(getContact, {
+const { run: getContactRequest } = useRequest(getContact, {
   onSuccess: (res: ResArrData) => {
     console.log(res.data)
     contacts.value = res?.data as Contact[]
@@ -243,36 +243,41 @@ const endTurns = () => {
   proxy.$toast.text('喜从天降，运气爆棚，恭喜你中奖了！')
 }
 
+interface ActivityData {
+  participants_num: number
+  cust_win_records: Array<ObjTy>
+  turn_prize_vos: Array<ObjTy>
+}
 // 获取当前活动内容信息
-const activityData: any = ref({
+const activityData = ref({
   participants_num: 0,
   cust_win_records: [],
   turn_prize_vos: []
-})
+} as ActivityData)
 // 变量-活动内容信息
-const queryTurnActivityRequest = useRequest(queryTurnActivity, {
-  onSuccess: (res: ResArrData) => {
+const { run: getActive } = useRequest(queryTurnActivity, {
+  onSuccess: (res: ResObjData) => {
     if (res) {
-      activityData.value = {
-        participants_num: 0,
-        cust_win_records: [],
-        turn_prize_vos: [],
-        ...res.data
-      }
-      activityData.turn_prize_vos.map((item: any) => ({
+      const turnPrizeVos = res?.data?.turnPrizeVos?.map((item: ObjTy) => ({
         prizeColor: '',
         prizeName: item.prize_name,
         prizeImg: item.prize_cover_url,
         ...item
       }))
+      activityData.value = {
+        participants_num: 0,
+        cust_win_records: [],
+        ...res.data,
+        turn_prize_vos: turnPrizeVos
+      }
     }
   }
 })
 
 onMounted(() => {
   setLottery()
-  getContactRequest.run()
-  queryTurnActivityRequest.run()
+  getContactRequest()
+  getActive()
 })
 </script>
 <style lang="scss" scoped>
