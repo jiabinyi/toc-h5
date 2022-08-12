@@ -25,7 +25,7 @@ const httpConfig = (method: string, params?: any) => {
         ...data,
         headers: {
           'Content-Type': 'application/json;charset=UTF-8',
-          authorization: token ? token : 'bearer',
+          authorization: `bearer ${token}`,
           tenant: import.meta.env.VITE_APP_TENANT,
           ...params.header
         }
@@ -43,7 +43,7 @@ const httpConfig = (method: string, params?: any) => {
       method: 'post',
       data: params.data,
       requestType: 'form',
-      headers: { authorization: token ? token : 'Basic aHc6aHc=' }
+      headers: { authorization: token ? token : 'bearer' }
     })
       .then((res: any) => {
         resolve(res)

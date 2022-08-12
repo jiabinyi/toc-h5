@@ -128,9 +128,8 @@
   </div>
 </template>
 <script lang="ts" setup name="marquee">
-import { ref, onMounted, getCurrentInstance, Ref } from 'vue'
-import { useRouteQuery } from '@vueuse/router'
-import useTheme from '@/utils/hooks/useTheme'
+import http from '@/axios/axios'
+import api from '@/axios/apiNames'
 // 弹窗 活动规则
 import dialogActivityRules from './components/dialogActivityRules/index.vue'
 // 组件 获奖人跑马灯
@@ -147,7 +146,16 @@ import dialogTipActivityFinish from './components/dialogTipActivityFinish/index.
 import dialogAward from './components/dialogAward/index.vue'
 onMounted(() => {
   setLottery()
+  getContact()
 })
+const getContact = async () => {
+  const params = {
+    url: api.getContact,
+    data: {}
+  }
+  const res: ObjTy = (await http.get(params)) as ObjTy
+  console.log('res: ', res)
+}
 const tabIndex = ref(0)
 const tabs: Array<ObjTy> = [
   { name: '领取免费次数' },

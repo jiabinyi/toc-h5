@@ -3,7 +3,7 @@
  */
 const useGetQuery = () => {
   // 获取浏览器url跟参
-  const hashStr: string = location.hash.substr(7)
+  const hashStr: string = location.href.split('?')[1] ?? ''
   const regex = (name: string) => `(^|&)${name}=([^&]*)(&|$)`
   const getQuery = (name: string) => hashStr.match(new RegExp(regex(name)))
   const getUrlParam = (name: string) => getQuery(name)?.[2] || null
