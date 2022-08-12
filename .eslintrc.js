@@ -12,6 +12,7 @@ module.exports = {
   plugins: ['vue', '@typescript-eslint'],
   rules: {
     'no-undef': 'off',
+    'vue/eqeqeq': 2,
     'vue/multi-word-component-names': 'off',
     // --以下是Possible Errors JS代码中的逻辑错误相关
     'no-extra-parens': 'error', // 禁止不必要的括号

@@ -48,7 +48,7 @@
         </div>
       </div>
       <!-- 领取免费次数 -->
-      <div class="footer-content" v-if="tabIndex == 0">
+      <div class="footer-content" v-if="tabIndex === 0">
         <div class="item">
           <div class="icon">
             <img src="@/common/assets/images/blue/invitation-icon.png" />
@@ -64,7 +64,7 @@
         </div>
       </div>
       <!-- 活动奖品 -->
-      <div class="footer-content" v-if="tabIndex == 1">
+      <div class="footer-content" v-if="tabIndex === 1">
         <div class="item">
           <div class="icon">
             <img src="@/common/assets/images/blue/invitation-icon.png" />
@@ -80,7 +80,7 @@
         </div>
       </div>
       <!-- 我的奖品 -->
-      <div class="footer-content" v-if="tabIndex == 2">
+      <div class="footer-content" v-if="tabIndex === 2">
         <div class="item">
           <div class="icon">
             <img src="@/common/assets/images/blue/invitation-icon.png" />
