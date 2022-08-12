@@ -1,13 +1,15 @@
 <template>
   <div class="lottery-container index-bg">
     <!--S 活动规则按钮  -->
-    <div class="rule-btn" @click="dialogActivityRulesVisible = true">
+    <div class="rule-btn" @click="showDialogActivityRules">
       <div>活动</div>
       <div>规则</div>
     </div>
     <!--E 活动规则按钮  -->
     <div class="lottery-header">
-      <div class="participants-btn">已有200人参与</div>
+      <div class="participants-btn">
+        已有{{ activityData.participants_num }}人参与
+      </div>
       <div class="activity-time">
         <div class="content">2022-05-12 19:00:00</div>
       </div>
@@ -18,7 +20,9 @@
         <div class="marquee">
           <div class="marquee-item">
             <!-- 获奖人轮播  s-->
-            <awards-marquee></awards-marquee>
+            <awards-marquee
+              :data="activityData.cust_win_records"
+            ></awards-marquee>
           </div>
         </div>
         <!-- 奖盘  s-->
@@ -97,34 +101,13 @@
       </div>
     </div>
     <!--E 抽奖信息  -->
-    <!-- S 弹窗 首次奖励 -->
-    <dialogNewUserAward
-      v-model:visible="dialogNewUserAwardVisible"
-    ></dialogNewUserAward>
-    <!-- E 弹窗 首次奖励 -->
-    <!-- S 弹窗 海报 -->
-    <dialogPoster v-model:visible="dialogPosterVisible"></dialogPoster>
-    <!-- S 弹窗 海报 -->
-    <!-- S 弹窗 活动规则 -->
-    <dialogActivityRules
-      v-model:visible="dialogActivityRulesVisible"
-    ></dialogActivityRules>
-    <!-- E 弹窗 活动规则 -->
-    <!-- S 弹窗 谢谢参与 -->
-    <dialogThanksParticipant
-      v-model:visible="dialogThanksPartiVisible"
-    ></dialogThanksParticipant>
-    <!-- E 弹窗 谢谢参与 -->
 
-    <!-- S 弹窗 活动结束 -->
-    <dialogTipActivityFinish
-      v-model:visible="dialogTipActFishVisible"
-    ></dialogTipActivityFinish>
-    <!-- E 弹窗 活动结束 -->
-
-    <!-- S 弹窗 恭喜中奖 -->
-    <dialogAward v-model:visible="dialogAwardVisible"></dialogAward>
-    <!-- E 弹窗 恭喜中奖 -->
+    <!-- S 弹窗-->
+    <component
+      :is="dialogComponents[dialogName]"
+      v-model:visible="dialogVisible"
+    ></component>
+    <!-- E 弹窗-->
   </div>
 </template>
 <script lang="ts" setup name="marquee">
@@ -144,10 +127,12 @@ import dialogThanksParticipant from './components/dialogThanksParticipant/index.
 import dialogTipActivityFinish from './components/dialogTipActivityFinish/index.vue'
 // 弹窗 恭喜中奖
 import dialogAward from './components/dialogAward/index.vue'
+import { Ref } from 'vue'
 onMounted(() => {
   setLottery()
   getContact()
 })
+
 const getContact = async () => {
   const params = {
     url: api.getContact,
@@ -162,12 +147,39 @@ const tabs: Array<ObjTy> = [
   { name: '活动奖品' },
   { name: '我的奖品' }
 ]
-const dialogNewUserAwardVisible = ref(false) // 变量-弹窗 首次奖励
-const dialogPosterVisible = ref(false) // 变量-弹窗 海报
-const dialogActivityRulesVisible = ref(false) // 变量-弹窗 活动规则
-const dialogThanksPartiVisible = ref(false) // 变量-弹窗 谢谢参与
-const dialogTipActFishVisible = ref(false) // 变量-弹窗 活动结束
-const dialogAwardVisible = ref(false) // 变量-弹窗 恭喜中奖
+
+const dialogVisible = ref(false) // 变量-弹窗
+// 枚举-弹窗名列表
+const dialogComponents: ObjTy = {
+  dialogActivityRules,
+  dialogNewUserAward,
+  dialogPoster,
+  dialogThanksParticipant,
+  dialogTipActivityFinish,
+  dialogAward
+}
+const dialogName: Ref = ref('dialogActivityRules') // 变量-弹窗名
+
+const showDialogActivityRules = () => {
+  dialogName.value = 'dialogActivityRules'
+  dialogVisible.value = true
+}
+
+const awardsList = ref([]) // 变量-弹窗 获奖用户列表
+// 幸运大转盘走马灯中奖列表
+const walkingLanternList = async () => {
+  const params = {
+    url: api.walkingLanternList,
+    data: {}
+  }
+  const res: any = await http.get(params).catch(err => {
+    proxy.$toast.text(err.result.msg)
+  })
+  if (res) {
+    awardsList.value = res.data
+  }
+}
+walkingLanternList()
 
 // 选择的Tab
 const handleActive = (index: number) => {
@@ -239,6 +251,38 @@ const startTurns = () => {
 const endTurns = () => {
   proxy.$toast.text('喜从天降，运气爆棚，恭喜你中奖了！')
 }
+
+// 获取当前活动内容信息
+const activityData: any = ref({
+  participants_num: 0,
+  cust_win_records: [],
+  turn_prize_vos: []
+}) // 变量-活动内容信息
+const queryTurnActivity = async () => {
+  const params = {
+    url: api.queryTurnActivity,
+    data: {}
+  }
+  const res: any = await http.get(params).catch(err => {
+    proxy.$toast.text(err.result.msg)
+  })
+  if (res) {
+    activityData.value = {
+      participants_num: 0,
+      cust_win_records: [],
+      turn_prize_vos: [],
+      ...res.data
+    }
+    activityData.turn_prize_vos.map((item: any) => ({
+      prizeColor: '',
+      prizeName: item.prize_name,
+      prizeImg: item.prize_cover_url,
+      ...item
+    }))
+  }
+}
+
+queryTurnActivity()
 </script>
 <style lang="scss" scoped>
 @import './index.scss';
