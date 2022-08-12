@@ -1,7 +1,7 @@
 <template>
   <div class="lottery-container index-bg">
     <!--S 活动规则按钮  -->
-    <div class="rule-btn" @click="showDialogActivityRules">
+    <div class="rule-btn" @click="handleShowRules">
       <div>活动</div>
       <div>规则</div>
     </div>
@@ -100,19 +100,20 @@
         </div>
       </div>
     </div>
-    <!--E 抽奖信息  -->
-
-    <!-- S 弹窗-->
     <component
       :is="dialogComponents[dialogName]"
       v-model:visible="dialogVisible"
-    ></component>
-    <!-- E 弹窗-->
+    />
+    <div class="test-contact">
+      <div v-for="contact in contacts" :key="contact?.id">
+        {{ contact?.name }}
+      </div>
+    </div>
   </div>
 </template>
 <script lang="ts" setup name="marquee">
-import http from '@/axios/axios'
-import api from '@/axios/apiNames'
+import { getContact } from '@/axios'
+import { useRequest } from 'vue-request'
 // 弹窗 活动规则
 import dialogActivityRules from './components/dialogActivityRules/index.vue'
 // 组件 获奖人跑马灯
@@ -127,29 +128,17 @@ import dialogThanksParticipant from './components/dialogThanksParticipant/index.
 import dialogTipActivityFinish from './components/dialogTipActivityFinish/index.vue'
 // 弹窗 恭喜中奖
 import dialogAward from './components/dialogAward/index.vue'
-import { Ref } from 'vue'
+const contacts = ref([{}])
+const { run } = useRequest(getContact, {
+  onSuccess: (res: ResArrData) => {
+    console.log(res.data)
+    contacts.value = res?.data
+  }
+})
 onMounted(() => {
   setLottery()
-  getContact()
+  run()
 })
-
-const getContact = async () => {
-  const params = {
-    url: api.getContact,
-    data: {}
-  }
-  const res: ObjTy = (await http.get(params)) as ObjTy
-  console.log('res: ', res)
-}
-const tabIndex = ref(0)
-const tabs: Array<ObjTy> = [
-  { name: '领取免费次数' },
-  { name: '活动奖品' },
-  { name: '我的奖品' }
-]
-
-const dialogVisible = ref(false) // 变量-弹窗
-// 枚举-弹窗名列表
 const dialogComponents: ObjTy = {
   dialogActivityRules,
   dialogNewUserAward,
@@ -158,28 +147,23 @@ const dialogComponents: ObjTy = {
   dialogTipActivityFinish,
   dialogAward
 }
-const dialogName: Ref = ref('dialogActivityRules') // 变量-弹窗名
+const dialogName = ref('dialogActivityRules')
+const dialogVisible = ref(false)
 
-const showDialogActivityRules = () => {
+/**
+ * 展示活动规则
+ * @param {Object} e
+ */
+const handleShowRules = () => {
   dialogName.value = 'dialogActivityRules'
   dialogVisible.value = true
 }
-
-const awardsList = ref([]) // 变量-弹窗 获奖用户列表
-// 幸运大转盘走马灯中奖列表
-const walkingLanternList = async () => {
-  const params = {
-    url: api.walkingLanternList,
-    data: {}
-  }
-  const res: any = await http.get(params).catch(err => {
-    proxy.$toast.text(err.result.msg)
-  })
-  if (res) {
-    awardsList.value = res.data
-  }
-}
-walkingLanternList()
+const tabIndex = ref(0)
+const tabs: Array<ObjTy> = [
+  { name: '领取免费次数' },
+  { name: '活动奖品' },
+  { name: '我的奖品' }
+]
 
 // 选择的Tab
 const handleActive = (index: number) => {

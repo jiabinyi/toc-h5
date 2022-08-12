@@ -25,3 +25,12 @@ type IOptions<T = number> = Array<{
   label: string
   value: T
 }>
+
+interface ResArrData {
+  data: Array<{ [propName: string]: any }>
+  result: ObjTy
+}
+interface ResObjData {
+  data: ObjTy
+  result: ObjTy
+}
