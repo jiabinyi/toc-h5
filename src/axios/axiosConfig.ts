@@ -31,11 +31,12 @@ const apiCode: any = {
   toast: -1, // 错误信息，需要toast提示
   loginFail: 'errorText' // 登录失效
 }
-const jsCode = sessions.get('js_code')
+const clientType: string = sessions.get('clientType')
 const request: any = axios.create({
-  baseURL: jsCode
-    ? import.meta.env.VITE_APP_WX_BASE_URL
-    : import.meta.env.VITE_APP_BASE_URL,
+  baseURL:
+    clientType === 'wechat'
+      ? import.meta.env.VITE_APP_WX_BASE_URL
+      : import.meta.env.VITE_APP_BASE_URL,
   timeout: 60000,
   responseType: 'json'
 })
