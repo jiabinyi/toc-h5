@@ -10,8 +10,14 @@
     "sourceMap": true,
     "resolveJsonModule": true,
     "esModuleInterop": true,
-    "lib": ["esnext", "dom"],
+    "lib": ["dom","es2015","es2016", "es2017", "es2018", "es2019", "es2020", "esnext"],
     "types": ["vite/client", "node"],
+    "allowSyntheticDefaultImports": true,
+    "declaration": true,
+    "declarationDir": "build",
+    "noEmit": true,
+    "rootDir": "./src",
+    "rootDirs": ["./src"],
     "paths": {
       "@/*": ["src/*"],
       "@common/*": ["src/common/*"],
@@ -21,6 +27,7 @@
     }
   },
   "include": [
+    "./src",
     "src/**/*.ts",
     "src/**/*.d.ts",
     "src/**/*.tsx",
