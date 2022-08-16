@@ -4,22 +4,54 @@ import AutoImport from 'unplugin-auto-import/vite'
 import Components from 'unplugin-vue-components/vite'
 import vue from '@vitejs/plugin-vue'
 import { createStyleImportPlugin, NutuiResolve } from 'vite-plugin-style-import'
+import compressPlugin from 'vite-plugin-compression'
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const path = require('path')
 
 function resolve(dir: string) {
   return path.join(__dirname, dir)
 }
+function configCompressPlugin(
+  compress: 'gzip' | 'brotli' | 'none',
+  deleteOriginFile = true
+): Plugin | Plugin[] {
+  const compressList = compress.split(',')
+
+  const plugins: Plugin[] = []
+
+  if (compressList.includes('gzip')) {
+    const gzPlugin = compressPlugin({
+      ext: '.gz',
+      threshold: 1024,
+      deleteOriginFile
+    }) as Plugin
+    plugins.push(gzPlugin)
+  }
+
+  if (compressList.includes('brotli')) {
+    const brPlugin = compressPlugin({
+      ext: '.br',
+      algorithm: 'brotliCompress',
+      threshold: 1024,
+      deleteOriginFile
+    }) as any
+    plugins.push(brPlugin)
+  }
+  return plugins
+}
 
 /*
  * https://vitejs.dev/config/
  * https://github.com/vitejs/vite/issues/1930 .env
  */
-export default defineConfig(({ mode }) => {
+export default defineConfig(({ mode, command }) => {
   const env = loadEnv(mode, process.cwd())
+  console.log('mode: ', mode)
+  const plugins = command === 'build' ? [configCompressPlugin('gzip')] : []
   return {
     plugins: [
       vue(),
+      ...plugins,
       createStyleImportPlugin({ resolves: [NutuiResolve()] }),
       Components({
         dirs: ['src/components'],
