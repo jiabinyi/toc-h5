@@ -8,6 +8,7 @@
     "dev": "vite --host",
     "start": "npm run dev --host",
     "test": "vue-tsc --noEmit && vite build --mode test",
+    "staging": "vue-tsc --noEmit && vite build --mode staging",
     "build": "vue-tsc --noEmit && vite build --mode production",
     "serve": "vite preview --host",
     "lint": "eslint --ext .js,.jsx,.vue,.ts,.tsx src",
