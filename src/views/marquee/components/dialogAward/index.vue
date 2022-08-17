@@ -5,7 +5,9 @@
         <div class="img">
           <img @click="visible = false" :src="prize.pic_url" />
         </div>
-        <div class="txt">{{ prize.prize_name }}</div>
+        <div class="txt">
+          {{ prize.choice_prize_name }}： {{ prize.prize_name }}
+        </div>
       </div>
 
       <div class="line"></div>
