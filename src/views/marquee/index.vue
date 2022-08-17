@@ -332,6 +332,8 @@ const { run: turnLuckDrawFunc } = useRequest(turnLuckDraw, {
   onSuccess: (res: ResObjData) => {
     if (res) {
       activityData.value.turn_prize_vos.findIndex((prize, index) => {
+        getActivityTaskList()
+        getMyWinningList()
         if (prize.id === res.data.id) {
           prizeCurrent.value = prize
           prizeIndex.value = index
