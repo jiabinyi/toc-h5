@@ -3,12 +3,9 @@
     <div class="dialogAward">
       <div class="content">
         <div class="img">
-          <img
-            @click="visible = false"
-            src="@/common/assets/images/blue/blue-dialog-close.png"
-          />
+          <img @click="visible = false" :src="data.pic_url" />
         </div>
-        <div class="txt">特等奖：美图手机 pro600</div>
+        <div class="txt">{{ data.prize_name }}</div>
       </div>
 
       <div class="line"></div>

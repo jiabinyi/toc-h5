@@ -2,27 +2,24 @@
   <DialogCustom v-model:visible="visible">
     <div class="dialogPoster">
       <div class="sharer">
-        <img src="@/common/assets/images/blue/invitation-icon.png" />
-        来自树上的猫的分享
+        <img :src="UserStore.userInfo.head_img_url" />
+        来自{{ UserStore.userInfo.nick_name }}的分享
       </div>
       <div class="canvas-wrap">
         <div class="canvas" id="canvas">
           <div class="pic">
-            <img src="@/common/assets/images/blue/invitation-icon.png" />
+            <img :src="activityData.turn_activity.share_pic_url" />
           </div>
           <div class="prizes">
-            <div class="item">
-              <img src="@/common/assets/images/blue/invitation-icon.png" />
+            <div
+              class="item"
+              v-for="(item, index) in data.turn_prize_vo_list.slice(0, 2)"
+              :key="index"
+            >
+              <img :src="item.pic_url" />
               <div class="ifo">
-                <div class="title">特等奖：美图手机 pro600</div>
-                <div class="num">1份</div>
-              </div>
-            </div>
-            <div class="item">
-              <img src="@/common/assets/images/blue/invitation-icon.png" />
-              <div class="ifo">
-                <div class="title">特等奖：美图手机 pro600</div>
-                <div class="num">1份</div>
+                <div class="title">{{ item.goods_name }}</div>
+                <div class="num">{{ item.prize_goods_num }}份</div>
               </div>
             </div>
           </div>
@@ -32,7 +29,7 @@
               <div class="tip2">立即免费参与</div>
             </div>
             <div class="qrcode">
-              <img src="@/common/assets/images/blue/invitation-icon.png" />
+              <img :src="qrcodeImg" />
             </div>
           </div>
         </div>
@@ -43,17 +40,59 @@
   </DialogCustom>
 </template>
 <script lang="ts" setup name="Home">
+import { getQRCode } from '@/axios'
+import { useRequest } from 'vue-request'
+import { useUserStore } from '@/store/modules/user.ts'
+import { sessions } from 'mosowejs'
+const UserStore = useUserStore()
+const props = defineProps({
+  // 变量-显示隐藏弹窗
+  visible: {
+    type: Boolean,
+    default: false
+  },
+  // 数据-活动规则
+  data: {
+    type: Object,
+    default: () => new Object()
+  },
+  activityData: {
+    type: Object,
+    default: () => new Object()
+  }
+})
+// prop响应式
+const emit = defineEmits(['update:visible'])
+const visible = useVModel(props, 'visible', emit)
+const activityData = useVModel(props, 'activityData')
 import html2canvas from 'html2canvas'
-
 // 弹窗
 import DialogCustom from '@/components/DialogCustom/index.vue'
-
-setTimeout(() => {
-  renderPoster()
-}, 2000)
+const qrcodeImg = ref('')
+// 获取小程序码
+const activityTaskListData = ref({} as any) // 变量-免费次数任务列表
+const { run: runGetQRCode } = useRequest(getQRCode, {
+  manual: true,
+  onSuccess: (res: any) => {
+    if (res) {
+      const binaryData = []
+      binaryData.push(res)
+      qrcodeImg.value = window.URL.createObjectURL(new Blob(binaryData))
+      renderPosterImage()
+    }
+  }
+})
 
 let canvasID: HTMLElement
 const renderPoster = () => {
+  runGetQRCode({
+    sharePagePath: 'pages/webview/webview',
+    activityId: activityData.value.turn_activity.id,
+    custId: sessions.get('cust_id'),
+    envVersion: sessions.get('envVersion')
+  })
+}
+const renderPosterImage = () => {
   canvasID = document.getElementById('canvas') ?? document.body
 
   const opts = {
@@ -62,18 +101,16 @@ const renderPoster = () => {
     logging: true // 日志开关
   }
   if (canvasID !== document.body) {
-    html2canvas(canvasID, opts).then(canvas => {
+    html2canvas(canvasID, opts).then((canvas: { toDataURL: () => string }) => {
       const image = new Image()
       const dom = document.getElementById('canvas_pic')
-
       image.src = canvas.toDataURL()
 
       dom?.appendChild(image)
     })
   }
 }
-
-const visible = ref(true)
+defineExpose({ renderPoster })
 </script>
 <style lang="scss">
 .dialogPoster {
@@ -127,6 +164,10 @@ const visible = ref(true)
           align-items: flex-start;
           justify-content: center;
           margin-left: 15px;
+          img {
+            width: 40px;
+            height: 40px;
+          }
           .title {
             font-size: 14px;
             font-family: PingFangSC-Medium, PingFang SC;
@@ -153,6 +194,10 @@ const visible = ref(true)
         line-height: 22px;
         flex-grow: 1;
         text-align: left;
+      }
+      img {
+        width: 67px;
+        height: 67px;
       }
     }
   }

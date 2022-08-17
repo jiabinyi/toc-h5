@@ -9,7 +9,7 @@
   >
     <div class="wrap">
       <slot></slot>
-      <div class="closeBtn" @click="visible = false" v-if="!hideCloseBtn">
+      <div class="closeBtn" @click="close" v-if="!hideCloseBtn">
         <img src="@/common/assets/images/blue/dialog-close-btn.png" />
       </div>
     </div>
@@ -26,8 +26,12 @@ const props = defineProps({
     default: false
   }
 })
-const emit = defineEmits(['update:visible'])
+const emit = defineEmits(['update:visible', 'close'])
 const visible = useVModel(props, 'visible', emit)
+const close = () => {
+  visible.value = false
+  emit('close')
+}
 </script>
 <style lang="scss">
 .DialogCustom {

@@ -25,20 +25,26 @@ const httpConfig = (method: string, params?: any) => {
         method,
         ...data,
         headers: {
-          'Content-Type': 'application/json;charset=UTF-8',
+          'Content-Type': 'application/x-www-form-urlencoded',
           authorization: `bearer ${token}`,
           tenant: import.meta.env.VITE_APP_TENANT,
           ...params.header
-        }
+        },
+        responseType: params.responseType
       })
         .then((res: any) => {
+          if (params.responseType === 'blob') {
+            resolve(res)
+            return
+          }
           res.result.code === 'Success' ? resolve(res) : reject(res)
         })
         .catch((err: any) => {
           reject(err)
         })
     })
-  } // 文件上传
+  }
+  // 文件上传
   return new Promise((resolve, reject) => {
     request(params.url, {
       method: 'post',

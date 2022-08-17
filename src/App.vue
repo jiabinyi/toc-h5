@@ -7,7 +7,11 @@
 </template>
 
 <script lang="ts" setup name="App">
+import { getUserInfo } from '@/axios'
+import { useRequest } from 'vue-request'
 import { sessions } from 'mosowejs'
+import { useUserStore } from '@/store/modules/user.ts'
+const UserStore = useUserStore()
 import useTheme from '@/utils/hooks/useTheme'
 import useGetQuery from '@/utils/hooks/useGetQuery'
 const { getUrlParam } = useGetQuery()
@@ -22,8 +26,21 @@ setBodyClassName(getUrlParam('theme') ?? 'blue')
 const setSession = (key: string, value: string) => {
   sessions.set(key, value)
 }
-const keys: string[] = ['token', 'clientType']
+const keys: string[] = ['token', 'clientType', 'envVersion']
 keys.forEach((key: string) => {
   setSession(key, getUrlParam(key) ?? '')
 })
+
+// 领取免费次数任务列表
+const { run: runGetUserInfo } = useRequest(getUserInfo, {
+  manual: true,
+  onSuccess: (res: ResObjData) => {
+    if (res) {
+      setSession('userInfo', JSON.stringify(res.data ?? {}))
+      setSession('cust_id', res.data.cust_id)
+      UserStore.userInfo = res.data
+    }
+  }
+})
+runGetUserInfo()
 </script>

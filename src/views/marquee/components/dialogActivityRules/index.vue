@@ -3,12 +3,15 @@
     <div class="dialogActivityRules">
       <div class="title">活动规则</div>
       <div class="content">
-        <div class="content-title">1</div>
-        <div class="content-txt">2</div>
+        <div class="content-title">活动规则</div>
+        <div class="content-txt">
+          1. 本次活动时间：{{ data.activity_time }} 至{{ data.end_time }}
+        </div>
+        <div class="content-txt">2. 领取时间：中奖后1小时领取有效；</div>
       </div>
       <div class="content">
-        <div class="content-title">1</div>
-        <div class="content-txt">2</div>
+        <div class="content-title">活动说明</div>
+        <div class="content-txt">{{ data.remark }}</div>
       </div>
       <div class="footer" @click="visible = false">
         <div class="btn">我知道了</div>

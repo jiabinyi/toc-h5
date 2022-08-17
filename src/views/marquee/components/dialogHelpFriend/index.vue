@@ -1,15 +1,20 @@
 <template>
-  <DialogCustom v-model:visible="visible">
-    <div class="dialogNewUserAward" @click="accept"></div>
+  <DialogCustom
+    v-model:visible="visible"
+    @close="emit('dialogHelpFriendClose')"
+  >
+    <div class="dialogHelpFriend" @click="accept"></div>
   </DialogCustom>
 </template>
 <script lang="ts" setup name="Home">
-import { immediatelyReceive } from '@/axios'
+import { helpFriends } from '@/axios'
 
 import { sessions } from 'mosowejs'
 import { useRequest } from 'vue-request'
 // 弹窗 首次奖励
 import DialogCustom from '@/components/DialogCustom/index.vue'
+import useGetQuery from '@/utils/hooks/useGetQuery'
+const { getUrlParam } = useGetQuery()
 const props = defineProps({
   // 变量-显示隐藏弹窗
   visible: {
@@ -28,37 +33,36 @@ const props = defineProps({
 })
 
 // prop响应式
-const emit = defineEmits(['update:visible', 'dialogNewUserAwardClose'])
+const emit = defineEmits(['update:visible', 'dialogHelpFriendClose'])
 const visible = useVModel(props, 'visible', emit)
 const activityData = useVModel(props, 'activityData')
 
-const accept = () => {
-  runImmediatelyReceive({
-    activityId: activityData.value.turn_activity.id,
-    custId: sessions.get('cust_id')
-  })
-  visible.value = false
-  emit('dialogNewUserAwardClose')
-}
-// 对象-组件代理
-const { proxy } = getCurrentInstance() as any
-// 领取
-const { run: runImmediatelyReceive } = useRequest(immediatelyReceive, {
+// 幸运大转盘助力好友
+const { run: runHelpFriends } = useRequest(helpFriends, {
   manual: true,
   onSuccess: (res: ResObjData) => {
     if (res) {
-      proxy.$toast.text('领取成功')
+      emit('dialogHelpFriendClose')
     }
   },
   onError: (error: any) => {
     proxy.$toast.text(error.result.msg)
   }
 })
+const accept = () => {
+  runHelpFriends({
+    activityId: activityData.value.turn_activity.id,
+    helpUserId: getUrlParam('userId'),
+    userId: sessions.get('cust_id')
+  })
+}
+// 对象-组件代理
+const { proxy } = getCurrentInstance() as any
 </script>
 <style lang="scss">
-.dialogNewUserAward {
+.dialogHelpFriend {
   @include toc-images-background;
-  background-image: var(--blue-dialog-new-user-award);
+  background-image: var(--blue-dialog-help-friend);
   width: 316px;
   height: 398px;
   display: block;

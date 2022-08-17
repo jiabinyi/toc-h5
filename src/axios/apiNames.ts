@@ -12,5 +12,8 @@ export default {
   queryTurnActivity: '/mall/front/turn/queryTurnActivity', // 小程序-获取当前活动内容信息
   queryTurnInviteFriends: '/mall/front/turn/queryTurnInviteFriends', // 小程序-获取分享文案信息
   turnLuckDraw: '/mall/front/turn/turnLuckDraw', // 小程序-幸运大转盘抽奖
-  walkingLanternList: '/mall/front/turn/walkingLanternList' // 小程序-幸运大转盘走马灯中奖列表
+  walkingLanternList: '/mall/front/turn/walkingLanternList', // 小程序-幸运大转盘走马灯中奖列表
+  getUserInfo: '/customer/account/info', // 小程序-获取用户信息
+  getQRCode: '/customer/wx/QRCode', // 小程序-生成二维码
+  immediatelyReceive: '/mall/front/turn/immediatelyReceive' // 小程序-立即领取
 }

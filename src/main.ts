@@ -10,6 +10,7 @@ import { Marquee } from '@nutui/nutui-bingo'
 import '@nutui/nutui/dist/style.css'
 import '@nutui/nutui-bingo/dist/style.css'
 import '@common/assets/styles/index.scss'
+
 const app = createApp(App)
 
 dayjs.locale('zh-ch')

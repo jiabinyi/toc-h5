@@ -27,7 +27,8 @@
         </div>
         <!-- 奖盘  s-->
         <nutbig-marquee
-          :prize-list="prizeList"
+          v-if="showMarquee"
+          :prize-list="activityData.turn_prize_vos"
           :prize-index="prizeIndex"
           :speed="150"
           :circle="40"
@@ -53,49 +54,55 @@
       </div>
       <!-- 领取免费次数 -->
       <div class="footer-content" v-if="tabIndex === 0">
-        <div class="item">
+        <div
+          class="item"
+          v-for="(item, index) in activityTaskListData"
+          :key="index"
+        >
           <div class="icon">
             <img src="@/common/assets/images/blue/invitation-icon.png" />
           </div>
           <div class="txt">
-            <div class="title">每邀请一位好友参与</div>
-            <div class="desc">免费次数 +1</div>
+            <div class="title">{{ item.guide_copy }}</div>
+            <div class="desc">
+              {{ item.task_content_title }} +{{ item.reward_type_value }}
+            </div>
           </div>
           <div class="right">
-            <div class="txt">进行中 (1/3)</div>
-            <div class="btn">立即邀请</div>
+            <div class="txt">
+              进行中 ({{ item.be_help_num }}/{{ item.cycle_daily_limit_num }})
+            </div>
+            <div
+              class="btn"
+              v-if="item.be_help_num < item.cycle_daily_limit_num"
+              @click="goToShare"
+            >
+              {{ item.button_copy }}
+            </div>
           </div>
         </div>
       </div>
       <!-- 活动奖品 -->
-      <div class="footer-content" v-if="tabIndex === 1">
-        <div class="item">
-          <div class="icon">
-            <img src="@/common/assets/images/blue/invitation-icon.png" />
-          </div>
-          <div class="txt">
-            <div class="title">每邀请一位好友参与</div>
-            <div class="desc">免费次数 +1</div>
-          </div>
-          <div class="right">
-            <div class="txt">进行中 (1/3)</div>
-            <div class="btn">立即邀请</div>
-          </div>
-        </div>
-      </div>
+      <!-- <div class="footer-content" v-if="tabIndex === 1"></div> -->
       <!-- 我的奖品 -->
-      <div class="footer-content" v-if="tabIndex === 2">
-        <div class="item">
+      <div class="footer-content" v-if="tabIndex === 1">
+        <div
+          class="item"
+          v-for="(item, index) in myWinningListData"
+          :key="index"
+        >
           <div class="icon">
-            <img src="@/common/assets/images/blue/invitation-icon.png" />
+            <img :src="item.pic_url" />
           </div>
           <div class="txt">
-            <div class="title">每邀请一位好友参与</div>
-            <div class="desc">免费次数 +1</div>
+            <div class="title">{{ item.goods_name }}</div>
+            <div class="desc">{{ item.win_time }}</div>
           </div>
           <div class="right">
-            <div class="txt">进行中 (1/3)</div>
-            <div class="btn">立即邀请</div>
+            <div class="btn" v-if="!item.order_no" @click="placeOrder(item)">
+              立即下单
+            </div>
+            <div class="btn" v-if="item.order_no">查看订单</div>
           </div>
         </div>
       </div>
@@ -103,11 +110,26 @@
     <component
       :is="dialogComponents[dialogName]"
       v-model:visible="dialogVisible"
+      :data="dialogData"
+      :inviteIfoData="inviteIfoData"
+      :activityData="activityData"
+      ref="refDialogComponent"
+      @dialogHelpFriendClose="dialogHelpFriendClose"
     />
   </div>
 </template>
 <script lang="ts" setup name="marquee">
-import { getContact, queryTurnActivity } from '@/axios'
+import {
+  getContact,
+  queryTurnActivity,
+  activityTaskList,
+  queryTurnInviteFriends,
+  myWinningList,
+  turnLuckDraw,
+  helpFriends
+} from '@/axios'
+
+import { sessions } from 'mosowejs'
 import { useRequest } from 'vue-request'
 // 弹窗 活动规则
 import dialogActivityRules from './components/dialogActivityRules/index.vue'
@@ -123,9 +145,13 @@ import dialogThanksParticipant from './components/dialogThanksParticipant/index.
 import dialogTipActivityFinish from './components/dialogTipActivityFinish/index.vue'
 // 弹窗 恭喜中奖
 import dialogAward from './components/dialogAward/index.vue'
+// 弹窗 助力
+import dialogHelpFriend from './components/dialogHelpFriend/index.vue'
+
 // 对象-组件代理
 const { proxy } = getCurrentInstance() as any
-
+import useGetQuery from '@/utils/hooks/useGetQuery'
+const { getUrlParam } = useGetQuery()
 // 变量-联系人
 interface Contact {
   id: number
@@ -134,12 +160,14 @@ interface Contact {
 const contacts = ref([] as Contact[])
 // 请求-联系人
 const { run: getContactRequest } = useRequest(getContact, {
+  manual: true,
   onSuccess: (res: ResArrData) => {
     console.log(res.data)
     contacts.value = res?.data as Contact[]
   }
 })
-
+// 变量-弹窗数据
+const dialogData = ref({})
 // 集合-弹窗
 const dialogComponents: ObjTy = {
   dialogActivityRules,
@@ -147,12 +175,14 @@ const dialogComponents: ObjTy = {
   dialogPoster,
   dialogThanksParticipant,
   dialogTipActivityFinish,
-  dialogAward
+  dialogAward,
+  dialogHelpFriend
 }
 // 变量-弹窗名
 const dialogName = ref('dialogActivityRules')
 // 变量-显示弹窗
 const dialogVisible = ref(false)
+const refDialogComponent = ref()
 
 /**
  * 展示活动规则
@@ -161,13 +191,26 @@ const dialogVisible = ref(false)
 const handleShowRules = () => {
   dialogName.value = 'dialogActivityRules'
   dialogVisible.value = true
+  dialogData.value = activityData.value?.turn_activity
+}
+
+/**
+ * 去分享
+ */
+const goToShare = () => {
+  dialogName.value = 'dialogPoster'
+  dialogData.value = inviteIfoData.value
+  dialogVisible.value = true
+  setTimeout(() => {
+    refDialogComponent.value.renderPoster()
+  }, 200)
 }
 // 变量-tab栏 index
 const tabIndex = ref(0)
 // 枚举-tab栏菜单
 const tabs: Array<ObjTy> = [
   { name: '领取免费次数' },
-  { name: '活动奖品' },
+  // { name: '活动奖品' },
   { name: '我的奖品' }
 ]
 
@@ -182,102 +225,181 @@ const setLottery = () => {
 }
 
 // 转盘上要展示的奖品数据
-const prizeList = ref([
-  {
-    id: 'xiaomi',
-    prizeName: '小米手机',
-    prizeImg: 'https://ecmb.bdimg.com/tam-ogel/519917739_1170906296_367_252.jpg'
-  },
-  {
-    id: 'blue',
-    prizeColor: 'rgb(251, 219, 216)',
-    prizeName: '蓝牙耳机',
-    prizeImg:
-      'https://img0.baidu.com/it/u=2636019359,707918449&fm=253&fmt=auto&app=138&f=JPG?w=500&h=318'
-  },
-  {
-    id: 'thanks',
-    prizeName: '谢谢参与',
-    prizeImg:
-      'https://img1.baidu.com/it/u=875176582,3483294321&fm=253&fmt=auto&app=138&f=PNG?w=260&h=170'
-  },
-  {
-    id: 'apple',
-    prizeName: 'apple watch',
-    prizeImg:
-      'https://img0.baidu.com/it/u=2794028064,3238991630&fm=253&fmt=auto&app=120&f=JPEG?w=526&h=500'
-  },
-  {
-    id: 'fruit',
-    prizeColor: 'rgba(246, 142, 46, 0.5)',
-    prizeName: '苹果13 Pro',
-    prizeImg:
-      'https://t15.baidu.com/it/u=1719561931,2725603912&fm=224&app=112&size=h200&n=0&f=JPEG&fmt=auto?sec=1659632400&t=ed77d1daacd290bf4472dadf4b54605e'
-  },
-  {
-    id: 'thanks',
-    prizeName: '谢谢参与',
-    prizeImg:
-      'https://img2.baidu.com/it/u=1985555842,143515817&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=667'
-  },
-  {
-    id: 'fish',
-    prizeName: '海鲜套餐',
-    prizeImg:
-      'https://img0.baidu.com/it/u=220318103,3593106031&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=667'
-  },
-  {
-    id: 'thanks',
-    prizeName: '谢谢参与',
-    prizeImg:
-      'https://img2.baidu.com/it/u=1985555842,143515817&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=667'
-  }
-])
+const prizeList = ref([])
 // 中奖的奖品的index(此数据可根据后台返回的值重新赋值)
 const prizeIndex = ref(-1)
 const startTurns = () => {
-  const PRIZE_lIST_SIZE = prizeList.value.length
-  prizeIndex.value = Math.floor(Math.random() * PRIZE_lIST_SIZE)
+  prizeCurrent.value = {}
+  prizeIndex.value = -1
+  turnLuckDrawFunc({
+    activityId: activityData.value.turn_activity.id,
+    custId: JSON.parse(sessions.get('userInfo')).cust_id
+  })
 }
 const endTurns = () => {
-  proxy.$toast.text('喜从天降，运气爆棚，恭喜你中奖了！')
+  if (prizeCurrent.value.name === '谢谢参与') {
+    // proxy.$toast.text('喜从天降，运气爆棚，恭喜你中奖了！')
+    dialogName.value = 'dialogThanksParticipant'
+    dialogVisible.value = true
+  } else {
+    dialogName.value = 'dialogAward'
+    dialogData.value = prizeCurrent.value
+    dialogVisible.value = true
+  }
 }
 
 interface ActivityData {
   participants_num: number
   cust_win_records: Array<ObjTy>
   turn_prize_vos: Array<ObjTy>
+  turn_activity: ObjTy
+  turn_invite_friends_vos: ObjTy
+  receive_flag: boolean
 }
+
 // 获取当前活动内容信息
 const activityData = ref({
+  receive_flag: false,
   participants_num: 0,
   cust_win_records: [],
-  turn_prize_vos: []
+  turn_prize_vos: [],
+  turn_activity: {},
+  turn_invite_friends_vos: {}
 } as ActivityData)
-// 变量-活动内容信息
-const { run: getActive } = useRequest(queryTurnActivity, {
+
+const showMarquee = ref(false)
+
+// 领取免费次数任务列表
+const activityTaskListData = ref({} as any) // 变量-免费次数任务列表
+const { run: getActivityTaskList } = useRequest(activityTaskList, {
+  manual: true,
   onSuccess: (res: ResObjData) => {
     if (res) {
-      const turnPrizeVos = res?.data?.turnPrizeVos?.map((item: ObjTy) => ({
+      activityTaskListData.value = res.data
+    }
+  }
+})
+
+// 获取分享文案信息
+const inviteIfoData = ref({} as any) // 变量-分享文案
+const { run: getInviteIfo } = useRequest(queryTurnInviteFriends, {
+  manual: true,
+  onSuccess: (res: ResObjData) => {
+    if (res) {
+      inviteIfoData.value = res.data
+    }
+  }
+})
+// 小程序-幸运大转盘分页获取我的中奖列表
+const myWinningListData = ref({} as any) // 变量-中奖列表
+const { run: getMyWinningList } = useRequest(myWinningList, {
+  manual: true,
+  onSuccess: (res: ResObjData) => {
+    if (res) {
+      myWinningListData.value = res.data
+    }
+  }
+})
+// 当前获奖奖品
+const prizeCurrent = ref({} as any)
+// 小程序-幸运大转盘抽奖
+const { run: turnLuckDrawFunc } = useRequest(turnLuckDraw, {
+  manual: true,
+  onSuccess: (res: ResObjData) => {
+    if (res) {
+      activityData.value.turn_prize_vos.findIndex((prize, index) => {
+        if (prize.id === res.data.id) {
+          prizeCurrent.value = prize
+          prizeIndex.value = index
+          return true
+        }
+        return false
+      })
+    }
+  },
+  onError: (error: any) => {
+    proxy.$toast.text(error.result.msg)
+    showMarquee.value = false
+    setTimeout(() => {
+      showMarquee.value = true
+    }, 100)
+  }
+})
+
+/**
+ * 下单
+ * @author yijiabin
+ * @date 2022-08-16
+ * @param {any} {category_code
+ * @param {any} goods_id}:any
+ * @returns {any}
+ */
+const placeOrder = ({ category_code, goods_id }: any) => {
+  const url = `/pages/activity/pages/goodDetail/goodDetail?category_code=${category_code}&activityId=${activityData.value.turn_activity.id}&goods_id=${goods_id}&type=marquee`
+  console.log('url', url)
+  window.postMessage(
+    {
+      type: 'navigateTo',
+      data: url
+    },
+    '*'
+  )
+}
+// 请求-活动内容信息
+const { run: getActive } = useRequest(queryTurnActivity, {
+  manual: true,
+  onSuccess: (res: ResObjData) => {
+    if (res) {
+      const turn_prize_vos = res?.data?.turn_prize_vos?.map((item: ObjTy) => ({
         prizeColor: '',
         prizeName: item.prize_name,
         prizeImg: item.prize_cover_url,
         ...item
       }))
       activityData.value = {
+        receive_flag: false,
+        turn_activity: {},
+        turn_invite_friends_vos: {},
         participants_num: 0,
         cust_win_records: [],
         ...res.data,
-        turn_prize_vos: turnPrizeVos
+        turn_prize_vos
+      }
+      showMarquee.value = true
+      setTimeout(() => {
+        setLottery()
+      }, 100)
+      // 获取分享文案信息
+      getInviteIfo({
+        activityId: activityData.value.turn_activity.id,
+        fissionType: 1
+      })
+      // 判断是否需助力
+
+      if (getUrlParam('userId')?.length) {
+        dialogName.value = 'dialogHelpFriend'
+        dialogVisible.value = true
+      } else if (activityData.value.receive_flag) {
+        dialogName.value = 'dialogNewUserAward'
+        dialogVisible.value = true
       }
     }
   }
 })
 
+// 帮好友助力后
+const dialogHelpFriendClose = () => {
+  if (activityData.value.receive_flag) {
+    dialogName.value = 'dialogNewUserAward'
+    dialogVisible.value = true
+  }
+}
 onMounted(() => {
-  setLottery()
+  getContactRequest()
   getContactRequest()
   getActive()
+  getActivityTaskList()
+  getMyWinningList()
 })
 </script>
 <style lang="scss" scoped>
