@@ -102,7 +102,9 @@
             <img :src="item.pic_url" />
           </div>
           <div class="txt">
-            <div class="title">{{ item.goods_name }}</div>
+            <div class="title">
+              {{ item.choice_prize_name }}：{{ item.goods_name }} x {{ 1 }}
+            </div>
             <div class="desc">{{ item.win_time }}</div>
           </div>
           <div class="right">
