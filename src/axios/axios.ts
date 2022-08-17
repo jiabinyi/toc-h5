@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import request from './axiosConfig'
 import { sessions } from 'mosowejs'
-import { rejects } from 'assert'
 
 interface api {
   url: string
@@ -11,7 +10,6 @@ interface api {
 
 const httpConfig = (method: string, params?: any) => {
   const token = sessions.get('token')
-  console.log('token-axios: ', token)
   let data: any = null
   if (method !== 'FILE') {
     // 非文件上传

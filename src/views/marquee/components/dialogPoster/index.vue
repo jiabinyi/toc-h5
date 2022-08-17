@@ -78,7 +78,6 @@ import html2canvas from 'html2canvas'
 import DialogCustom from '@/components/DialogCustom/index.vue'
 const qrcodeImg = ref('')
 // 获取小程序码
-const activityTaskListData = ref({} as any) // 变量-免费次数任务列表
 const { run: runGetQRCode } = useRequest(getQRCode, {
   manual: true,
   onSuccess: (res: any) => {
