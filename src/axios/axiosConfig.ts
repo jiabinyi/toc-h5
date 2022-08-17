@@ -32,6 +32,7 @@ const apiCode: any = {
   loginFail: 'errorText' // 登录失效
 }
 const clientType: string = sessions.get('clientType')
+console.log('clientType-----: ', clientType, clientType === 'wechat')
 const request: any = axios.create({
   baseURL:
     clientType === 'wechat'
