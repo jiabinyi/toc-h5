@@ -105,6 +105,7 @@
             <div class="btn" v-if="item.order_no">查看订单</div>
           </div>
         </div>
+        <div v-if="!myWinningListData.length"></div>
       </div>
     </div>
     <component
@@ -237,7 +238,7 @@ const startTurns = () => {
   })
 }
 const endTurns = () => {
-  if (prizeCurrent.value.name === '谢谢参与') {
+  if (prizeCurrent.value.prizeName === '谢谢参与') {
     // proxy.$toast.text('喜从天降，运气爆棚，恭喜你中奖了！')
     dialogName.value = 'dialogThanksParticipant'
     dialogVisible.value = true
@@ -309,6 +310,7 @@ const { run: turnLuckDrawFunc } = useRequest(turnLuckDraw, {
     if (res) {
       activityData.value.turn_prize_vos.findIndex((prize, index) => {
         if (prize.id === res.data.id) {
+          debugger
           prizeCurrent.value = prize
           prizeIndex.value = index
           return true
