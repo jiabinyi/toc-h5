@@ -2,8 +2,12 @@
   <DialogCustom v-model:visible="visible">
     <div class="dialogPoster">
       <div class="sharer">
-        <img :src="UserStore.userInfo.head_img_url" />
-        来自{{ UserStore.userInfo.nick_name }}的分享
+        <img class="image" :src="UserStore.userInfo.head_img_url" />
+        <div class="title">
+          来自{{ UserStore.userInfo.nick_name }}的分享@{{
+            helpShareData.task_content_title
+          }}
+        </div>
       </div>
       <div class="canvas-wrap">
         <div class="canvas" id="canvas">
@@ -57,6 +61,10 @@ const props = defineProps({
     default: () => new Object()
   },
   activityData: {
+    type: Object,
+    default: () => new Object()
+  },
+  helpShareData: {
     type: Object,
     default: () => new Object()
   }
@@ -132,12 +140,19 @@ defineExpose({ renderPoster })
       height: 28px;
       border-radius: 28px;
       margin-right: 5px;
+      flex-shrink: 0;
     }
     font-size: 14px;
     font-family: PingFangSC-Medium, PingFang SC;
     font-weight: 500;
     color: #333333;
     line-height: 14px;
+    .title {
+      display: flex;
+      flex-grow: 1;
+      justify-content: flex-start;
+      line-height: 24px;
+    }
   }
   .canvas-wrap {
     position: relative;

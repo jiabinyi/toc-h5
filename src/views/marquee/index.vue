@@ -64,7 +64,7 @@
           </div>
           <div class="txt">
             <div class="title">
-              {{ item.task_content_title }} +{{ item.reward_type_value }}
+              {{ item.reward_type_value }}+ {{ item.task_content_title }}
             </div>
             <div class="desc">
               {{ item.guide_copy }}
@@ -77,7 +77,7 @@
             <div
               class="btn"
               v-if="item.be_help_num < item.cycle_daily_limit_num"
-              @click="goToShare"
+              @click="goToShare(item)"
             >
               {{ item.button_copy }}
             </div>
@@ -99,10 +99,15 @@
             <div class="desc">{{ item.win_time }}</div>
           </div>
           <div class="right">
-            <div class="btn" v-if="!item.order_no" @click="placeOrder(item)">
+            <div
+              class="btn"
+              v-if="!item.order_no && !item.over_tim"
+              @click="placeOrder(item)"
+            >
               立即下单
             </div>
             <div class="btn" v-if="item.order_no">查看订单</div>
+            <div class="btn" v-if="item.over_time">超时未下单</div>
           </div>
         </div>
         <div v-if="!myWinningListData.length">
@@ -111,6 +116,7 @@
       </div>
     </div>
     <component
+      :helpShareData="helpShareData"
       :is="dialogComponents[dialogName]"
       v-model:visible="dialogVisible"
       :data="dialogData"
@@ -201,7 +207,9 @@ const handleShowRules = () => {
 /**
  * 去分享
  */
-const goToShare = () => {
+const helpShareData = ref({})
+const goToShare = (item: any) => {
+  helpShareData.value = item
   dialogName.value = 'dialogPoster'
   dialogData.value = inviteIfoData.value
   dialogVisible.value = true
