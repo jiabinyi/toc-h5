@@ -1,16 +1,16 @@
 <template>
   <DialogCustom v-model:visible="visible">
     <div class="dialogPoster">
-      <div class="sharer">
-        <img class="image" :src="UserStore.userInfo.head_img_url" />
-        <div class="title">
-          来自{{ UserStore.userInfo.nick_name }}的分享@{{
-            helpShareData.task_content_title
-          }}
-        </div>
-      </div>
       <div class="canvas-wrap">
         <div class="canvas" id="canvas">
+          <div class="sharer">
+            <img class="image" :src="UserStore.userInfo.head_img_url" />
+            <div class="title">
+              来自{{ UserStore.userInfo.nick_name }}的分享@{{
+                helpShareData.task_content_title
+              }}
+            </div>
+          </div>
           <div class="pic">
             <img :src="activityData.turn_activity.share_pic_url" />
           </div>
@@ -151,6 +151,7 @@ defineExpose({ renderPoster })
       flex-grow: 1;
       justify-content: flex-start;
       line-height: 24px;
+      text-align: left;
     }
   }
   .canvas-wrap {
