@@ -116,6 +116,7 @@
       :data="dialogData"
       :inviteIfoData="inviteIfoData"
       :activityData="activityData"
+      :prize="prizeCurrent"
       ref="refDialogComponent"
       @dialogHelpFriendClose="dialogHelpFriendClose"
     />
@@ -129,7 +130,6 @@ import {
   queryTurnInviteFriends,
   myWinningList,
   turnLuckDraw,
-  helpFriends,
   currentActivityAccount
 } from '@/axios'
 
@@ -230,8 +230,6 @@ const setLottery = () => {
   }次)</div>`
 }
 
-// 转盘上要展示的奖品数据
-const prizeList = ref([])
 // 中奖的奖品的index(此数据可根据后台返回的值重新赋值)
 const prizeIndex = ref(-1)
 const startTurns = () => {

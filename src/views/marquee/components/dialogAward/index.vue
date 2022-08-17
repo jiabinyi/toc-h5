@@ -3,9 +3,9 @@
     <div class="dialogAward">
       <div class="content">
         <div class="img">
-          <img @click="visible = false" :src="data.pic_url" />
+          <img @click="visible = false" :src="prize.pic_url" />
         </div>
-        <div class="txt">{{ data.prize_name }}</div>
+        <div class="txt">{{ prize.prize_name }}</div>
       </div>
 
       <div class="line"></div>
@@ -28,7 +28,7 @@ const props = defineProps({
     default: false
   },
   // 数据-活动规则
-  data: {
+  prize: {
     type: Object,
     default: () => new Object()
   }

@@ -6,7 +6,7 @@
         <div class="content-txt-center">好运总是眷顾努力坚持的人</div>
       </div>
       <div class="footer" @click="visible = false">
-        <div class="btn">立即领取</div>
+        <div class="btn">再抽一次</div>
       </div>
     </div>
   </DialogCustom>
