@@ -1,18 +1,30 @@
 module.exports = {
   root: true,
-  env: { browser: true, es2021: true, 'vue/setup-compiler-macros': true },
+  env: {
+    browser: true,
+    es2022: true,
+    node: true,
+    'vue/setup-compiler-macros': true
+  },
   extends: [
     'plugin:vue/vue3-essential',
     'eslint:recommended',
     '@vue/typescript/recommended',
     '@vue/prettier',
     '@vue/prettier/@typescript-eslint',
+    'plugin:@typescript-eslint/recommended',
     'vue-global-api'
   ],
   plugins: ['vue', '@typescript-eslint'],
   rules: {
-    'no-undef': 'off',
+    // 'no-undef': 'off',
     'vue/eqeqeq': 2,
+    // 允许使用any类型
+    '@typescript-eslint/no-explicit-any': ['off'],
+    // 允许非空断言
+    '@typescript-eslint/no-non-null-assertion': 'off',
+    // 允许自定义模块和命名空间
+    '@typescript-eslint/no-namespace': 'off',
     'vue/multi-word-component-names': 'off',
     // --以下是Possible Errors JS代码中的逻辑错误相关
     'no-extra-parens': 'error', // 禁止不必要的括号
@@ -89,5 +101,13 @@ module.exports = {
     ecmaVersion: 'latest',
     parser: '@typescript-eslint/parser',
     sourceType: 'module'
+  },
+  globals: {
+    ObjTy: true,
+    ResObjData: true,
+    ResArrData: true,
+    useVModel: true,
+    useRouter: true,
+    useIntervalFn: true
   }
 }

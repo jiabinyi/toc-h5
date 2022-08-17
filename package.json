@@ -7,7 +7,9 @@
   "scripts": {
     "dev": "vite --host",
     "start": "npm run dev --host",
-    "build": "vue-tsc --noEmit && vite build",
+    "test": "vue-tsc --noEmit && vite build --mode test",
+    "staging": "vue-tsc --noEmit && vite build --mode staging",
+    "build": "vue-tsc --noEmit && vite build --mode production",
     "serve": "vite preview --host",
     "lint": "eslint --ext .js,.jsx,.vue,.ts,.tsx src",
     "eslint": "eslint --ext .js,.vue --ignore-path .gitignore --fix src",
@@ -43,6 +45,7 @@
     "pinia": "^2.0.17",
     "qs": "^6.11.0",
     "vant": "^3.3.7",
+    "vite-plugin-compression": "^0.5.1",
     "vue": "^3.2.26",
     "vue-global-api": "^0.4.1",
     "vue-request": "2.0.0-rc.3",
