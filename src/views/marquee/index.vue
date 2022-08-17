@@ -82,8 +82,6 @@
           </div>
         </div>
       </div>
-      <!-- 活动奖品 -->
-      <!-- <div class="footer-content" v-if="tabIndex === 1"></div> -->
       <!-- 我的奖品 -->
       <div class="footer-content" v-if="tabIndex === 1">
         <div
@@ -105,7 +103,9 @@
             <div class="btn" v-if="item.order_no">查看订单</div>
           </div>
         </div>
-        <div v-if="!myWinningListData.length"></div>
+        <div v-if="!myWinningListData.length">
+          <nut-empty description="无数据"></nut-empty>
+        </div>
       </div>
     </div>
     <component
@@ -310,7 +310,6 @@ const { run: turnLuckDrawFunc } = useRequest(turnLuckDraw, {
     if (res) {
       activityData.value.turn_prize_vos.findIndex((prize, index) => {
         if (prize.id === res.data.id) {
-          debugger
           prizeCurrent.value = prize
           prizeIndex.value = index
           return true
