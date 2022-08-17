@@ -323,6 +323,9 @@ const { run: turnLuckDrawFunc } = useRequest(turnLuckDraw, {
     showMarquee.value = false
     setTimeout(() => {
       showMarquee.value = true
+      nextTick(() => {
+        setLottery()
+      })
     }, 100)
   }
 })
