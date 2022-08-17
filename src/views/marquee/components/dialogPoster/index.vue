@@ -160,16 +160,17 @@ defineExpose({ renderPoster })
       .item {
         margin-top: 20px;
         display: flex;
+        img {
+          width: 40px;
+          height: 40px;
+        }
         .ifo {
           display: flex;
           flex-direction: column;
           align-items: flex-start;
           justify-content: center;
           margin-left: 15px;
-          img {
-            width: 40px;
-            height: 40px;
-          }
+
           .title {
             font-size: 14px;
             font-family: PingFangSC-Medium, PingFang SC;
