@@ -91,3 +91,8 @@ export const helpFriends: PromiseFn = data => {
   }
   return http.post(params)
 }
+
+export const currentActivityAccount: PromiseFn = () => {
+  const params = { url: api.currentActivityAccount }
+  return http.get(params)
+}

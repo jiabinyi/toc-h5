@@ -127,7 +127,8 @@ import {
   queryTurnInviteFriends,
   myWinningList,
   turnLuckDraw,
-  helpFriends
+  helpFriends,
+  currentActivityAccount
 } from '@/axios'
 
 import { sessions } from 'mosowejs'
@@ -222,7 +223,9 @@ const handleActive = (index: number) => {
 // 设置转盘
 const setLottery = () => {
   const lotteryBtn = document.getElementsByClassName('start')
-  lotteryBtn[0].innerHTML = '立即抽奖'
+  lotteryBtn[0].innerHTML = `<div class="txt">立即抽奖</div><div class="num-txt">(${
+    curActivityAccountData.value?.activity_account?.loot_ticket_num ?? 0
+  }次)</div>`
 }
 
 // 转盘上要展示的奖品数据
@@ -281,6 +284,18 @@ const { run: getActivityTaskList } = useRequest(activityTaskList, {
   }
 })
 
+// 当前活动的账户查询
+const curActivityAccountData = ref({} as any) // 变量-免费次数任务列表
+const { run: runCurActivityAccount } = useRequest(currentActivityAccount, {
+  manual: true,
+  onSuccess: (res: ResObjData) => {
+    if (res) {
+      curActivityAccountData.value = res.data
+      setLottery()
+    }
+  }
+})
+runCurActivityAccount()
 // 获取分享文案信息
 const inviteIfoData = ref({} as any) // 变量-分享文案
 const { run: getInviteIfo } = useRequest(queryTurnInviteFriends, {

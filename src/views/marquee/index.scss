@@ -115,7 +115,27 @@
       line-height: 98px;
       top: 5px;
       left: 4px;
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      justify-content: center;
+
+
+
+
+
     }
+
+    :deep(.num-txt) {
+      line-height: 22px;
+      font-weight: 400;
+    }
+
+    :deep(.txt) {
+      line-height: 22px;
+    }
+
+
 
     :deep(.disabledDraw) {
       @include lottery-btn-bg;
