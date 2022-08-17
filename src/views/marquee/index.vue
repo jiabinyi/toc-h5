@@ -71,14 +71,21 @@
             </div>
           </div>
           <div class="right">
-            <div class="txt">
+            <div
+              class="txt"
+              v-if="item.be_help_num < item.cycle_daily_limit_num"
+            >
               进行中 ({{ item.be_help_num }}/{{ item.cycle_daily_limit_num }})
             </div>
+
             <div
-              class="btn"
-              v-if="item.be_help_num < item.cycle_daily_limit_num"
-              @click="goToShare(item)"
+              class="txt"
+              v-if="item.be_help_num >= item.cycle_daily_limit_num"
             >
+              任务已完成
+            </div>
+
+            <div class="btn" @click="goToShare(item)">
               {{ item.button_copy }}
             </div>
           </div>
