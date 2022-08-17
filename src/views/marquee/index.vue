@@ -11,7 +11,7 @@
         已有{{ activityData.participants_num }}人参与
       </div>
       <div class="activity-time">
-        <div class="content">2022-05-12 19:00:00</div>
+        <div class="content">{{ activityData.turn_activity.end_time }}</div>
       </div>
     </div>
     <!--S 抽奖箱  -->

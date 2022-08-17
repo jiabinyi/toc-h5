@@ -78,7 +78,9 @@ const { run: runGetQRCode } = useRequest(getQRCode, {
       const binaryData = []
       binaryData.push(res)
       qrcodeImg.value = window.URL.createObjectURL(new Blob(binaryData))
-      renderPosterImage()
+      setTimeout(() => {
+        renderPosterImage()
+      }, 200)
     }
   }
 })
