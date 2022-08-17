@@ -60,12 +60,14 @@
           :key="index"
         >
           <div class="icon">
-            <img src="@/common/assets/images/blue/invitation-icon.png" />
+            <img :src="item.task_icon_url" />
           </div>
           <div class="txt">
-            <div class="title">{{ item.guide_copy }}</div>
-            <div class="desc">
+            <div class="title">
               {{ item.task_content_title }} +{{ item.reward_type_value }}
+            </div>
+            <div class="desc">
+              {{ item.guide_copy }}
             </div>
           </div>
           <div class="right">
