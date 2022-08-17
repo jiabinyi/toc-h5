@@ -4,7 +4,7 @@
  */
 import qs from 'qs'
 import axios from 'axios'
-import { sessions } from 'mosowejs'
+import useGetQuery from '@/utils/hooks/useGetQuery'
 import dayjs from 'dayjs'
 import api from './apiNames'
 
@@ -31,11 +31,11 @@ const apiCode: any = {
   toast: -1, // 错误信息，需要toast提示
   loginFail: 'errorText' // 登录失效
 }
-const clientType: string = sessions.get('clientType')
-console.log('clientType-----: ', clientType, clientType === 'wechat')
+const { getUrlParam } = useGetQuery()
+console.log('clientType-----: ', getUrlParam('clientType'))
 const request: any = axios.create({
   baseURL:
-    clientType === 'wechat'
+    getUrlParam('clientType') === 'wechat'
       ? import.meta.env.VITE_APP_WX_BASE_URL
       : import.meta.env.VITE_APP_BASE_URL,
   timeout: 60000,
