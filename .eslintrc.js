@@ -25,6 +25,7 @@ module.exports = {
     '@typescript-eslint/no-non-null-assertion': 'off',
     // 允许自定义模块和命名空间
     '@typescript-eslint/no-namespace': 'off',
+    '@typescript-eslint/no-unused-vars': 'error',
     'vue/multi-word-component-names': 'off',
     // --以下是Possible Errors JS代码中的逻辑错误相关
     'no-extra-parens': 'error', // 禁止不必要的括号
@@ -41,6 +42,7 @@ module.exports = {
     'no-self-compare': 'error', // 禁止自身比较
     'no-unmodified-loop-condition': 'error', // 禁止一成不变的循环条件，如while条件，防止死循环
     'no-useless-concat': 'error', // 禁止没有必要的字符串拼接，如'a'+'b'应该写成'ab'
+    'no-unused-vars': 'error', // 禁止出现未使用过的变量，如let a = 1;
     'require-await': 'error', // 禁止使用不带await的async表达式
     // --以下是Stylistic Issues 主观的代码风格
     'array-element-newline': ['error', 'consistent'], // 数组元素要一致的换行或者不换行
