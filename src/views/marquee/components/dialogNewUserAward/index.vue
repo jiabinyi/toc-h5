@@ -47,12 +47,13 @@ const { run: runImmediatelyReceive } = useRequest(immediatelyReceive, {
   onSuccess: (res: ResObjData) => {
     if (res) {
       proxy.$toast.text('领取成功')
+      emit('dialogNewUserAwardClose')
     }
-    emit('dialogNewUserAwardClose')
+    visible.value = false
   },
   onError: (error: any) => {
     proxy.$toast.text(error.result.msg)
-    emit('dialogNewUserAwardClose')
+    visible.value = false
   }
 })
 </script>

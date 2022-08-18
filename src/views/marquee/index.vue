@@ -403,6 +403,8 @@ const placeOrder = ({ category_code, goods_id }: any) => {
   const url = `/pages/activity/pages/goodDetail/goodDetail?category_code=${category_code}&activityId=${activityData.value.turn_activity.id}&goods_id=${goods_id}&type=marquee`
   console.log('url', url)
 }
+// 常量 是否已助力
+const dialogHelpFriendHadPop = ref(false)
 // 请求-活动内容信息
 const { run: getActive } = useRequest(queryTurnActivity, {
   manual: true,
@@ -435,14 +437,20 @@ const { run: getActive } = useRequest(queryTurnActivity, {
       })
       // 判断是否需助力
       if (activityData.value.join_flag) {
-        if (getUrlParam('userId')?.length) {
+        if (getUrlParam('userId')?.length && !dialogHelpFriendHadPop.value) {
           dialogName.value = 'dialogHelpFriend'
           dialogVisible.value = true
+          dialogHelpFriendHadPop.value = true
         } else if (activityData.value.receive_flag) {
           dialogName.value = 'dialogNewUserAward'
           dialogVisible.value = true
         }
       }
+    }
+  },
+  onError: (error: any) => {
+    if (error?.result?.code === 'MallFailure.CurrentTurnActivityNotExist') {
+      proxy.$toast.text(error?.result?.msg, { duration: 1500000 })
     }
   }
 })
