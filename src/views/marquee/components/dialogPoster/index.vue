@@ -6,7 +6,7 @@
           <div class="sharer">
             <img class="image" :src="UserStore.userInfo.head_img_url" />
             <div class="title">
-              来自{{ UserStore.userInfo.nick_name }}的分享@{{
+              {{ UserStore.userInfo.nick_name }}的分享@{{
                 helpShareData.task_content_title
               }}
             </div>
@@ -121,6 +121,7 @@ const renderPosterImage = () => {
     html2canvas(canvasID, opts).then((canvas: { toDataURL: () => string }) => {
       const image = new Image()
       const dom = document.getElementById('canvas_pic')
+
       image.src = canvas.toDataURL()
 
       dom?.appendChild(image)

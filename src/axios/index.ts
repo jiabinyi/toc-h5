@@ -96,3 +96,8 @@ export const currentActivityAccount: PromiseFn = () => {
   const params = { url: api.currentActivityAccount }
   return http.get(params)
 }
+
+export const walkingLanternList: PromiseFn = () => {
+  const params = { url: api.walkingLanternList }
+  return http.get(params)
+}

@@ -21,7 +21,8 @@
           <div class="marquee-item">
             <!-- 获奖人轮播  s-->
             <awards-marquee
-              :data="activityData.cust_win_records"
+              v-if="walkingLanternListData.cust_win_records"
+              :data="walkingLanternListData.cust_win_records ?? []"
             ></awards-marquee>
           </div>
         </div>
@@ -154,7 +155,8 @@ import {
   queryTurnInviteFriends,
   myWinningList,
   turnLuckDraw,
-  currentActivityAccount
+  currentActivityAccount,
+  walkingLanternList
 } from '@/axios'
 
 import { sessions } from 'mosowejs'
@@ -288,6 +290,7 @@ interface ActivityData {
   turn_activity: ObjTy
   turn_invite_friends_vos: ObjTy
   receive_flag: boolean
+  join_flag: boolean
 }
 
 // 获取当前活动内容信息
@@ -297,7 +300,8 @@ const activityData = ref({
   cust_win_records: [],
   turn_prize_vos: [],
   turn_activity: {},
-  turn_invite_friends_vos: {}
+  turn_invite_friends_vos: {},
+  join_flag: false
 } as ActivityData)
 
 const showMarquee = ref(false)
@@ -324,7 +328,7 @@ const { run: runCurActivityAccount } = useRequest(currentActivityAccount, {
     }
   }
 })
-runCurActivityAccount()
+
 // 获取分享文案信息
 const inviteIfoData = ref({} as any) // 变量-分享文案
 const { run: getInviteIfo } = useRequest(queryTurnInviteFriends, {
@@ -342,6 +346,17 @@ const { run: getMyWinningList } = useRequest(myWinningList, {
   onSuccess: (res: ResObjData) => {
     if (res) {
       myWinningListData.value = res.data
+    }
+  }
+})
+
+// 小程序-幸运大转盘分页获取我的中奖列表
+const walkingLanternListData = ref({} as any) // 变量-中奖列表
+const { run: runDalkingLanternList } = useRequest(walkingLanternList, {
+  manual: true,
+  onSuccess: (res: ResObjData) => {
+    if (res) {
+      walkingLanternListData.value = res.data
     }
   }
 })
@@ -405,6 +420,7 @@ const { run: getActive } = useRequest(queryTurnActivity, {
         turn_invite_friends_vos: {},
         participants_num: 0,
         cust_win_records: [],
+        join_flag: true,
         ...res.data,
         turn_prize_vos
       }
@@ -418,13 +434,14 @@ const { run: getActive } = useRequest(queryTurnActivity, {
         fissionType: 1
       })
       // 判断是否需助力
-
-      if (getUrlParam('userId')?.length) {
-        dialogName.value = 'dialogHelpFriend'
-        dialogVisible.value = true
-      } else if (activityData.value.receive_flag) {
-        dialogName.value = 'dialogNewUserAward'
-        dialogVisible.value = true
+      if (activityData.value.join_flag) {
+        if (getUrlParam('userId')?.length) {
+          dialogName.value = 'dialogHelpFriend'
+          dialogVisible.value = true
+        } else if (activityData.value.receive_flag) {
+          dialogName.value = 'dialogNewUserAward'
+          dialogVisible.value = true
+        }
       }
     }
   }
@@ -439,6 +456,7 @@ const dialogHelpFriendClose = () => {
     runCurActivityAccount()
   }
 }
+
 // 领取免费次数
 const dialogNewUserAwardClose = () => {
   getActive()
@@ -450,6 +468,8 @@ onMounted(() => {
   getActive()
   getActivityTaskList()
   getMyWinningList()
+  runDalkingLanternList()
+  runCurActivityAccount()
 })
 </script>
 <style lang="scss" scoped>

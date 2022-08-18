@@ -2,7 +2,7 @@
   <nut-noticebar
     class="awardsMarquee"
     direction="vertical"
-    :height="30"
+    :height="40"
     :speed="5"
     :standTime="3000"
     :list="[]"
@@ -10,12 +10,12 @@
     :color="`#D9500B`"
   >
     <div class="item" v-for="(item, index) in data" :key="index">
-      <div class="user">
+      <div class="user" v-if="item?.head_img_url">
         <div class="avatar">
           <img :src="item.head_img_url" />
         </div>
         <div class="txt">
-          {{ hideName(item.nick_name) + ' ' + item.phone_number }}
+          恭喜{{ hideName(item.nick_name) + '抽中' + (item.prize_name ?? '') }}
         </div>
       </div>
     </div>
