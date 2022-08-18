@@ -101,6 +101,7 @@ const { run: runGetQRCode } = useRequest(getQRCode, {
 
 let canvasID: HTMLElement
 const renderPoster = () => {
+  proxy.$toast.loading('加载中')
   runGetQRCode({
     sharePagePath: 'pages/common/pages/webview/webview',
     activityId: activityData.value.turn_activity.id,
@@ -109,7 +110,6 @@ const renderPoster = () => {
   })
 }
 const renderPosterImage = () => {
-  proxy.$toast.loading('加载中')
   canvasID = document.getElementById('canvas') ?? document.body
 
   const opts = {
