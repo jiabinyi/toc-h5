@@ -375,7 +375,7 @@ const { run: turnLuckDrawFunc } = useRequest(turnLuckDraw, {
 const placeOrder = ({ category_code, goods_id }: any) => {
   const url = `/pages/activity/pages/goodDetail/goodDetail?category_code=${category_code}&activityId=${activityData.value.turn_activity.id}&goods_id=${goods_id}&type=marquee`
   console.log('url', url)
-  window.postMessage(
+  window.uni.postMessage(
     {
       type: 'navigateTo',
       data: url

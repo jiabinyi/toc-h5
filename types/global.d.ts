@@ -49,3 +49,5 @@ declare type IntervalHandle = ReturnType<typeof setInterval>
 declare interface ChangeEvent extends Event {
   target: HTMLInputElement
 }
+
+declare const window: Window & { uni: any }
