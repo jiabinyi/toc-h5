@@ -38,7 +38,6 @@ const accept = () => {
     custId: sessions.get('cust_id')
   })
   visible.value = false
-  emit('dialogNewUserAwardClose')
 }
 // 对象-组件代理
 const { proxy } = getCurrentInstance() as any
@@ -49,9 +48,11 @@ const { run: runImmediatelyReceive } = useRequest(immediatelyReceive, {
     if (res) {
       proxy.$toast.text('领取成功')
     }
+    emit('dialogNewUserAwardClose')
   },
   onError: (error: any) => {
     proxy.$toast.text(error.result.msg)
+    emit('dialogNewUserAwardClose')
   }
 })
 </script>

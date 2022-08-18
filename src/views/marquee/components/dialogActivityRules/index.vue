@@ -5,9 +5,11 @@
       <div class="content">
         <div class="content-title">活动规则</div>
         <div class="content-txt">
-          1. 本次活动时间：{{ data.activity_time }} 至{{ data.end_time }}
+          1. 本次活动时间：{{ data.activity_time_explain }}；
         </div>
-        <div class="content-txt">2. 领取时间：中奖后1小时领取有效；</div>
+        <div class="content-txt">
+          2. 领取时间：{{ data.time_duration_explain }}；
+        </div>
       </div>
       <div class="content">
         <div class="content-title">活动说明</div>

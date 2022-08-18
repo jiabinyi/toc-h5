@@ -141,6 +141,7 @@
       :activityData="activityData"
       :prize="prizeCurrent"
       ref="refDialogComponent"
+      @dialogNewUserAwardClose="dialogNewUserAwardClose"
       @dialogHelpFriendClose="dialogHelpFriendClose"
     />
   </div>
@@ -249,6 +250,9 @@ const handleActive = (index: number) => {
 }
 // 设置转盘
 const setLottery = () => {
+  if (!showMarquee.value) {
+    return
+  }
   const lotteryBtn = document.getElementsByClassName('start')
   lotteryBtn[0].innerHTML = `<div class="txt">立即抽奖</div><div class="num-txt">(${
     curActivityAccountData.value?.activity_account?.loot_ticket_num ?? 0
@@ -438,7 +442,13 @@ const dialogHelpFriendClose = () => {
   if (activityData.value.receive_flag) {
     dialogName.value = 'dialogNewUserAward'
     dialogVisible.value = true
+    runCurActivityAccount()
   }
+}
+// 领取免费次数
+const dialogNewUserAwardClose = () => {
+  getActive()
+  runCurActivityAccount()
 }
 onMounted(() => {
   getContactRequest()
