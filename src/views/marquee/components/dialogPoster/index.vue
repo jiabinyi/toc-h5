@@ -85,7 +85,6 @@ const { run: runGetQRCode } = useRequest(getQRCode, {
   manual: true,
   onSuccess: (res: any) => {
     if (res) {
-      proxy.$toast.loading('加载中')
       const binaryData = []
       binaryData.push(res)
       qrcodeImg.value = window.URL.createObjectURL(new Blob(binaryData))
@@ -94,19 +93,23 @@ const { run: runGetQRCode } = useRequest(getQRCode, {
         proxy.$toast.hide()
       }, 200)
     }
+  },
+  onError: () => {
+    proxy.$toast.hide()
   }
 })
 
 let canvasID: HTMLElement
 const renderPoster = () => {
   runGetQRCode({
-    sharePagePath: 'pages/webview/webview',
+    sharePagePath: 'pages/common/pages/webview/webview',
     activityId: activityData.value.turn_activity.id,
     custId: sessions.get('cust_id'),
     envVersion: sessions.get('envVersion')
   })
 }
 const renderPosterImage = () => {
+  proxy.$toast.loading('加载中')
   canvasID = document.getElementById('canvas') ?? document.body
 
   const opts = {
