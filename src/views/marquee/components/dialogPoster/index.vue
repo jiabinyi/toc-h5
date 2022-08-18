@@ -48,6 +48,11 @@ import { getQRCode } from '@/axios'
 import { useRequest } from 'vue-request'
 import { useUserStore } from '@/store/modules/user.ts'
 import { sessions } from 'mosowejs'
+import html2canvas from 'html2canvas'
+// 弹窗
+import DialogCustom from '@/components/DialogCustom/index.vue'
+// 对象-组件代理
+const { proxy } = getCurrentInstance() as any
 const UserStore = useUserStore()
 const props = defineProps({
   // 变量-显示隐藏弹窗
@@ -73,20 +78,20 @@ const props = defineProps({
 const emit = defineEmits(['update:visible'])
 const visible = useVModel(props, 'visible', emit)
 const activityData = useVModel(props, 'activityData')
-import html2canvas from 'html2canvas'
-// 弹窗
-import DialogCustom from '@/components/DialogCustom/index.vue'
+
 const qrcodeImg = ref('')
 // 获取小程序码
 const { run: runGetQRCode } = useRequest(getQRCode, {
   manual: true,
   onSuccess: (res: any) => {
     if (res) {
+      proxy.$toast.loading('加载中')
       const binaryData = []
       binaryData.push(res)
       qrcodeImg.value = window.URL.createObjectURL(new Blob(binaryData))
       setTimeout(() => {
         renderPosterImage()
+        proxy.$toast.hide()
       }, 200)
     }
   }

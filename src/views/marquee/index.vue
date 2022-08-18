@@ -54,73 +54,81 @@
       </div>
       <!-- 领取免费次数 -->
       <div class="footer-content" v-if="tabIndex === 0">
-        <div
-          class="item"
-          v-for="(item, index) in activityTaskListData"
-          :key="index"
-        >
-          <div class="icon">
-            <img :src="item.task_icon_url" />
-          </div>
-          <div class="txt">
-            <div class="title">
-              {{ item.reward_type_value }}+ {{ item.task_content_title }}
+        <div v-for="(item, index) in activityTaskListData" :key="index">
+          <div class="item" v-if="inviteIfoData?.open_flag === 0">
+            <div class="icon">
+              <img :src="item.task_icon_url" />
             </div>
-            <div class="desc">
-              {{ item.guide_copy }}
+            <div class="txt">
+              <div class="title">
+                {{ item.reward_type_value }}+ {{ item.task_content_title }}
+              </div>
+              <div class="desc">
+                {{ item.guide_copy }}
+              </div>
             </div>
-          </div>
-          <div class="right">
-            <div
-              class="txt"
-              v-if="item.be_help_num < item.cycle_daily_limit_num"
-            >
-              进行中 ({{ item.be_help_num }}/{{ item.cycle_daily_limit_num }})
-            </div>
+            <div class="right">
+              <div
+                class="txt"
+                v-if="item.be_help_num < item.cycle_daily_limit_num"
+              >
+                进行中 ({{ item.be_help_num }}/{{ item.cycle_daily_limit_num }})
+              </div>
 
-            <div
-              class="txt"
-              v-if="item.be_help_num >= item.cycle_daily_limit_num"
-            >
-              任务已完成
-            </div>
+              <div
+                class="txt"
+                v-if="item.be_help_num >= item.cycle_daily_limit_num"
+              >
+                任务已完成
+              </div>
 
-            <div class="btn" @click="goToShare(item)">
-              {{ item.button_copy }}
+              <div class="btn" @click="goToShare(item)">
+                {{ item.button_copy }}
+              </div>
             </div>
           </div>
+        </div>
+        <div v-if="inviteIfoData?.open_flag !== 0">
+          <nut-empty description="暂无任务信息~">
+            <template #image>
+              <img src="@/common/assets/images/blue/blue-no-data.png" />
+            </template>
+          </nut-empty>
         </div>
       </div>
       <!-- 我的奖品 -->
       <div class="footer-content" v-if="tabIndex === 1">
-        <div
-          class="item"
-          v-for="(item, index) in myWinningListData"
-          :key="index"
-        >
-          <div class="icon">
-            <img :src="item.pic_url" />
-          </div>
-          <div class="txt">
-            <div class="title">
-              {{ item.choice_prize_name }}：{{ item.goods_name }} x {{ 1 }}
+        <div v-for="(item, index) in myWinningListData" :key="index">
+          <div class="item">
+            <div class="icon">
+              <img :src="item.pic_url" />
             </div>
-            <div class="desc">{{ item.win_time }}</div>
-          </div>
-          <div class="right">
-            <div
-              class="btn"
-              v-if="!item.order_no && !item.over_tim"
-              @click="placeOrder(item)"
-            >
-              立即下单
+            <div class="txt">
+              <div class="title">
+                {{ item.choice_prize_name }}：{{ item.prize_name }} x {{ 1 }}份
+              </div>
+              <div class="desc">{{ item?.win_time?.slice(0, 16) }}</div>
             </div>
-            <div class="btn" v-if="item.order_no">查看订单</div>
-            <div class="btn" v-if="item.over_time">超时未下单</div>
+            <div class="right">
+              <div
+                class="btn"
+                v-if="!item.order_no && !item.over_tim"
+                @click="placeOrder(item)"
+              >
+                立即下单
+              </div>
+              <div class="btn" v-if="item.order_no">查看订单</div>
+              <div class="btn" v-if="item.over_time">超时未下单</div>
+            </div>
           </div>
         </div>
+
         <div v-if="!myWinningListData.length">
-          <nut-empty description="无数据"></nut-empty>
+          <nut-empty description="暂无中奖信息~">
+            <template #image>
+              <img src="@/common/assets/images/blue/blue-no-data.png" />
+            </template>
+          </nut-empty>
         </div>
       </div>
     </div>
