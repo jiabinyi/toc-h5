@@ -432,6 +432,7 @@ const { run: getActive } = useRequest(queryTurnActivity, {
 
 // 帮好友助力后
 const dialogHelpFriendClose = () => {
+  dialogVisible.value = false
   if (activityData.value.receive_flag) {
     dialogName.value = 'dialogNewUserAward'
     dialogVisible.value = true
