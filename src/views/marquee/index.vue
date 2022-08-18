@@ -272,6 +272,7 @@ const startTurns = () => {
   })
 }
 const endTurns = () => {
+  getMyWinningList()
   if (prizeCurrent.value.prizeName === '谢谢参与') {
     // proxy.$toast.text('喜从天降，运气爆棚，恭喜你中奖了！')
     dialogName.value = 'dialogThanksParticipant'
@@ -362,6 +363,7 @@ const { run: runDalkingLanternList } = useRequest(walkingLanternList, {
 })
 // 当前获奖奖品
 const prizeCurrent = ref({} as any)
+
 // 小程序-幸运大转盘抽奖
 const { run: turnLuckDrawFunc } = useRequest(turnLuckDraw, {
   manual: true,
@@ -369,7 +371,7 @@ const { run: turnLuckDrawFunc } = useRequest(turnLuckDraw, {
     if (res) {
       activityData.value.turn_prize_vos.findIndex((prize, index) => {
         getActivityTaskList()
-        getMyWinningList()
+
         if (prize.id === res.data.id) {
           prizeCurrent.value = prize
           prizeIndex.value = index
