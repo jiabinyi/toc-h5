@@ -178,9 +178,15 @@ import dialogAward from './components/dialogAward/index.vue'
 // 弹窗 助力
 import dialogHelpFriend from './components/dialogHelpFriend/index.vue'
 
+// import wx from '@skit/wxjssdk-promisify'
+import wx from 'weixin-js-sdk'
+
+// const wx = require('weixin-js-sdk')
+
 // 对象-组件代理
 const { proxy } = getCurrentInstance() as any
 import useGetQuery from '@/utils/hooks/useGetQuery'
+
 const { getUrlParam } = useGetQuery()
 // 变量-联系人
 interface Contact {
@@ -369,7 +375,7 @@ const { run: turnLuckDrawFunc } = useRequest(turnLuckDraw, {
   manual: true,
   onSuccess: (res: ResObjData) => {
     if (res) {
-      activityData.value.turn_prize_vos.findIndex((prize, index) => {
+      activityData.value.turn_prize_vos.findIndex((prize: any, index: any) => {
         getActivityTaskList()
 
         if (prize.id === res.data.id) {
@@ -404,6 +410,11 @@ const { run: turnLuckDrawFunc } = useRequest(turnLuckDraw, {
 const placeOrder = ({ category_code, goods_id }: any) => {
   const url = `/pages/activity/pages/goodDetail/goodDetail?category_code=${category_code}&activityId=${activityData.value.turn_activity.id}&goods_id=${goods_id}&type=marquee`
   console.log('url', url)
+  // 触发postmessage
+  wx.miniProgram.postMessage({
+    data: url,
+    type: 'navigateTo'
+  })
 }
 // 常量 是否已助力
 const dialogHelpFriendHadPop = ref(false)

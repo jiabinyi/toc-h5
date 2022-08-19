@@ -1,5 +1,6 @@
 <template>
   <nut-noticebar
+    v-if="data.length"
     class="awardsMarquee"
     direction="vertical"
     :height="40"
@@ -22,20 +23,16 @@
   </nut-noticebar>
 </template>
 <script lang="ts" setup name="awardsMarquee">
-const props = defineProps({
-  // 数据
-  data: {
-    type: Array<any>,
-    default: () => Array.from({ length: 3 })
-  }
-})
+interface Props {
+  data: Array<any>
+}
+const props = defineProps<Props>()
 const { data } = toRefs(props)
 // 隐藏姓
 const hideName: any = (name: any) => {
   name = name.length
     ? name.substring(0, 1) + name.substring(1).replace(/./g, '*')
     : '用户'
-
   return name
 }
 </script>

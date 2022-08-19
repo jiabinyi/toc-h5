@@ -120,14 +120,15 @@ const renderPosterImage = () => {
   if (canvasID !== document.body) {
     html2canvas(canvasID, opts).then((canvas: { toDataURL: () => string }) => {
       const image = new Image()
-      const dom = document.getElementById('canvas_pic')
+      const dom = document.getElementById('canvas_pic') as HTMLElement
 
       image.src = canvas.toDataURL()
-
+      dom.innerHTML = ''
       dom?.appendChild(image)
     })
   }
 }
+
 defineExpose({ renderPoster })
 </script>
 <style lang="scss">
