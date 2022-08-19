@@ -117,13 +117,13 @@
             <div class="right">
               <div
                 class="btn"
-                v-if="!item.order_no && !item.over_tim"
+                v-if="!item.order_no && !item.over_time"
                 @click="placeOrder(item)"
               >
                 立即下单
               </div>
               <div class="btn" v-if="item.order_no">查看订单</div>
-              <div class="btn" v-if="item.over_time">超时未下单</div>
+              <div class="btn disable" v-if="item.over_time">超时未下单</div>
             </div>
           </div>
         </div>
