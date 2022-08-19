@@ -44,9 +44,11 @@ const { run: runHelpFriends } = useRequest(helpFriends, {
     if (res) {
       emit('dialogHelpFriendClose')
     }
+    visible.value = false
   },
   onError: (error: any) => {
     proxy.$toast.text(error.result.msg)
+    visible.value = false
   }
 })
 const accept = () => {
