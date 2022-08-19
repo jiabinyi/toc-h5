@@ -113,7 +113,7 @@
                 {{ item.choice_prize_name }}：{{ item.prize_name }} x {{ 1 }}份
               </div>
               <div class="desc">
-                {{ dayjs(item?.win_time).format('YYYY-MM  HH:mm') }}
+                {{ dayjs(item?.win_time).format('YYYY年MM月  HH:mm') }}
               </div>
             </div>
             <div class="right">
