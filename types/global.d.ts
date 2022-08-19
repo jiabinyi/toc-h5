@@ -50,6 +50,8 @@ declare interface ChangeEvent extends Event {
   target: HTMLInputElement
 }
 
-declare const window: Window & { URL: any }
+declare const window: Window & { URL: any; uni: any }
 
 declare const html2canvas: any
+
+declare const uni: any
