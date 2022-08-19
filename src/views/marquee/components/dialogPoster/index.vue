@@ -32,8 +32,8 @@
               <div class="tip1">长按识别二维码</div>
               <div class="tip2">立即免费参与</div>
             </div>
-            <div class="qrcode">
-              <img :src="qrcodeImg" />
+            <div class="qrcode" :class="{ showQRcodeImg: showQRcodeImg }">
+              <img :src="qrcodeImg" v-if="qrcodeImg" />
             </div>
           </div>
         </div>
@@ -101,7 +101,8 @@ const { run: runGetQRCode } = useRequest(getQRCode, {
 
 let canvasID: HTMLElement
 const renderPoster = () => {
-  proxy.$toast.loading('加载中')
+  showQRcodeImg.value = false
+  proxy.$toast.loading('生成中...')
   runGetQRCode({
     sharePagePath: 'pages/common/pages/webview/webview',
     activityId: activityData.value.turn_activity.id,
@@ -111,7 +112,7 @@ const renderPoster = () => {
 }
 const renderPosterImage = () => {
   canvasID = document.getElementById('canvas') ?? document.body
-
+  showQRcodeImg.value = true
   const opts = {
     tainttest: true, // 检测每张图片都已经加载完成
     useCORS: true, // 跨域处理，可以加载网络图片
@@ -128,6 +129,7 @@ const renderPosterImage = () => {
     })
   }
 }
+const showQRcodeImg = ref(false)
 
 defineExpose({ renderPoster })
 </script>
