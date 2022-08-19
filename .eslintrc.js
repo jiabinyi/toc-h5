@@ -19,6 +19,13 @@ module.exports = {
   rules: {
     // 'no-undef': 'off',
     'vue/eqeqeq': 2,
+    '@typescript-eslint/ban-types': [
+      'error',
+      {
+        extendDefaults: true,
+        types: { '{}': false }
+      }
+    ],
     // 允许使用any类型
     '@typescript-eslint/no-explicit-any': ['off'],
     // 允许非空断言

@@ -128,6 +128,7 @@ const renderPosterImage = () => {
     })
   }
 }
+
 defineExpose({ renderPoster })
 </script>
 <style lang="scss">
