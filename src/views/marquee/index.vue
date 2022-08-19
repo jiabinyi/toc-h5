@@ -191,12 +191,6 @@ import dialogAward from './components/dialogAward/index.vue'
 // 弹窗 助力
 import dialogHelpFriend from './components/dialogHelpFriend/index.vue'
 
-// import wx from '@skit/wxjssdk-promisify'
-import wx from 'weixin-js-sdk'
-
-// const wx = require('weixin-js-sdk')
-
-// 对象-组件代理
 const { proxy, appContext } = getCurrentInstance() as any
 
 const dayjs = appContext.config.globalProperties.$dayjs
@@ -432,7 +426,7 @@ const { run: turnLuckDrawFunc } = useRequest(turnLuckDraw, {
  * @returns {any}
  */
 
-const placeOrder = async ({ category_code, goods_id }: any) => {
+const placeOrder = async ({ category_code, goods_id }: ObjTy) => {
   const url = `/pages/activity/pages/goodDetail/goodDetail?category_code=${category_code}&activityId=${activityData.value.turn_activity.id}&goods_id=${goods_id}&type=marquee`
   const wx = await import('wechat-ts-sdk').then(module => module.default)
   wx.miniProgram.navigateTo({ url }) // 跳到小程序原生页面
