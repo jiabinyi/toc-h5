@@ -6,8 +6,8 @@
           <div class="sharer">
             <img class="image" :src="UserStore.userInfo.head_img_url" />
             <div class="title">
-              {{ UserStore.userInfo.nick_name }}的分享@{{
-                helpShareData.task_content_title
+              {{ UserStore.userInfo.nick_name }}@{{
+                activityData.turn_activity.share_title
               }}
             </div>
           </div>

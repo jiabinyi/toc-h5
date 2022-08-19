@@ -3,7 +3,7 @@
     v-if="data.length"
     class="awardsMarquee"
     direction="vertical"
-    :height="40"
+    :height="30"
     :speed="5"
     :standTime="3000"
     :list="[]"
@@ -16,12 +16,15 @@
           <img :src="item.head_img_url" />
         </div>
         <div class="txt">
-          恭喜{{ hideName(item.nick_name) + '抽中' + (item.prize_name ?? '') }}
+          恭喜{{
+            '"' + hideName(item.nick_name) + '"抽中' + (item.prize_name ?? '')
+          }}
         </div>
       </div>
     </div>
   </nut-noticebar>
 </template>
+
 <script lang="ts" setup name="awardsMarquee">
 interface Props {
   data: Array<any>
