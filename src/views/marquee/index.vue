@@ -112,7 +112,9 @@
               <div class="title">
                 {{ item.choice_prize_name }}：{{ item.prize_name }} x {{ 1 }}份
               </div>
-              <div class="desc">{{ item?.win_time?.slice(0, 16) }}</div>
+              <div class="desc">
+                {{ dayjs(item?.win_time).format('YYYY-MM  HH:mm') }}
+              </div>
             </div>
             <div class="right">
               <div
@@ -188,7 +190,10 @@ import wx from 'weixin-js-sdk'
 // const wx = require('weixin-js-sdk')
 
 // 对象-组件代理
-const { proxy } = getCurrentInstance() as any
+const { proxy, appContext } = getCurrentInstance() as any
+
+const dayjs = appContext.config.globalProperties.$dayjs
+
 import useGetQuery from '@/utils/hooks/useGetQuery'
 
 const { getUrlParam } = useGetQuery()
