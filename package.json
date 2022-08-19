@@ -52,6 +52,7 @@
     "vue-request": "2.0.0-rc.3",
     "vue-router": "^4.0.12",
     "vuex": "^4.0.2",
+    "wechat-ts-sdk": "^1.4.1",
     "weixin-js-sdk": "^1.6.0"
   },
   "devDependencies": {

@@ -55,3 +55,5 @@ declare const window: Window & { URL: any; uni: any }
 declare const html2canvas: any
 
 declare const uni: any
+
+declare module 'wechat-ts-sdk'

@@ -62,7 +62,12 @@
             </div>
             <div class="txt">
               <div class="title">
-                {{ item.reward_type_value }}+ {{ item.task_content_title }}
+                {{
+                  item.task_content_title.length > 12
+                    ? item.task_content_title.substr(0, 12) + '...'
+                    : item.task_content_title
+                }}
+                x{{ item.reward_type_value }}
               </div>
               <div class="desc">
                 {{ item.guide_copy }}
@@ -254,6 +259,7 @@ const goToShare = (item: any) => {
   dialogName.value = 'dialogPoster'
   dialogData.value = inviteIfoData.value
   dialogVisible.value = true
+
   setTimeout(() => {
     refDialogComponent.value.renderPoster()
   }, 200)
@@ -425,16 +431,11 @@ const { run: turnLuckDrawFunc } = useRequest(turnLuckDraw, {
  * @param {any} goods_id}:any
  * @returns {any}
  */
-const placeOrder = ({ category_code, goods_id }: any) => {
+
+const placeOrder = async ({ category_code, goods_id }: any) => {
   const url = `/pages/activity/pages/goodDetail/goodDetail?category_code=${category_code}&activityId=${activityData.value.turn_activity.id}&goods_id=${goods_id}&type=marquee`
-  console.log('url', url)
-
-  // 触发postmessage
-
-  window.uni.postMessage({
-    data: url,
-    type: 'navigateTo'
-  })
+  const wx = await import('wechat-ts-sdk').then(module => module.default)
+  wx.miniProgram.navigateTo({ url }) // 跳到小程序原生页面
 }
 // 常量 是否已助力
 const dialogHelpFriendHadPop = ref(false)
