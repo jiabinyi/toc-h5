@@ -331,6 +331,10 @@
             font-weight: 500;
             color: #ffffff;
             line-height: 14px;
+
+            &.disable {
+              background-color: #aaa;
+            }
           }
         }
 

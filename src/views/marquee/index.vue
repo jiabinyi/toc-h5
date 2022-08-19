@@ -83,7 +83,11 @@
                 任务已完成
               </div>
 
-              <div class="btn" @click="goToShare(item)">
+              <div
+                class="btn"
+                @click="goToShare(item)"
+                :class="{ disable: !activityData.join_flag }"
+              >
                 {{ item.button_copy }}
               </div>
             </div>
@@ -235,6 +239,10 @@ const handleShowRules = () => {
  */
 const helpShareData = ref({})
 const goToShare = (item: any) => {
+  if (!activityData.value.join_flag) {
+    proxy.$toast.text('暂无分享权限', { duration: 1500 })
+    return
+  }
   helpShareData.value = item
   dialogName.value = 'dialogPoster'
   dialogData.value = inviteIfoData.value
