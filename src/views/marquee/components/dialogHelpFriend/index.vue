@@ -49,6 +49,9 @@ const { run: runHelpFriends } = useRequest(helpFriends, {
   },
   onError: (error: any) => {
     proxy.$toast.text(error.result.msg)
+    if (error.result.code === 'Failure') {
+      return
+    }
     visible.value = false
   }
 })
