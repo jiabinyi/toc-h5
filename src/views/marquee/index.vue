@@ -316,6 +316,7 @@ interface ActivityData {
   turn_invite_friends_vos: ObjTy
   receive_flag: boolean
   join_flag: boolean
+  end_time: any
 }
 
 // 获取当前活动内容信息
@@ -326,7 +327,8 @@ const activityData = ref({
   turn_prize_vos: [],
   turn_activity: {},
   turn_invite_friends_vos: {},
-  join_flag: false
+  join_flag: false,
+  end_time: ''
 } as ActivityData)
 
 const showMarquee = ref(false)
@@ -444,17 +446,21 @@ const { run: getActive } = useRequest(queryTurnActivity, {
         prizeImg: item.prize_cover_url,
         ...item
       }))
+      // 活动详情
       activityData.value = {
-        receive_flag: false,
-        turn_activity: {},
-        turn_invite_friends_vos: {},
-        participants_num: 0,
-        cust_win_records: [],
-        join_flag: true,
+        ...JSON.parse(JSON.stringify(activityData.value)),
         ...res.data,
         turn_prize_vos
       }
       showMarquee.value = true
+      // 活动结束 回首页
+      if (new Date(activityData.value.end_time) > new Date()) {
+        dialogName.value = 'dialogTipActivityFinish'
+        dialogVisible.value = true
+        dialogName.value = 'dialogTipActivityFinish'
+        dialogVisible.value = true
+        return
+      }
       setTimeout(() => {
         setLottery()
       }, 100)
@@ -463,6 +469,7 @@ const { run: getActive } = useRequest(queryTurnActivity, {
         activityId: activityData.value.turn_activity.id,
         fissionType: 1
       })
+
       // 判断是否需助力
       if (activityData.value.join_flag) {
         if (getUrlParam('userId')?.length && !dialogHelpFriendHadPop.value) {

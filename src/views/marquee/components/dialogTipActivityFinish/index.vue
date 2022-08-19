@@ -35,12 +35,25 @@ const { pause, resume } = useIntervalFn(
     // 每隔多长时间做什么 回调
     time.value--
     if (time.value <= 0) {
+      goToHome()
       pause()
     }
   },
   1000,
   { immediate: false }
 )
+
+/**
+ * 回到小程序首页
+ * @author yijiabin
+ * @date 2022-08-19
+ * @returns {any}
+ */
+const goToHome = async () => {
+  const url = 'pages/tabbar/index/index'
+  const wx = await import('wechat-ts-sdk').then(module => module.default)
+  wx.miniProgram.navigateTo({ url }) // 跳到小程序原生页面
+}
 resume()
 </script>
 <style lang="scss" scoped>
