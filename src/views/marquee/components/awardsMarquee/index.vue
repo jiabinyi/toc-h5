@@ -6,7 +6,6 @@
     :height="30"
     :speed="5"
     :standTime="3000"
-    :list="[]"
     :background="`rgba(251, 248, 220, 0)`"
     :color="`#D9500B`"
   >
