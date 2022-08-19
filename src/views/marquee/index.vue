@@ -287,7 +287,10 @@ const startTurns = () => {
 }
 const endTurns = () => {
   getMyWinningList()
-  if (prizeCurrent.value.prizeName === '谢谢参与') {
+  if (
+    String(prizeCurrent.value.choice_prize_name).replaceAll(/\s/g, '') ===
+    '谢谢参与'
+  ) {
     // proxy.$toast.text('喜从天降，运气爆棚，恭喜你中奖了！')
     dialogName.value = 'dialogThanksParticipant'
     dialogVisible.value = true
@@ -387,7 +390,7 @@ const { run: turnLuckDrawFunc } = useRequest(turnLuckDraw, {
         getActivityTaskList()
 
         if (prize.id === res.data.id) {
-          prizeCurrent.value = prize
+          prizeCurrent.value = res.data
           prizeIndex.value = index
           return true
         }
