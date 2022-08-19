@@ -49,7 +49,7 @@ const { run: runHelpFriends } = useRequest(helpFriends, {
   },
   onError: (error: any) => {
     proxy.$toast.text(error.result.msg)
-    if (error.result.code === 'Failure' || error.result.msg === '系统繁忙') {
+    if (error.result.code === 'systemBusy') {
       return
     }
     visible.value = false
