@@ -42,6 +42,7 @@ const { run: runHelpFriends } = useRequest(helpFriends, {
   manual: true,
   onSuccess: (res: ResObjData) => {
     if (res) {
+      proxy.$toast.text('助力成功！')
       emit('dialogHelpFriendClose')
     }
     visible.value = false
