@@ -69,6 +69,7 @@ const { proxy } = getCurrentInstance() as any
 .dialogHelpFriend {
   @include toc-images-background;
   background-image: var(--blue-dialog-help-friend);
+  background-size: 100% 100%;
   width: 316px;
   height: 398px;
   display: block;

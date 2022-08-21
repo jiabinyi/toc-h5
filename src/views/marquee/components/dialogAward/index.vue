@@ -45,6 +45,7 @@ const visible = useVModel(props, 'visible', emit)
   .content {
     @include toc-images-background;
     background-image: var(--blue-dialog-award-bg);
+    background-size: 100% 100%;
     width: 316px;
     height: 428px;
     display: block;
