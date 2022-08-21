@@ -26,6 +26,11 @@
             ></awards-marquee>
           </div>
         </div>
+        <div
+          class="marquee-disable"
+          @click="marqueeDisable"
+          v-if="curActivityAccountData?.activity_account?.loot_ticket_num == 0"
+        ></div>
         <!-- 奖盘  s-->
         <nutbig-marquee
           v-if="showMarquee"
@@ -213,6 +218,7 @@ const { run: getContactRequest } = useRequest(getContact, {
     contacts.value = res?.data as Contact[]
   }
 })
+
 // 变量-弹窗数据
 const dialogData = ref({})
 // 集合-弹窗
@@ -505,6 +511,10 @@ const dialogHelpFriendClose = () => {
 const dialogNewUserAwardClose = () => {
   getActive()
   runCurActivityAccount()
+}
+// 无法抽奖提示
+const marqueeDisable = () => {
+  proxy.$toast.text('你已经超过抽奖次数限制')
 }
 onMounted(() => {
   getContactRequest()
