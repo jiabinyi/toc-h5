@@ -8,7 +8,7 @@
           1. 本次活动时间：{{ data.activity_time_explain }}；
         </div>
         <div class="content-txt">
-          2. 领取时间：{{ data.time_duration_explain }}；
+          2. 下单时间：{{ data.time_duration_explain }}；
         </div>
       </div>
       <div class="content">

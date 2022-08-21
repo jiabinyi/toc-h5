@@ -428,7 +428,7 @@ const { run: turnLuckDrawFunc } = useRequest(turnLuckDraw, {
  * @returns {any}
  */
 
-const placeOrder = async ({ category_code, goods_id,id }: ObjTy) => {
+const placeOrder = async ({ category_code, goods_id, id }: ObjTy) => {
   const url = `/pages/activity/pages/goodDetail/goodDetail?category_code=${category_code}&activityGoodId=${id}&goods_id=${goods_id}&type=marquee`
   const wx = await import('wechat-ts-sdk').then(module => module.default)
   wx.miniProgram.navigateTo({ url }) // 跳到小程序原生页面

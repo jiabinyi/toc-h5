@@ -32,9 +32,7 @@ const props = defineProps<Props>()
 const { data } = toRefs(props)
 // 隐藏姓
 const hideName: any = (name: any) => {
-  name = name.length
-    ? name.substring(0, 1) + name.substring(1).replace(/./g, '*')
-    : '用户'
+  name = name.length ? name.substring(0, 1) + '***' : '用户'
   return name
 }
 </script>
