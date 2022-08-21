@@ -90,6 +90,7 @@
       height: 423px;
       @include toc-images-background;
       background-image: var(--lottery-main-bg) !important;
+      background-size: 100% 100%;
     }
 
     :deep(.nutbig-marquee) {

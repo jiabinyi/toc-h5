@@ -106,6 +106,7 @@
           </nut-empty>
         </div>
       </div>
+
       <!-- 我的奖品 -->
       <div class="footer-content" v-if="tabIndex === 1">
         <div v-for="(item, index) in myWinningListData" :key="index">

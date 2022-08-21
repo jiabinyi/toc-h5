@@ -3,15 +3,14 @@
     v-if="data.length"
     class="awardsMarquee"
     direction="vertical"
-    :height="30"
-    :speed="5"
+    :speed="10"
     :standTime="3000"
     :background="`rgba(251, 248, 220, 0)`"
     :color="`#D9500B`"
   >
     <div class="item" v-for="(item, index) in data" :key="index">
-      <div class="user" v-if="item?.head_img_url">
-        <div class="avatar">
+      <div class="user">
+        <div class="avatar" v-if="item?.head_img_url">
           <img :src="item.head_img_url" />
         </div>
         <div class="txt">
@@ -44,7 +43,9 @@ const hideName: any = (name: any) => {
 .awardsMarquee {
   margin-top: 5px;
   display: flex;
+  height: 30px !important;
   .item {
+    height: 30px !important;
     line-height: 30px;
     margin-right: 20px;
     .user {
