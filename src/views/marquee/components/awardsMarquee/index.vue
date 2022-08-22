@@ -3,10 +3,11 @@
     v-if="data.length"
     class="awardsMarquee"
     direction="vertical"
-    :speed="10"
+    :speed="5"
     :standTime="3000"
     :background="`rgba(251, 248, 220, 0)`"
     :color="`#D9500B`"
+    :height="30"
   >
     <div class="item" v-for="(item, index) in data" :key="index">
       <div class="user">
@@ -48,11 +49,11 @@ const hideName: any = (name: any) => {
   display: flex;
   height: 30px !important;
   overflow: hidden;
-  :deep(.nut-noticebar-vertical) {
-    height: 30px !important;
-  }
+  // :deep(.nut-noticebar-vertical) {
+  //   height: 30px !important;
+  // }
   .item {
-    height: 30px !important;
+    // height: 30px !important;
     line-height: 30px;
     margin-right: 20px;
     .user {
@@ -61,6 +62,7 @@ const hideName: any = (name: any) => {
       align-items: center;
       margin-left: 10px;
       .avatar {
+        flex-shrink: 0;
         width: 22px;
         height: 22px;
         border-radius: 22px;
