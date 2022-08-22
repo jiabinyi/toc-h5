@@ -4,7 +4,7 @@
       <div class="title">温馨提示</div>
       <div class="content">
         <div class="content-txt">
-          当前活动已结束，将在 <span>{{ time }}s</span> 后自动前往小程序首页
+          {{ data.txt }}，将在 <span>{{ time }}s</span> 后自动前往小程序首页
         </div>
       </div>
     </div>

@@ -467,19 +467,18 @@ const { run: getActive } = useRequest(queryTurnActivity, {
         ...res.data,
         turn_prize_vos
       }
-      showMarquee.value = true
 
       // 活动结束 回首页
       if (
         dayjs(activityData.value.turn_activity.end_time).valueOf() <
         new Date().getTime()
       ) {
-        dialogName.value = 'dialogTipActivityFinish'
-        dialogVisible.value = true
+        dialogData.value = { txt: '当前活动已结束' }
         dialogName.value = 'dialogTipActivityFinish'
         dialogVisible.value = true
         return
       }
+      showMarquee.value = true
       setTimeout(() => {
         setLottery()
       }, 100)
@@ -504,7 +503,9 @@ const { run: getActive } = useRequest(queryTurnActivity, {
   },
   onError: (error: any) => {
     if (error?.result?.code === 'MallFailure.CurrentTurnActivityNotExist') {
-      proxy.$toast.text(error?.result?.msg, { duration: 1500000 })
+      dialogData.value = { txt: error?.result?.msg }
+      dialogName.value = 'dialogTipActivityFinish'
+      dialogVisible.value = true
     }
   }
 })
