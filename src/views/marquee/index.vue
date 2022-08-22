@@ -130,12 +130,18 @@
             <div class="right">
               <div
                 class="btn"
-                v-if="!item.order_no && !item.overtime_flag"
+                v-if="!item.order_code && !item.overtime_flag"
                 @click="placeOrder(item)"
               >
                 立即下单
               </div>
-              <div class="btn" v-if="item.order_no">查看订单</div>
+              <div
+                class="btn"
+                v-if="item.order_code"
+                @click="seeOrderDetail(item)"
+              >
+                查看订单
+              </div>
               <div class="btn disable" v-if="item.overtime_flag">
                 超时未下单
               </div>
@@ -515,6 +521,12 @@ const dialogNewUserAwardClose = () => {
 // 无法抽奖提示
 const marqueeDisable = () => {
   proxy.$toast.text('你已经超过抽奖次数限制')
+}
+// 查看订单详情
+const seeOrderDetail = async (prize: any) => {
+  const url = `pages/subTicket/pages/orderTicketDetail/orderTicketDetail?order_no=${prize.order_code}&media_type=SUB_ORDER_NO`
+  const wx = await import('wechat-ts-sdk').then(module => module.default)
+  wx.miniProgram.navigateTo({ url }) // 跳到小程序原生页面
 }
 onMounted(() => {
   getContactRequest()
