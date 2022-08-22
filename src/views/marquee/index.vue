@@ -489,8 +489,8 @@ const { run: getActive } = useRequest(queryTurnActivity, {
         fissionType: 1
       })
 
-      // 判断是否需助力
       if (activityData.value.join_flag) {
+        // 判断是否需助力
         if (getUrlParam('userId')?.length && !dialogHelpFriendHadPop.value) {
           dialogName.value = 'dialogHelpFriend'
           dialogVisible.value = true

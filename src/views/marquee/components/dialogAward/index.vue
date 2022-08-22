@@ -47,12 +47,11 @@ const visible = useVModel(props, 'visible', emit)
     background-image: var(--blue-dialog-award-bg);
     background-size: 100% 100%;
     width: 316px;
-    height: 428px;
+    height: 322px;
     display: block;
     .img {
-      height: 380px;
       box-sizing: border-box;
-      padding-top: 240px;
+      padding-top: 200px;
       @include flex-center;
       padding-bottom: 20px;
       img {
