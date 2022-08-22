@@ -105,7 +105,6 @@ let canvasID: HTMLElement
 const renderPoster = () => {
   showQRcodeImg.value = false
   // proxy.$toast.loading('生成中...')
-  debugger
   runGetQRCode({
     sharePagePath: 'pages/common/pages/webview/webview',
     activityId: activityData.value.turn_activity.id,

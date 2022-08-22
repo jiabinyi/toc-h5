@@ -448,6 +448,8 @@ const placeOrder = async ({ category_code, goods_id, id }: ObjTy) => {
   const wx = await import('wechat-ts-sdk').then(module => module.default)
   wx.miniProgram.navigateTo({ url }) // 跳到小程序原生页面
 }
+// 常量 是否已领取首次奖励
+const NewUserAward = ref(false)
 // 常量 是否已助力
 const dialogHelpFriendHadPop = ref(false)
 // 请求-活动内容信息
@@ -494,7 +496,7 @@ const { run: getActive } = useRequest(queryTurnActivity, {
         dialogVisible.value = true
         dialogHelpFriendHadPop.value = true
       } else if (activityData.value.receive_flag) {
-        if (activityData.value.join_flag) {
+        if (activityData.value.join_flag && !NewUserAward.value) {
           dialogName.value = 'dialogNewUserAward'
           dialogVisible.value = true
         }
@@ -518,7 +520,7 @@ const dialogHelpFriendClose = () => {
   if (activityData.value.receive_flag) {
     setTimeout(() => {
       // 判断是否有参与权限
-      if (activityData.value.join_flag) {
+      if (activityData.value.join_flag && !NewUserAward.value) {
         dialogName.value = 'dialogNewUserAward'
         dialogVisible.value = true
       }
@@ -528,6 +530,7 @@ const dialogHelpFriendClose = () => {
 
 // 领取免费次数
 const dialogNewUserAwardClose = () => {
+  NewUserAward.value = true
   getActive()
   runCurActivityAccount()
 }
@@ -539,7 +542,7 @@ const marqueeDisable = () => {
 const seeOrderDetail = async (prize: any) => {
   const url = `pages/subTicket/pages/orderTicketDetail/orderTicketDetail?order_no=${prize.order_code}&media_type=SUB_ORDER_NO`
   const wx = await import('wechat-ts-sdk').then(module => module.default)
-  wx.miniProgram.navigateTo({ url }) // 跳到小程序原生页面
+  wx.miniProgram.switchTab({ url }) // 跳到小程序原生页面
 }
 onMounted(() => {
   getContactRequest()
