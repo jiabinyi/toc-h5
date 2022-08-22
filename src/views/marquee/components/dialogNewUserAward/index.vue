@@ -1,5 +1,8 @@
 <template>
-  <DialogCustom v-model:visible="visible">
+  <DialogCustom
+    v-model:visible="visible"
+    @close="emit('dialogNewUserAwardClose')"
+  >
     <div class="dialogNewUserAward" @click="accept"></div>
   </DialogCustom>
 </template>
@@ -54,6 +57,7 @@ const { run: runImmediatelyReceive } = useRequest(immediatelyReceive, {
   onError: (error: any) => {
     proxy.$toast.text(error.result.msg)
     visible.value = false
+    emit('dialogNewUserAwardClose')
   }
 })
 </script>

@@ -488,13 +488,13 @@ const { run: getActive } = useRequest(queryTurnActivity, {
         fissionType: 1
       })
 
-      if (activityData.value.join_flag) {
-        // 判断是否需助力
-        if (getUrlParam('userId')?.length && !dialogHelpFriendHadPop.value) {
-          dialogName.value = 'dialogHelpFriend'
-          dialogVisible.value = true
-          dialogHelpFriendHadPop.value = true
-        } else if (activityData.value.receive_flag) {
+      // 判断是否需助力
+      if (getUrlParam('userId')?.length && !dialogHelpFriendHadPop.value) {
+        dialogName.value = 'dialogHelpFriend'
+        dialogVisible.value = true
+        dialogHelpFriendHadPop.value = true
+      } else if (activityData.value.receive_flag) {
+        if (activityData.value.join_flag) {
           dialogName.value = 'dialogNewUserAward'
           dialogVisible.value = true
         }
@@ -513,10 +513,16 @@ const { run: getActive } = useRequest(queryTurnActivity, {
 // 帮好友助力后
 const dialogHelpFriendClose = () => {
   dialogVisible.value = false
+  runCurActivityAccount()
+  // 判断是否已领取
   if (activityData.value.receive_flag) {
-    dialogName.value = 'dialogNewUserAward'
-    dialogVisible.value = true
-    runCurActivityAccount()
+    setTimeout(() => {
+      // 判断是否有参与权限
+      if (activityData.value.join_flag) {
+        dialogName.value = 'dialogNewUserAward'
+        dialogVisible.value = true
+      }
+    }, 1000)
   }
 }
 
