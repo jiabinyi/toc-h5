@@ -29,7 +29,7 @@
         <div
           class="marquee-disable"
           @click="marqueeDisable"
-          v-if="curActivityAccountData?.activity_account?.loot_ticket_num == 0"
+          v-if="curActivityAccountData?.activity_account?.loot_ticket_num === 0"
         ></div>
         <!-- 奖盘  s-->
         <nutbig-marquee
@@ -142,7 +142,10 @@
               >
                 查看订单
               </div>
-              <div class="btn disable" v-if="item.overtime_flag">
+              <div
+                class="btn disable"
+                v-if="!item.order_code && item.overtime_flag"
+              >
                 超时未下单
               </div>
             </div>
@@ -542,7 +545,7 @@ const marqueeDisable = () => {
 const seeOrderDetail = async (prize: any) => {
   const url = `pages/subTicket/pages/orderTicketDetail/orderTicketDetail?order_no=${prize.order_code}&media_type=SUB_ORDER_NO`
   const wx = await import('wechat-ts-sdk').then(module => module.default)
-  wx.miniProgram.switchTab({ url }) // 跳到小程序原生页面
+  wx.miniProgram.navigateTo({ url }) // 跳到小程序原生页面
 }
 onMounted(() => {
   getContactRequest()
