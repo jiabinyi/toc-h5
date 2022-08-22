@@ -31,6 +31,9 @@ const props = defineProps<Props>()
 const { data } = toRefs(props)
 // 隐藏姓
 const hideName: any = (name: any) => {
+  if (!name) {
+    return name
+  }
   name = name.length ? name.substring(0, 1) + '***' : '用户'
   return name
 }
@@ -44,6 +47,10 @@ const hideName: any = (name: any) => {
   margin-top: 5px;
   display: flex;
   height: 30px !important;
+  overflow: hidden;
+  :deep(.nut-noticebar-vertical) {
+    height: 30px !important;
+  }
   .item {
     height: 30px !important;
     line-height: 30px;

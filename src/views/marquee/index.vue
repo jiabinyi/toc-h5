@@ -410,7 +410,8 @@ const { run: turnLuckDrawFunc } = useRequest(turnLuckDraw, {
     if (res) {
       activityData.value.turn_prize_vos.findIndex((prize: any, index: any) => {
         getActivityTaskList()
-
+        getActive()
+        runCurActivityAccount()
         if (prize.id === res.data.id) {
           prizeCurrent.value = res.data
           prizeIndex.value = index
@@ -443,6 +444,7 @@ const { run: turnLuckDrawFunc } = useRequest(turnLuckDraw, {
 
 const placeOrder = async ({ category_code, goods_id, id }: ObjTy) => {
   const url = `/pages/activity/pages/goodDetail/goodDetail?category_code=${category_code}&activityGoodId=${id}&goods_id=${goods_id}&type=marquee`
+  console.log('url', url)
   const wx = await import('wechat-ts-sdk').then(module => module.default)
   wx.miniProgram.navigateTo({ url }) // 跳到小程序原生页面
 }
@@ -466,8 +468,12 @@ const { run: getActive } = useRequest(queryTurnActivity, {
         turn_prize_vos
       }
       showMarquee.value = true
+
       // 活动结束 回首页
-      if (new Date(activityData.value.end_time) > new Date()) {
+      if (
+        dayjs(activityData.value.turn_activity.end_time).valueOf() <
+        new Date().getTime()
+      ) {
         dialogName.value = 'dialogTipActivityFinish'
         dialogVisible.value = true
         dialogName.value = 'dialogTipActivityFinish'
