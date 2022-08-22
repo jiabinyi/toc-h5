@@ -52,6 +52,7 @@ const { run: runHelpFriends } = useRequest(helpFriends, {
     if (error.result.code === 'systemBusy') {
       return
     }
+    emit('dialogHelpFriendClose')
     visible.value = false
   }
 })
