@@ -23,7 +23,7 @@
               <img :src="item.pic_url" />
               <div class="ifo">
                 <div class="title">
-                  {{ item?.choice_prize_name ?? '' + '：' + item.prize_name }}
+                  {{ (item?.choice_prize_name ?? '') + '：' + item.prize_name }}
                 </div>
                 <div class="num">{{ item.prize_goods_num }}份</div>
               </div>
