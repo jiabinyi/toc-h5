@@ -50,9 +50,9 @@ const { pause, resume } = useIntervalFn(
  * @returns {any}
  */
 const goToHome = async () => {
-  const url = 'pages/tabbar/index/index'
+  const url = '/pages/common/pages/webview/webview?type=switchTab&target=index'
   const wx = await import('wechat-ts-sdk').then(module => module.default)
-  wx.miniProgram.switchTab({ url }) // 跳到小程序原生页面
+  wx.miniProgram.navigateTo({ url }) // 跳到小程序原生页面
 }
 resume()
 </script>
