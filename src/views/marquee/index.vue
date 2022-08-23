@@ -563,14 +563,13 @@ const marqueeDisable = () => {
   proxy.$toast.text('你已经超过抽奖次数限制')
 }
 // 查看订单详情
-const seeOrderDetail = async (prize: any) => {
+const seeOrderDetail = async (prize: ObjTy) => {
   let url = ''
   if (prize.category_code === 'PACKAGE_GOODS') {
     url = `/pages/subSetMeal/pages/orderMealDetail/orderMealDetail?order_no=${prize.order_code}&media_type=SUB_ORDER_NO`
   } else {
     url = `/pages/subTicket/pages/orderTicketDetail/orderTicketDetail?order_no=${prize.order_code}&media_type=SUB_ORDER_NO`
   }
-  console.log('url', url)
   const wx = await import('wechat-ts-sdk').then(module => module.default)
   wx.miniProgram.navigateTo({ url }) // 跳到小程序原生页面
 }
