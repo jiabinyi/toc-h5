@@ -48,6 +48,7 @@ specifiers:
   stylelint-config-recommended-vue: ^1.4.0
   stylelint-config-standard: ^28.0.0
   stylelint-order: ^5.0.0
+  stylelint-scss: ^4.3.0
   typescript: ^4.5.2
   unplugin-auto-import: 0.10.3
   unplugin-vue-components: ^0.21.1
@@ -127,6 +128,7 @@ devDependencies:
   stylelint: registry.npmmirror.com/stylelint/14.11.0
   stylelint-config-standard: registry.npmmirror.com/stylelint-config-standard/28.0.0_stylelint@14.11.0
   stylelint-order: registry.npmmirror.com/stylelint-order/5.0.0_stylelint@14.11.0
+  stylelint-scss: registry.npmmirror.com/stylelint-scss/4.3.0_stylelint@14.11.0
   typescript: registry.npmmirror.com/typescript/4.7.4
   unplugin-auto-import: registry.npmmirror.com/unplugin-auto-import/0.10.3_25lmdjqd6sh2wqsrigufd6bkkm
   unplugin-vue-components: registry.npmmirror.com/unplugin-vue-components/0.21.2_vite@3.0.4+vue@3.2.37
@@ -7624,7 +7626,6 @@ packages:
       postcss-selector-parser: registry.npmmirror.com/postcss-selector-parser/6.0.10
       postcss-value-parser: registry.npmmirror.com/postcss-value-parser/4.2.0
       stylelint: registry.npmmirror.com/stylelint/14.11.0
-    dev: false
 
   registry.npmmirror.com/stylelint/14.11.0:
     resolution: {integrity: sha512-OTLjLPxpvGtojEfpESWM8Ir64Z01E89xsisaBMUP/ngOx1+4VG2DPRcUyCCiin9Rd3kPXPsh/uwHd9eqnvhsYA==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/stylelint/-/stylelint-14.11.0.tgz}
