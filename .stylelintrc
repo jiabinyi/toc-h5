@@ -14,7 +14,7 @@
         "stylelint-scss"
     ],
     "rules": {
-        "indentation": 4,
+        "indentation": 2,
         "string-quotes": "single",
         "rule-empty-line-before": "never",
         "at-rule-empty-line-before": "never",

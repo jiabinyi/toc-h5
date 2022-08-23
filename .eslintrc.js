@@ -23,8 +23,7 @@ module.exports = {
       'error',
       {
         singleQuote: true,
-        parser: 'flow',
-        indentation: 4
+        indentation: 2
       }
     ],
     '@typescript-eslint/ban-types': [

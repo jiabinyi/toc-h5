@@ -50,7 +50,7 @@ export default defineConfig(({ mode, command }) => {
   const plugins = command === 'build' ? [configCompressPlugin('gzip')] : []
   return {
     plugins: [
-      vue(),
+      vue({ reactivityTransform: true }),
       ...plugins,
       createStyleImportPlugin({ resolves: [NutuiResolve()] }),
       Components({
