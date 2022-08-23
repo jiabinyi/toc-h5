@@ -45,6 +45,7 @@
     "pinia": "^2.0.17",
     "qs": "^6.11.0",
     "stylelint-config-recommended-scss": "^7.0.0",
+    "stylelint-config-recommended-vue": "^1.4.0",
     "vant": "^3.3.7",
     "vconsole": "^3.14.6",
     "vite-plugin-compression": "^0.5.1",
