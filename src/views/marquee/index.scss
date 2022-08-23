@@ -97,7 +97,7 @@
 
       width: 345px;
       height: 423px;
-      @include toc-images-background;
+      // @include toc-images-background;
       background-image: var(--lottery-main-bg) !important;
       background-size: 100% 100%;
     }
