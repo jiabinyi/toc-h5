@@ -604,6 +604,14 @@ const dialogNewUserAwardClose = () => {
 }
 // 无法抽奖提示
 const marqueeDisable = () => {
+  if (
+    curActivityAccountData.value?.activity_account?.loot_ticket_num === 0 &&
+    activityTaskListData.value[0].be_help_num <
+      activityTaskListData.value[0].cycle_daily_limit_num
+  ) {
+    proxy.$toast.text('做任务获取更多抽奖次数')
+    return
+  }
   proxy.$toast.text(marqueeCheckResult.value.msg)
 }
 
