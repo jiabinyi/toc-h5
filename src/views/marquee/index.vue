@@ -11,7 +11,9 @@
         已有{{ activityData.participants_num }}人参与
       </div>
       <div class="activity-time">
-        <div class="content">{{ activityData.turn_activity.end_time }}</div>
+        <div class="content">
+          {{ activityData.turn_activity.end_time }} 结束
+        </div>
       </div>
     </div>
     <!--S 抽奖箱  -->
