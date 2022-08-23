@@ -26,7 +26,7 @@ setBodyClassName(getUrlParam('theme') ?? 'blue')
 const setSession = (key: string, value: string) => {
   sessions.set(key, value)
 }
-const keys: string[] = ['token', 'clientType', 'envVersion']
+const keys: string[] = ['token', 'clientType', 'envVersion', 'activityId']
 keys.forEach((key: string) => {
   setSession(key, getUrlParam(key) ?? '')
 })

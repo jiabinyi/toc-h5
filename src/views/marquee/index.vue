@@ -453,6 +453,18 @@ const placeOrder = async ({ category_code, goods_id, id }: ObjTy) => {
   const wx = await import('wechat-ts-sdk').then(module => module.default)
   wx.miniProgram.navigateTo({ url }) // 跳到小程序原生页面
 }
+
+/**
+ * 活动结束-回首页
+ * @author yijiabin
+ * @date 2022-08-23
+ * @returns {any}
+ */
+const activityFinished = () => {
+  dialogData.value = { txt: '当前活动已结束' }
+  dialogName.value = 'dialogTipActivityFinish'
+  dialogVisible.value = true
+}
 // 常量 是否已领取首次奖励
 const NewUserAward = ref(false)
 // 常量 是否已助力
@@ -474,18 +486,25 @@ const { run: getActive } = useRequest(queryTurnActivity, {
         ...res.data,
         turn_prize_vos
       }
-
+      //  判断分享景来的活动是否已过期
+      if (
+        sessions.get('activityId') !== '' &&
+        sessions.get('activityId') !== activityData.value.turn_activity.id
+      ) {
+        activityFinished()
+        return
+      }
       // 活动结束 回首页
       if (
         dayjs(activityData.value.turn_activity.end_time).valueOf() <
         new Date().getTime()
       ) {
-        dialogData.value = { txt: '当前活动已结束' }
-        dialogName.value = 'dialogTipActivityFinish'
-        dialogVisible.value = true
+        activityFinished()
         return
       }
+      // 显示抽奖盘
       showMarquee.value = true
+
       setTimeout(() => {
         setLottery()
       }, 100)

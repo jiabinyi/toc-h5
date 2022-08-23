@@ -33,7 +33,7 @@ const { data } = toRefs(props)
 // 隐藏姓
 const hideName: any = (name: any) => {
   if (!name) {
-    return name
+    return ''
   }
   name = name.length ? name.substring(0, 1) + '***' : '用户'
   return name
