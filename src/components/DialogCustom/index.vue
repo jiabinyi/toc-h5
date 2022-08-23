@@ -2,8 +2,9 @@
   <nut-dialog
     footer-direction="vertical"
     v-model:visible="visible"
-    :noCancelBtn="true"
-    :noOkBtn="true"
+    no-cancel-btn
+    no-ok-btn
+    lock-scroll
     :popStyle="{ background: 'rgba(0,0,0,0)', maxHeight: 'auto' }"
     pop-class="DialogCustom"
   >
@@ -35,24 +36,24 @@ const close = () => {
 </script>
 <style lang="scss">
 .DialogCustom {
-  padding: 0px;
-  border-radius: 0px !important;
-  .nut-dialog,
-  .nut-dialog__content {
-    padding: 0px;
-    margin: 0px;
-    width: auto;
-    height: auto;
-    max-height: 100% !important;
-    max-width: 100% !important;
-  }
-  .wrap {
-    .closeBtn {
-      img {
-        width: 40px;
-        height: 66px;
-      }
+    padding: 0;
+    border-radius: 0 !important;
+    .nut-dialog,
+    .nut-dialog__content {
+        padding: 0;
+        margin: 0;
+        width: auto;
+        height: auto;
+        max-height: 100% !important;
+        max-width: 100% !important;
     }
-  }
+    .wrap {
+        .closeBtn {
+            img {
+                width: 40px;
+                height: 66px;
+            }
+        }
+    }
 }
 </style>

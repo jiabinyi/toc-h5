@@ -19,6 +19,14 @@ module.exports = {
   rules: {
     // 'no-undef': 'off',
     'vue/eqeqeq': 2,
+    'prettier/prettier': [
+      'error',
+      {
+        singleQuote: true,
+        parser: 'flow',
+        indentation: 4
+      }
+    ],
     '@typescript-eslint/ban-types': [
       'error',
       {
