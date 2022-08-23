@@ -101,3 +101,12 @@ export const walkingLanternList: PromiseFn = () => {
   const params = { url: api.walkingLanternList }
   return http.get(params)
 }
+// 小程序-幸运大转盘抽奖校验
+export const turnLuckDrawCheck: PromiseFn = data => {
+  const params = {
+    url: `${api.turnLuckDrawCheck}/${data.activityId}/${data.userId}`,
+    data: {}
+  }
+
+  return http.get(params)
+}

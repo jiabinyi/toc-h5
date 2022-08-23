@@ -15,5 +15,6 @@ export default {
   walkingLanternList: '/mall/front/turn/walkingLanternList', // 小程序-幸运大转盘走马灯中奖列表
   getUserInfo: '/customer/account/info', // 小程序-获取用户信息
   getQRCode: '/customer/wx/QRCode', // 小程序-生成二维码
-  immediatelyReceive: '/mall/front/turn/immediatelyReceive' // 小程序-立即领取
+  immediatelyReceive: '/mall/front/turn/immediatelyReceive', // 小程序-立即领取
+  turnLuckDrawCheck: '/mall/front/turn/turnLuckDrawCheck' // 小程序-幸运大转盘抽奖校验
 }

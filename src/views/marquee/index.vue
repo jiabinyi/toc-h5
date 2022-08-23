@@ -31,14 +31,14 @@
         <div
           class="marquee-disable"
           @click="marqueeDisable"
-          v-if="curActivityAccountData?.activity_account?.loot_ticket_num === 0"
+          v-if="!['InternalError', 'Success'].includes(marqueeCheckResult.code)"
         ></div>
         <!-- 奖盘  s-->
         <nutbig-marquee
           v-if="showMarquee"
           :prize-list="activityData.turn_prize_vos"
           :prize-index="prizeIndex"
-          :speed="150"
+          :speed="marqueeSpeed"
           :circle="40"
           @start-turns="startTurns"
           @end-turns="endTurns"
@@ -186,7 +186,8 @@ import {
   myWinningList,
   turnLuckDraw,
   currentActivityAccount,
-  walkingLanternList
+  walkingLanternList,
+  turnLuckDrawCheck
 } from '@/axios'
 
 import { sessions } from 'mosowejs'
@@ -221,6 +222,7 @@ interface Contact {
   name: string
 }
 const contacts = ref([] as Contact[])
+
 // 请求-联系人
 const { run: getContactRequest } = useRequest(getContact, {
   manual: true,
@@ -307,11 +309,16 @@ const startTurns = () => {
   prizeIndex.value = -1
   turnLuckDrawFunc({
     activityId: activityData.value.turn_activity.id,
-    custId: JSON.parse(sessions.get('userInfo')).cust_id
+    custId: sessions.get('cust_id')
   })
 }
 const endTurns = () => {
   getMyWinningList()
+
+  runTurnLuckDrawCheck({
+    activityId: activityData.value.turn_activity.id,
+    userId: sessions.get('cust_id')
+  })
   if (
     String(prizeCurrent.value.choice_prize_name).replaceAll(/\s/g, '') ===
     '谢谢参与'
@@ -405,6 +412,33 @@ const { run: runDalkingLanternList } = useRequest(walkingLanternList, {
     }
   }
 })
+
+// 速度
+const marqueeSpeed = ref(5)
+// 抽奖效验结果
+const marqueeCheckResult = ref({} as ObjTy)
+marqueeCheckResult.value = { code: 'Success' }
+// 幸运大转盘抽奖校验
+const { run: runTurnLuckDrawCheck } = useRequest(turnLuckDrawCheck, {
+  manual: true,
+  onSuccess: (res: ResObjData) => {
+    if (res.result) {
+      if (res.result?.code !== 'Success') {
+        marqueeSpeed.value = 5
+      } else {
+        marqueeSpeed.value = 0
+      }
+      marqueeCheckResult.value = res.result
+    }
+  },
+  onError: (res: ObjTy) => {
+    if (res.result) {
+      marqueeSpeed.value = 0
+      marqueeCheckResult.value = res.result
+    }
+  }
+})
+
 // 当前获奖奖品
 const prizeCurrent = ref({} as any)
 
@@ -447,8 +481,13 @@ const { run: turnLuckDrawFunc } = useRequest(turnLuckDraw, {
  * @returns {any}
  */
 
-const placeOrder = async ({ category_code, goods_id, id }: ObjTy) => {
-  const url = `/pages/activity/pages/goodDetail/goodDetail?category_code=${category_code}&activityGoodId=${id}&goods_id=${goods_id}&type=marquee`
+const placeOrder = async ({
+  category_code,
+  goods_id,
+  id,
+  prize_goods_id
+}: ObjTy) => {
+  const url = `/pages/activity/pages/goodDetail/goodDetail?category_code=${category_code}&activityGoodId=${id}&goods_id=${goods_id}&type=marquee&prizeGoodsId=${prize_goods_id}`
   console.log('url', url)
   const wx = await import('wechat-ts-sdk').then(module => module.default)
   wx.miniProgram.navigateTo({ url }) // 跳到小程序原生页面
@@ -486,6 +525,11 @@ const { run: getActive } = useRequest(queryTurnActivity, {
         ...res.data,
         turn_prize_vos
       }
+      // 幸运大转盘抽奖校验
+      runTurnLuckDrawCheck({
+        activityId: activityData.value.turn_activity.id,
+        userId: sessions.get('cust_id')
+      })
       //  判断分享景来的活动是否已过期
       if (
         sessions.get('activityId') !== '' &&
@@ -560,16 +604,18 @@ const dialogNewUserAwardClose = () => {
 }
 // 无法抽奖提示
 const marqueeDisable = () => {
-  proxy.$toast.text('你已经超过抽奖次数限制')
+  proxy.$toast.text(marqueeCheckResult.value.msg)
 }
+
 // 查看订单详情
-const seeOrderDetail = async (prize: ObjTy) => {
+const seeOrderDetail = async (prize: any) => {
   let url = ''
   if (prize.category_code === 'PACKAGE_GOODS') {
     url = `/pages/subSetMeal/pages/orderMealDetail/orderMealDetail?order_no=${prize.order_code}&media_type=SUB_ORDER_NO`
   } else {
     url = `/pages/subTicket/pages/orderTicketDetail/orderTicketDetail?order_no=${prize.order_code}&media_type=SUB_ORDER_NO`
   }
+  console.log('url', url)
   const wx = await import('wechat-ts-sdk').then(module => module.default)
   wx.miniProgram.navigateTo({ url }) // 跳到小程序原生页面
 }
