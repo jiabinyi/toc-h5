@@ -34,7 +34,7 @@
           v-if="showMarquee"
           :prize-list="activityData.turn_prize_vos"
           :prize-index="prizeIndex"
-          :speed="marqueeSpeed"
+          :speed="5"
           :circle="40"
           @start-turns="startTurns"
           @end-turns="endTurns"
@@ -379,24 +379,14 @@ const { run: runTurnLuckDrawCheck } = useRequest(turnLuckDrawCheck, {
   onSuccess: (res: ResObjData) => {
     if (res.result) {
       if (res.result?.code !== 'Success') {
-        marqueeSpeed.value = 5
+        marqueeSpeed.value = 0
       } else {
         marqueeSpeed.value = 0
       }
       marqueeCheckResult.value = res.result
     }
   },
-  onError: (res: ObjTy) => {
-    if (res.result) {
-      marqueeSpeed.value = 0
-      marqueeCheckResult.value = res.result
-    }
-
-    /*
-     * marqueeSpeed.value = 0
-     * marqueeCheckResult.value = { code: 'error', msg: '22' }
-     */
-  }
+  onError: (res: ObjTy) => {}
 })
 
 // 当前获奖奖品

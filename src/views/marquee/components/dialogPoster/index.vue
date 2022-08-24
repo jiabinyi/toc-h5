@@ -1,5 +1,5 @@
 <template>
-  <DialogCustom v-model:visible="visible">
+  <DialogCustom v-model:visible="visible" @close="close">
     <div class="dialogPoster">
       <div class="canvas-wrap">
         <div class="canvas" id="canvas">
@@ -23,7 +23,10 @@
           </div>
           <div class="foot">
             <div class="tip">
-              <div class="tip1">长按识别二维码</div>
+              <div class="tip1">
+                长按识别二维码
+                <img :src="handImg" class="hand" />
+              </div>
               <div class="tip2">立即免费参与</div>
             </div>
             <div class="qrcode" :class="{ showQRcodeImg: showQRcodeImg }">
@@ -42,6 +45,7 @@ import { getQRCode } from '@/axios'
 import { useRequest } from 'vue-request'
 import { useUserStore } from '@/store/modules/user.ts'
 import { sessions } from 'mosowejs'
+import handImg from '@common/assets/images/blue/share-hand.png'
 import html2canvas from 'html2canvas'
 // 弹窗
 import DialogCustom from '@/components/DialogCustom/index.vue'
@@ -74,7 +78,16 @@ const visible = useVModel(props, 'visible', emit)
 const activityData = useVModel(props, 'activityData')
 
 const qrcodeImg = ref('')
-// 获取小程序码
+
+/**
+ * // 方法 获取小程序码
+ * @author yijiabin
+ * @date 2022-08-24
+ * @param {any} getQRCode
+ * @param {any} {manual:true
+ * @param {any} onSuccess:(res:any
+ * @returns {any}
+ */
 const { run: runGetQRCode } = useRequest(getQRCode, {
   manual: true,
   onSuccess: (res: any) => {
@@ -92,11 +105,20 @@ const { run: runGetQRCode } = useRequest(getQRCode, {
     proxy.$toast.hide()
   }
 })
-
+let dom = document.getElementById('canvas_pic') as HTMLElement
 let canvasID: HTMLElement
+/**
+ * 生成海报第一步-获取二维码
+ * @author yijiabin
+ * @date 2022-08-24
+ * @returns {any}
+ */
 const renderPoster = () => {
+  dom = document.getElementById('canvas_pic') as HTMLElement
+  dom.innerHTML = ''
+  qrcodeImg.value = ''
   showQRcodeImg.value = false
-  // proxy.$toast.loading('生成中...')
+  proxy.$toast.loading('生成中...')
   runGetQRCode({
     sharePagePath: 'pages/common/pages/webview/webview',
     activityId: activityData.value.turn_activity.id,
@@ -104,6 +126,12 @@ const renderPoster = () => {
     envVersion: sessions.get('envVersion')
   })
 }
+/**
+ * 生成海报第二部 base64转图片
+ * @author yijiabin
+ * @date 2022-08-24
+ * @returns {any}
+ */
 const renderPosterImage = () => {
   canvasID = document.getElementById('canvas') ?? document.body
   showQRcodeImg.value = true
@@ -115,17 +143,26 @@ const renderPosterImage = () => {
   if (canvasID !== document.body) {
     html2canvas(canvasID, opts).then((canvas: { toDataURL: () => string }) => {
       const image = new Image()
-      const dom = document.getElementById('canvas_pic') as HTMLElement
 
-      image.src = canvas.toDataURL()
       dom.innerHTML = ''
+      image.src = canvas.toDataURL()
+
       dom?.appendChild(image)
     })
   }
 }
 const showQRcodeImg = ref(false)
-
 defineExpose({ renderPoster })
+
+/**
+ * 关闭弹窗前重置小程序码
+ * @author yijiabin
+ * @date 2022-08-24
+ * @returns {any}
+ */
+const close = () => {
+  qrcodeImg.value = ''
+}
 </script>
 <style lang="scss">
 .dialogPoster {
@@ -217,6 +254,10 @@ defineExpose({ renderPoster })
         line-height: 22px;
         flex-grow: 1;
         text-align: left;
+        .hand {
+          width: 19px;
+          height: 10px;
+        }
       }
       img {
         width: 67px;
