@@ -23,7 +23,8 @@ module.exports = {
       'error',
       {
         singleQuote: true,
-        indentation: 2
+        indentation: 2,
+        printWidth: 120
       }
     ],
     '@typescript-eslint/ban-types': [
@@ -42,7 +43,7 @@ module.exports = {
     '@typescript-eslint/no-unused-vars': 'error',
     'vue/multi-word-component-names': 'off',
     // --以下是Possible Errors JS代码中的逻辑错误相关
-    'no-extra-parens': 'error', // 禁止不必要的括号
+    'no-extra-parens': ['error', 'all', { enforceForArrowConditionals: false }], // 禁止不必要的括号
     // "no-console": "error" // 不允许打印console.log
     'no-template-curly-in-string': 'error', // 禁止在常规字符串中出现模板字符串语法${xxx}
     // --以下是Best Practices 最佳实践
@@ -85,10 +86,7 @@ module.exports = {
     'nonblock-statement-body-position': 'error', // 强制单行语句不换行
     'object-curly-newline': ['error', { multiline: true }], // 对象数属性要有一致的换行，都换行或都不换行
     'object-curly-spacing': ['error', 'always'], // 强制对象/解构赋值/import等花括号前后有空格
-    'object-property-newline': [
-      'error',
-      { allowAllPropertiesOnSameLine: true }
-    ], // 强制对象的属性在同一行或全换行
+    'object-property-newline': ['error', { allowAllPropertiesOnSameLine: true }], // 强制对象的属性在同一行或全换行
     'one-var-declaration-per-line': 'error', // 强制变量初始化语句换行
     'operator-assignment': 'error', // 尽可能的简化赋值操作，如x=x+1 应简化为x+=1
     quotes: ['error', 'single'], // 要求字符串尽可能的使用单引号
