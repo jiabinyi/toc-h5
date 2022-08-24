@@ -5,18 +5,12 @@
         <div class="img">
           <img @click="visible = false" :src="prize.pic_url" />
         </div>
-        <div class="txt">
-          {{ prize.choice_prize_name }}： {{ prize.prize_name }}
-        </div>
+        <div class="txt">{{ prize.choice_prize_name }}： {{ prize.prize_name }}</div>
       </div>
 
       <div class="line"></div>
       <div class="btn" @click="visible = false">我知道了</div>
-      <img
-        @click="visible = false"
-        class="btn-close"
-        src="@/common/assets/images/blue/blue-dialog-close.png"
-      />
+      <img @click="visible = false" class="btn-close" src="@/common/assets/images/blue/blue-dialog-close.png" />
     </div>
   </DialogCustom>
 </template>
@@ -44,6 +38,7 @@ const visible = useVModel(props, 'visible', emit)
   text-align: center;
   .content {
     @include toc-images-background;
+
     background-image: var(--blue-dialog-award-bg);
     background-size: 100% 100%;
     width: 316px;
@@ -53,6 +48,7 @@ const visible = useVModel(props, 'visible', emit)
       box-sizing: border-box;
       padding-top: 200px;
       @include flex-center;
+
       padding-bottom: 20px;
       img {
         height: 68px;
@@ -60,13 +56,13 @@ const visible = useVModel(props, 'visible', emit)
       }
     }
     .txt {
-      margin: 0px auto;
+      margin: 0 auto;
       width: 184px;
       height: 14px;
       font-size: 14px;
-      font-family: PingFangSC-Medium, PingFang SC;
+      font-family: PingFangSC-Medium, 'PingFang SC';
       font-weight: 500;
-      color: #ffffff;
+      color: #fff;
       line-height: 14px;
       overflow: auto;
       word-wrap: normal;
@@ -74,22 +70,21 @@ const visible = useVModel(props, 'visible', emit)
     }
   }
   .line {
-    margin: 0px auto;
+    margin: 0 auto;
     width: 3px;
     height: 24px;
     background: #ffc10a;
   }
   .btn {
-    margin: 0px auto;
+    margin: 0 auto;
     width: 180px;
     height: 36px;
     background: #ffc10a;
-    box-shadow: 0px 2px 4px 0px rgba(255, 193, 10, 0.15);
+    box-shadow: 0 2px 4px 0 rgb(255 193 10 / 15%);
     border-radius: 20px;
     font-size: 16px;
-    font-family: PingFangSC-Medium, PingFang SC;
     font-weight: 500;
-    color: #ffffff;
+    color: #fff;
     line-height: 36px;
   }
   .btn-close {

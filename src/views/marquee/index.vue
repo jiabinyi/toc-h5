@@ -7,16 +7,9 @@
     </div>
     <!--E 活动规则按钮  -->
     <div class="lottery-header">
-      <div class="participants-btn">
-        已有{{ activityData.participants_num }}人参与
-      </div>
-      <div
-        class="activity-time"
-        v-if="dialogName !== 'dialogTipActivityFinish'"
-      >
-        <div class="content">
-          {{ activityData.turn_activity.end_time }} 结束
-        </div>
+      <div class="participants-btn">已有{{ activityData.participants_num }}人参与</div>
+      <div class="activity-time" v-if="dialogName !== 'dialogTipActivityFinish'">
+        <div class="content">{{ activityData.turn_activity.end_time }} 结束</div>
       </div>
     </div>
     <!--S 抽奖箱  -->
@@ -84,25 +77,13 @@
               </div>
             </div>
             <div class="right">
-              <div
-                class="txt"
-                v-if="item.be_help_num < item.cycle_daily_limit_num"
-              >
+              <div class="txt" v-if="item.be_help_num < item.cycle_daily_limit_num">
                 进行中 ({{ item.be_help_num }}/{{ item.cycle_daily_limit_num }})
               </div>
 
-              <div
-                class="txt"
-                v-if="item.be_help_num >= item.cycle_daily_limit_num"
-              >
-                任务已完成
-              </div>
+              <div class="txt" v-if="item.be_help_num >= item.cycle_daily_limit_num">任务已完成</div>
 
-              <div
-                class="btn"
-                @click="goToShare(item)"
-                :class="{ disable: !activityData.join_flag }"
-              >
+              <div class="btn" @click="goToShare(item)" :class="{ disable: !activityData.join_flag }">
                 {{ item.button_copy }}
               </div>
             </div>
@@ -125,34 +106,15 @@
               <img :src="item.pic_url" />
             </div>
             <div class="txt">
-              <div class="title">
-                {{ item.choice_prize_name }}：{{ item.prize_name }} x {{ 1 }}份
-              </div>
+              <div class="title">{{ item.choice_prize_name }}：{{ item.prize_name }} x {{ 1 }}份</div>
               <div class="desc">
                 {{ dayjs(item?.win_time).format('YYYY年MM月  HH:mm') }}
               </div>
             </div>
             <div class="right">
-              <div
-                class="btn"
-                v-if="!item.order_code && !item.overtime_flag"
-                @click="placeOrder(item)"
-              >
-                立即下单
-              </div>
-              <div
-                class="btn"
-                v-if="item.order_code"
-                @click="seeOrderDetail(item)"
-              >
-                查看订单
-              </div>
-              <div
-                class="btn disable"
-                v-if="!item.order_code && item.overtime_flag"
-              >
-                超时未下单
-              </div>
+              <div class="btn" v-if="!item.order_code && !item.overtime_flag" @click="placeOrder(item)">立即下单</div>
+              <div class="btn" v-if="item.order_code" @click="seeOrderDetail(item)">查看订单</div>
+              <div class="btn disable" v-if="!item.order_code && item.overtime_flag">超时未下单</div>
             </div>
           </div>
         </div>
@@ -182,7 +144,6 @@
 </template>
 <script lang="ts" setup name="marquee">
 import {
-  getContact,
   queryTurnActivity,
   activityTaskList,
   queryTurnInviteFriends,
@@ -219,21 +180,6 @@ const dayjs = appContext.config.globalProperties.$dayjs
 import useGetQuery from '@/utils/hooks/useGetQuery'
 
 const { getUrlParam } = useGetQuery()
-// 变量-联系人
-interface Contact {
-  id: number
-  name: string
-}
-const contacts = ref([] as Contact[])
-
-// 请求-联系人
-const { run: getContactRequest } = useRequest(getContact, {
-  manual: true,
-  onSuccess: (res: ResArrData) => {
-    console.log(res.data)
-    contacts.value = res?.data as Contact[]
-  }
-})
 
 // 变量-弹窗数据
 const dialogData = ref({})
@@ -306,9 +252,9 @@ const setLottery = () => {
   remoteGiftSelected()
 }
 // 去除默认抽中奖品样式
-let remoteGiftSelected = () => {
+const remoteGiftSelected = () => {
   nextTick(() => {
-    let gift1 = document.querySelector('.gift-1.active') as ObjTy
+    const gift1 = document.querySelector('.gift-1.active') as ObjTy
     if (gift1) {
       gift1.setAttribute('class', 'gift-1')
     }
@@ -331,10 +277,7 @@ const endTurns = () => {
     activityId: activityData.value.turn_activity.id,
     userId: sessions.get('cust_id')
   })
-  if (
-    String(prizeCurrent.value.choice_prize_name).replaceAll(/\s/g, '') ===
-    '谢谢参与'
-  ) {
+  if (String(prizeCurrent.value.choice_prize_name).replaceAll(/\s/g, '') === '谢谢参与') {
     // proxy.$toast.text('喜从天降，运气爆棚，恭喜你中奖了！')
     dialogName.value = 'dialogThanksParticipant'
     dialogVisible.value = true
@@ -448,8 +391,11 @@ const { run: runTurnLuckDrawCheck } = useRequest(turnLuckDrawCheck, {
       marqueeSpeed.value = 0
       marqueeCheckResult.value = res.result
     }
-    // marqueeSpeed.value = 0
-    // marqueeCheckResult.value = { code: 'error', msg: '22' }
+
+    /*
+     * marqueeSpeed.value = 0
+     * marqueeCheckResult.value = { code: 'error', msg: '22' }
+     */
   }
 })
 
@@ -495,12 +441,7 @@ const { run: turnLuckDrawFunc } = useRequest(turnLuckDraw, {
  * @returns {any}
  */
 
-const placeOrder = async ({
-  category_code,
-  goods_id,
-  id,
-  prize_goods_id
-}: ObjTy) => {
+const placeOrder = async ({ category_code, goods_id, id, prize_goods_id }: ObjTy) => {
   const url = `/pages/activity/pages/goodDetail/goodDetail?category_code=${category_code}&activityGoodId=${id}&goods_id=${goods_id}&type=marquee&prizeGoodsId=${prize_goods_id}`
   console.log('url', url)
   const wx = await import('wechat-ts-sdk').then(module => module.default)
@@ -545,18 +486,12 @@ const { run: getActive } = useRequest(queryTurnActivity, {
         userId: sessions.get('cust_id')
       })
       //  判断分享景来的活动是否已过期
-      if (
-        sessions.get('activityId') !== '' &&
-        sessions.get('activityId') !== activityData.value.turn_activity.id
-      ) {
+      if (sessions.get('activityId') !== '' && sessions.get('activityId') !== activityData.value.turn_activity.id) {
         activityFinished()
         return
       }
       // 活动结束 回首页
-      if (
-        dayjs(activityData.value.turn_activity.end_time).valueOf() <
-        new Date().getTime()
-      ) {
+      if (dayjs(activityData.value.turn_activity.end_time).valueOf() < new Date().getTime()) {
         activityFinished()
         return
       }
@@ -620,8 +555,7 @@ const dialogNewUserAwardClose = () => {
 const marqueeDisable = () => {
   if (
     curActivityAccountData.value?.activity_account?.loot_ticket_num === 0 &&
-    activityTaskListData.value[0].be_help_num <
-      activityTaskListData.value[0].cycle_daily_limit_num
+    activityTaskListData.value[0].be_help_num < activityTaskListData.value[0].cycle_daily_limit_num
   ) {
     proxy.$toast.text('做任务获取更多抽奖次数')
     return
@@ -642,8 +576,6 @@ const seeOrderDetail = async (prize: any) => {
   wx.miniProgram.navigateTo({ url }) // 跳到小程序原生页面
 }
 onMounted(() => {
-  getContactRequest()
-  getContactRequest()
   getActive()
   getActivityTaskList()
   getMyWinningList()

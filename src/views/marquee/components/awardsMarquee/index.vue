@@ -14,11 +14,7 @@
         <div class="avatar" v-if="item?.head_img_url">
           <img :src="item.head_img_url" />
         </div>
-        <div class="txt">
-          恭喜{{
-            '"' + hideName(item.nick_name) + '"抽中' + (item.prize_name ?? '')
-          }}
-        </div>
+        <div class="txt">恭喜{{ '"' + hideName(item.nick_name) + '"抽中' + (item.prize_name ?? '') }}</div>
       </div>
     </div>
   </nut-noticebar>
@@ -28,32 +24,22 @@
 export interface AwardProps {
   data: Array<any>
 }
+// eslint-disable-next-line vue/no-setup-props-destructure
 const { data } = defineProps<AwardProps>()
 
 // 隐藏姓
-const hideName: any = (name: any) => {
-  if (!name) {
-    return ''
-  }
-  name = name.length ? name.substring(0, 1) + '***' : '用户'
-  return name
-}
+const hideName = (name: string): string => (name ? `${name.substring(0, 1)}***` : '用户')
 </script>
 <style lang="scss" scoped>
 .marquee {
   width: 25px;
-  // margin-left: 10px;
 }
 .awardsMarquee {
   margin-top: 5px;
   display: flex;
   height: 30px !important;
   overflow: hidden;
-  // :deep(.nut-noticebar-vertical) {
-  //   height: 30px !important;
-  // }
   .item {
-    // height: 30px !important;
     line-height: 30px;
     margin-right: 20px;
     .user {
@@ -67,7 +53,7 @@ const hideName: any = (name: any) => {
         height: 22px;
         border-radius: 22px;
         overflow: hidden;
-        margin-left: 0px;
+        margin-left: 0;
         img {
           width: 100%;
           height: 100%;
@@ -79,9 +65,9 @@ const hideName: any = (name: any) => {
         max-width: 181px;
         height: 17px;
         font-size: 12px;
-        font-family: PingFangSC-Medium, PingFang SC;
+        font-family: PingFangSC-Medium, 'PingFang SC';
         font-weight: 500;
-        color: #ffffff;
+        color: #fff;
         line-height: 17px;
         overflow: hidden;
       }
@@ -90,7 +76,7 @@ const hideName: any = (name: any) => {
       width: 100%;
       height: 100%;
     }
-    ::v-deep(.nut-swiper-pagination-vertical) {
+    :deep(.nut-swiper-pagination-vertical) {
       i {
         width: 6px;
         height: 6px;

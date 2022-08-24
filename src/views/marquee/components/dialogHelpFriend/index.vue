@@ -1,8 +1,5 @@
 <template>
-  <DialogCustom
-    v-model:visible="visible"
-    @close="emit('dialogHelpFriendClose')"
-  >
+  <DialogCustom v-model:visible="visible" @close="emit('dialogHelpFriendClose')">
     <div class="dialogHelpFriend" @click="accept"></div>
   </DialogCustom>
 </template>
@@ -68,11 +65,11 @@ const { proxy } = getCurrentInstance() as any
 </script>
 <style lang="scss">
 .dialogHelpFriend {
-  @include toc-images-background;
-  background-image: var(--blue-dialog-help-friend);
-  background-size: 100% 100%;
+  display: block;
   width: 316px;
   height: 398px;
-  display: block;
+  @include toc-images-background;
+
+  background-image: var(--blue-dialog-help-friend);
 }
 </style>

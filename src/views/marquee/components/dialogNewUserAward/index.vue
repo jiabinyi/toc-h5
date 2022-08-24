@@ -1,8 +1,5 @@
 <template>
-  <DialogCustom
-    v-model:visible="visible"
-    @close="emit('dialogNewUserAwardClose')"
-  >
+  <DialogCustom v-model:visible="visible" @close="emit('dialogNewUserAwardClose')">
     <div class="dialogNewUserAward" @click="accept"></div>
   </DialogCustom>
 </template>
@@ -63,11 +60,11 @@ const { run: runImmediatelyReceive } = useRequest(immediatelyReceive, {
 </script>
 <style lang="scss">
 .dialogNewUserAward {
-  @include toc-images-background;
-  background-image: var(--blue-dialog-new-user-award);
-  background-size: 100% 100%;
+  display: block;
   width: 316px;
   height: 398px;
-  display: block;
+  @include toc-images-background;
+
+  background-image: var(--blue-dialog-new-user-award);
 }
 </style>

@@ -5,12 +5,8 @@
       <div class="content-main">
         <div class="content">
           <div class="content-title">活动规则</div>
-          <div class="content-txt">
-            1. 本次活动时间：{{ data.activity_time_explain }}；
-          </div>
-          <div class="content-txt">
-            2. 下单时间：{{ data.time_duration_explain }}；
-          </div>
+          <div class="content-txt">1. 本次活动时间：{{ data.activity_time_explain }}；</div>
+          <div class="content-txt">2. 下单时间：{{ data.time_duration_explain }}；</div>
         </div>
         <div class="content">
           <div class="content-title">活动说明</div>
@@ -44,58 +40,54 @@ const visible = useVModel(props, 'visible', emit)
 </script>
 <style lang="scss">
 .dialogActivityRules {
-    width: 337px;
-    min-height: 120px;
-    background: #fff;
-    border-radius: 8px;
-    display: block;
-    .title {
-        height: 80px;
-        font-size: 16px;
-        font-family: PingFangSC-Semibold, 'PingFang SC';
+  width: 337px;
+  min-height: 120px;
+  background: #fff;
+  border-radius: 8px;
+  display: block;
+  .title {
+    height: 80px;
+    font-size: 16px;
+    font-weight: 600;
+    color: #333;
+    line-height: 16px;
+    @include flex-center;
+  }
+  .content-main {
+    height: 375px;
+    overflow-y: scroll;
+    & .content {
+      padding: 0 11px 11px;
+      text-align: left;
+      .content-title {
+        font-size: 14px;
         font-weight: 600;
         color: #333;
-        line-height: 16px;
-        @include flex-center;
+        line-height: 28px;
+      }
+      .content-txt {
+        font-size: 14px;
+        font-weight: 200;
+        color: #777;
+        line-height: 28px;
+      }
     }
-    .content-main {
-        height: 375px;
-        overflow-y: scroll;
-        & .content {
-            padding: 0 11px 11px;
-            text-align: left;
-            .content-title {
-                font-size: 14px;
-                font-family: PingFangSC-Medium, 'PingFang SC';
-                font-weight: 600;
-                color: #333;
-                line-height: 28px;
-            }
-            .content-txt {
-                font-size: 14px;
-                font-family: PingFangSC-Medium, 'PingFang SC';
-                font-weight: 200;
-                color: #777;
-                line-height: 28px;
-            }
-        }
+  }
+  .footer {
+    padding-bottom: 25px;
+    padding-top: 25px;
+    @include flex-center;
+    .btn {
+      width: 180px;
+      height: 36px;
+      background: #ffc10a;
+      box-shadow: 0 2px 4px 0 rgb(255 193 10 / 15%);
+      border-radius: 20px;
+      font-size: 16px;
+      font-weight: 500;
+      color: #fff;
+      line-height: 36px;
     }
-    .footer {
-        padding-bottom: 25px;
-        padding-top: 25px;
-        @include flex-center;
-        .btn {
-            width: 180px;
-            height: 36px;
-            background: #ffc10a;
-            box-shadow: 0 2px 4px 0 rgb(255 193 10 / 15%);
-            border-radius: 20px;
-            font-size: 16px;
-            font-family: PingFangSC-Medium, 'PingFang SC';
-            font-weight: 500;
-            color: #fff;
-            line-height: 36px;
-        }
-    }
+  }
 }
 </style>

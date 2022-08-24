@@ -5,21 +5,13 @@
         <div class="canvas" id="canvas">
           <div class="sharer">
             <img class="image" :src="UserStore.userInfo.head_img_url" />
-            <div class="title">
-              {{ UserStore.userInfo.nick_name }}@{{
-                activityData.turn_activity.share_title
-              }}
-            </div>
+            <div class="title">{{ UserStore.userInfo.nick_name }}@{{ activityData.turn_activity.share_title }}</div>
           </div>
           <div class="pic">
             <img :src="activityData.turn_activity.share_pic_url" />
           </div>
           <div class="prizes">
-            <div
-              class="item"
-              v-for="(item, index) in data.turn_prize_vo_list.slice(0, 2)"
-              :key="index"
-            >
+            <div class="item" v-for="(item, index) in data.turn_prize_vo_list.slice(0, 2)" :key="index">
               <img :src="item.pic_url" />
               <div class="ifo">
                 <div class="title">
@@ -155,10 +147,11 @@ defineExpose({ renderPoster })
       margin-right: 5px;
       flex-shrink: 0;
     }
+
     font-size: 14px;
-    font-family: PingFangSC-Medium, PingFang SC;
+    font-family: PingFangSC-Medium, 'PingFang SC';
     font-weight: 500;
-    color: #333333;
+    color: #333;
     line-height: 14px;
     .title {
       display: flex;
@@ -174,9 +167,8 @@ defineExpose({ renderPoster })
   #canvas {
     opacity: 1;
   }
-
   .canvas {
-    padding: 11px 11px;
+    padding: 11px;
     .pic {
       width: 262px;
       height: 140px;
@@ -199,19 +191,18 @@ defineExpose({ renderPoster })
           align-items: flex-start;
           justify-content: center;
           margin-left: 15px;
-
           .title {
             font-size: 14px;
-            font-family: PingFangSC-Medium, PingFang SC;
+            font-family: PingFangSC-Medium, 'PingFang SC';
             font-weight: 500;
-            color: #333333;
+            color: #333;
             line-height: 19px;
           }
           .num {
             font-size: 12px;
-            font-family: PingFangSC-Regular, PingFang SC;
+            font-family: PingFangSC-Regular, 'PingFang SC';
             font-weight: 400;
-            color: #999999;
+            color: #999;
           }
         }
       }
@@ -222,7 +213,7 @@ defineExpose({ renderPoster })
       .tip {
         font-size: 12px;
         font-weight: 400;
-        color: #333333;
+        color: #333;
         line-height: 22px;
         flex-grow: 1;
         text-align: left;
@@ -233,14 +224,13 @@ defineExpose({ renderPoster })
       }
     }
   }
-
   .foot-message {
     line-height: 40px;
   }
   #canvas_pic {
     position: absolute;
-    top: 0px;
-    left: 0px;
+    top: 0;
+    left: 0;
     img {
       width: 100%;
     }

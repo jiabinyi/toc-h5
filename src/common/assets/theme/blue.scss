@@ -3,45 +3,39 @@
   height: 98px;
   background-size: cover !important;
 }
-
 @mixin toc-images-background {
   background-position: center 0;
   background-attachment: inherit;
   background-repeat: no-repeat;
   background-size: cover;
 }
-
 .blue-mode {
   margin: 0;
   padding: 0;
   background: #127bfe;
-
   .index-bg {
     width: 100vw;
     height: 100vh;
     @include toc-images-background;
-    background-image: url("../images/blue/blue-index-bg.png");
+
+    background-image: url('../images/blue/blue-index-bg.png');
   }
 
-
-
-
-  --lottery-desc-color:#2055e2;
-  --lottery-main-bg:url("../images/blue/blue-lottery-bg.png");
-  --lottery-btn-default:url("../images/blue/lottery-btn-default.png");
-  --lottery-btn-disabled:url("../images/blue/lottery-btn-disabled.png");
-  --receive-tab:url("../images/blue/blue-receive-tab-activation.png");
-  --blue-my-tab-activation:url("../images/blue/blue-my-tab-activation.png");
-  --blue-prize-tab-prize-activation:url("../images/blue/blue-prize-tab-prize-activation.png");
-  --blue-receive-tab-activation:url("../images/blue/blue-receive-tab-activation.png");
-  --marquee-item:url("../images/blue/marquee-item-bg.png");
-  --blue-end-date-bg:url("../images/blue/blue-end-date-bg.png");
-  --blue-delalllotteryinfo-bg:url("../images/blue/blue-delalllotteryinfo-bg.png");
-  --blue-rule-btn:url("../images/blue/blue-rule-btn.png");
-  --blue-dialog-new-user-award:url("../images/blue/blue-dialog-new-user-award.png");
-  --blue-dialog-award-bg:url("../images/blue/blue-dialog-award-bg.png");
-  --blue-dialog-help-friend:url("../images/blue/blue-dialog-help-marquee.png");
-
+  --lottery-desc-color: #2055e2;
+  --lottery-main-bg: url('../images/blue/blue-lottery-bg.png');
+  --lottery-btn-default: url('../images/blue/lottery-btn-default.png');
+  --lottery-btn-disabled: url('../images/blue/lottery-btn-disabled.png');
+  --receive-tab: url('../images/blue/blue-receive-tab-activation.png');
+  --blue-my-tab-activation: url('../images/blue/blue-my-tab-activation.png');
+  --blue-prize-tab-prize-activation: url('../images/blue/blue-prize-tab-prize-activation.png');
+  --blue-receive-tab-activation: url('../images/blue/blue-receive-tab-activation.png');
+  --marquee-item: url('../images/blue/marquee-item-bg.png');
+  --blue-end-date-bg: url('../images/blue/blue-end-date-bg.png');
+  --blue-delalllotteryinfo-bg: url('../images/blue/blue-delalllotteryinfo-bg.png');
+  --blue-rule-btn: url('../images/blue/blue-rule-btn.png');
+  --blue-dialog-new-user-award: url('../images/blue/blue-dialog-new-user-award.png');
+  --blue-dialog-award-bg: url('../images/blue/blue-dialog-award-bg.png');
+  --blue-dialog-help-friend: url('../images/blue/blue-dialog-help-marquee.png');
   .lottery-tab-item {
     position: relative;
     background: #60c2fa;
@@ -55,23 +49,20 @@
     text-align: center;
     border: 3px solid #60c2fa;
     border-bottom: 4px solid #46abf9;
-
     &:first-child {
-      margin-left: 0px;
+      margin-left: 0;
     }
-
   }
-
   & .active-tab {
     position: relative;
     height: 36px;
     line-height: 42px;
     font-size: 16px;
     font-weight: 600;
-
     &::before {
-      content: "";
+      content: '';
       @include toc-images-background;
+
       position: absolute;
       height: 12px;
       width: 14px;
@@ -80,18 +71,14 @@
       background-image: var(--active-tab);
     }
   }
-
   & .footer-content {
     width: 345px;
     min-height: 200px;
     margin: 0 auto;
-    background: #FFFFFF;
+    background: #fff;
     border-radius: 10px;
   }
 }
-
-
-
 @mixin flex-center {
   display: flex;
   justify-content: center;

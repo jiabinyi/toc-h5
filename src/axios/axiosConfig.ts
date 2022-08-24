@@ -35,9 +35,7 @@ const { getUrlParam } = useGetQuery()
 console.log('clientType-----: ', getUrlParam('clientType'))
 const request: any = axios.create({
   baseURL:
-    getUrlParam('clientType') === 'wechat'
-      ? import.meta.env.VITE_APP_WX_BASE_URL
-      : import.meta.env.VITE_APP_BASE_URL,
+    getUrlParam('clientType') === 'wechat' ? import.meta.env.VITE_APP_WX_BASE_URL : import.meta.env.VITE_APP_BASE_URL,
   timeout: 60000,
   responseType: 'json'
 })
@@ -68,9 +66,7 @@ const list = [{ url: api.exportDetails, type: 'export', export: 1 }]
 request.interceptors.request.use(
   (config: any) => {
     const finds = list.find(item => config.url.includes(item.url))
-    const num =
-      config[config.method.toUpperCase() === 'GET' ? 'params' : 'data']
-        ?.export || 0
+    const num = config[config.method.toUpperCase() === 'GET' ? 'params' : 'data']?.export || 0
     if (finds && num === 1) {
       // 下载
       config.responseType = 'blob'
@@ -91,15 +87,13 @@ request.interceptors.request.use(
 request.interceptors.response.use((response: any) => {
   const options = response.config
   const finds = list.find(item => options.url.includes(item.url))
-  const num =
-    options[options.method.toUpperCase() === 'GET' ? 'params' : 'data']
-      ?.export || 0
+  const num = options[options.method.toUpperCase() === 'GET' ? 'params' : 'data']?.export || 0
   if (finds && num === 1 && response.status === 200) {
     // 文件流下载，请求中必须含：export：1，可选fileName，默认时间
     const blob = new Blob([response.data], { type: 'application/vnd.ms-excel' })
     const filename =
-      options[options.method.toUpperCase() === 'GET' ? 'params' : 'data']
-        ?.fileName || dayjs().format('YYYY-MM-DD hh:mm:ss')
+      options[options.method.toUpperCase() === 'GET' ? 'params' : 'data']?.fileName ||
+      dayjs().format('YYYY-MM-DD hh:mm:ss')
     // 创建一个超链接，将文件流赋进去，然后实现这个超链接的单击事件
     const elink = document.createElement('a')
     elink.download = filename
