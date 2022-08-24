@@ -1,323 +1,322 @@
 .lottery-container {
-    position: relative;
-    .rule-btn {
-        z-index: 100;
-        position: absolute;
-        right: 0;
-        top: 180px;
-        font-size: 12px;
-        font-family: PingFangSC-Regular, 'PingFang SC';
-        font-weight: 400;
-        color: #fff;
-        line-height: 16px;
-        width: 46px;
-        height: 44px;
-        box-shadow: 0 4px 8px 0 rgb(0 54 173 / 20%);
-        @include flex-center;
+  position: relative;
+  .rule-btn {
+    z-index: 100;
+    position: absolute;
+    right: 0;
+    top: 180px;
+    font-size: 12px;
+    font-family: PingFangSC-Regular, 'PingFang SC';
+    font-weight: 400;
+    color: #fff;
+    line-height: 16px;
+    width: 46px;
+    height: 44px;
+    box-shadow: 0 4px 8px 0 rgb(0 54 173 / 20%);
+    @include flex-center;
 
-        flex-direction: column;
+    flex-direction: column;
+    @include toc-images-background;
+
+    background-image: var(--blue-rule-btn);
+  }
+  & .lottery-header {
+    width: 100vw;
+    height: 216px;
+    position: relative;
+    .participants-btn {
+      position: absolute;
+      top: 20px;
+      left: 0;
+      font-size: 12px;
+      font-family: PingFangSC-Regular, 'PingFang SC';
+      font-weight: 400;
+      color: #fff;
+      height: 26px;
+      background: #3333337a;
+      box-shadow: 0 1px 2px 0 rgb(251 169 38 / 10%);
+      border-radius: 0 15px 15px 0;
+      min-width: 21px;
+      padding-right: 10px;
+      padding-left: 10px;
+      @include flex-center;
+    }
+    .activity-time {
+      padding-top: 83px;
+      @include flex-center;
+      & > .content {
+        width: 181px;
+        height: 23px;
         @include toc-images-background;
 
-        background-image: var(--blue-rule-btn);
+        background-image: var(--blue-end-date-bg);
+        font-size: 12px;
+        font-family: PingFangSC-Medium, 'PingFang SC';
+        font-weight: 500;
+        color: #fff;
+        @include flex-center;
+      }
     }
-    & .lottery-header {
-        width: 100vw;
-        height: 216px;
-        position: relative;
-        .participants-btn {
-            position: absolute;
-            top: 20px;
-            left: 0;
+  }
+  & .lottery-main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    .lottery-content {
+      position: relative;
+      width: 345px;
+      height: 423px;
+      @include toc-images-background;
+
+      background-image: var(--lottery-main-bg) !important;
+      .marquee-disable {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 11;
+      }
+      & .marquee {
+        top: 30px;
+        position: absolute;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        .marquee-item {
+          width: 250px;
+          height: 40px;
+          @include toc-images-background;
+
+          background-image: var(--blue-delalllotteryinfo-bg) !important;
+        }
+      }
+    }
+    :deep(.nutbig-marquee) {
+      margin-top: 95px;
+    }
+    :deep(.bgContent) {
+      background: none;
+    }
+    :deep(.marqueeBg) {
+      background: none !important;
+    }
+    :deep(.start) {
+      @include lottery-btn-bg;
+
+      background: var(--lottery-btn-default) no-repeat;
+      position: relative;
+      text-align: center;
+      color: white;
+      font-weight: 600;
+      font-size: 14px;
+      line-height: 98px;
+      top: 5px;
+      left: 4px;
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      justify-content: center;
+    }
+    :deep(.num-txt) {
+      line-height: 22px;
+      font-weight: 400;
+    }
+    :deep(.txt) {
+      line-height: 22px;
+    }
+    :deep(.disabledDraw) {
+      @include lottery-btn-bg;
+
+      background: var(--lottery-btn-disabled) no-repeat;
+      color: black;
+    }
+    :deep(ul) {
+      & li {
+        width: 100px;
+        height: 100px;
+        @include toc-images-background;
+
+        background-image: var(--marquee-item);
+      }
+      & .gift-1,
+      .gift-2,
+      .gift-3 {
+        top: 0;
+      }
+      & .gift-4,
+      .gift-8 {
+        top: 105px;
+      }
+      & .gift-5,
+      .gift-6,
+      .gift-7 {
+        top: 210px;
+      }
+      & .gift-1,
+      .gift-7,
+      .gift-8 {
+        left: 0;
+      }
+      & .gift-2,
+      .gift-6 {
+        left: 103px;
+      }
+      & .desc {
+        font-size: 14px;
+        font-weight: 400;
+        color: var(--lottery-desc-color);
+      }
+      & .gift-img {
+        width: 64px;
+        height: 48px;
+        & img {
+          width: auto;
+          height: auto;
+          max-width: 100%;
+          max-height: 100%;
+        }
+      }
+    }
+    :deep(.active) {
+      background: rgb(232 243 255 / 32%);
+      box-shadow: 0 2px 5px 0 rgb(232 243 255 / 32%);
+      border-radius: 6px;
+      color: #000;
+      font-weight: 500;
+    }
+  }
+  & .lottery-footer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 29px;
+    padding-bottom: 50px;
+    & .lottery-tab {
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+      font-size: 14px;
+      width: 320px;
+      height: 40px;
+      @include toc-images-background;
+
+      background-image: var(--receive-tab) !important;
+      .lottery-tab-item {
+        width: 100%;
+      }
+      &.lottery-tab-0 {
+        background-image: var(--blue-receive-tab-activation) !important;
+      }
+      &.lottery-tab-1 {
+        background-image: var(--blue-prize-tab-prize-activation) !important;
+      }
+      &.lottery-tab-2 {
+        background-image: var(--blue-my-tab-activation) !important;
+      }
+      .item {
+        height: 40px;
+        flex-grow: 1;
+        &.active {
+          width: 36px;
+          background-color: transparent;
+        }
+      }
+    }
+    & > .footer-content {
+      background-color: #fff;
+      width: 345px;
+      flex-shrink: 0;
+      min-height: 40px;
+      display: flex;
+      flex-direction: column;
+      border-radius: 10px;
+      .item {
+        padding-bottom: 10px;
+        padding-top: 10px;
+        display: flex;
+        width: 345px;
+        align-items: center;
+        .icon {
+          padding-left: 10px;
+          width: 40px;
+          height: 40px;
+          padding-right: 10px;
+          flex-shrink: 0;
+          img {
+            width: 100%;
+          }
+        }
+        .txt {
+          font-size: 14px;
+          font-family: PingFangSC-Medium, 'PingFang SC';
+          font-weight: 500;
+          color: #333;
+          line-height: 14px;
+          flex-grow: 1;
+          .title {
+            font-size: 14px;
+            color: #333;
+            line-height: 14px;
+            margin-bottom: 3px;
+            width: 205px;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            word-break: keep-all;
+            white-space: nowrap;
+          }
+          .desc {
+            font-size: 12px;
+            font-weight: 400;
+            color: #999;
+            line-height: 12px;
+            width: 205px;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            word-break: keep-all;
+            white-space: nowrap;
+          }
+        }
+        .right {
+          padding-right: 20px;
+          .txt {
+            padding-bottom: 5px;
             font-size: 12px;
             font-family: PingFangSC-Regular, 'PingFang SC';
             font-weight: 400;
-            color: #fff;
-            height: 26px;
-            background: #3333337a;
-            box-shadow: 0 1px 2px 0 rgb(251 169 38 / 10%);
-            border-radius: 0 15px 15px 0;
-            min-width: 21px;
-            padding-right: 10px;
-            padding-left: 10px;
-            @include flex-center;
-        }
-        .activity-time {
-            padding-top: 83px;
-            @include flex-center;
-            & > .content {
-                width: 181px;
-                height: 23px;
-                @include toc-images-background;
-
-                background-image: var(--blue-end-date-bg);
-                font-size: 12px;
-                font-family: PingFangSC-Medium, 'PingFang SC';
-                font-weight: 500;
-                color: #fff;
-                @include flex-center;
-            }
-        }
-    }
-    & .lottery-main {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-direction: column;
-        .lottery-content {
-            position: relative;
-            .marquee-disable {
-                position: absolute;
-                left: 0;
-                top: 0;
-                width: 100%;
-                height: 100%;
-                z-index: 11;
-            }
-            & > .marquee {
-                top: 30px;
-                position: absolute;
-                width: 100%;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                .marquee-item {
-                    width: 250px;
-                    height: 40px;
-                    @include toc-images-background;
-
-                    background-image: var(--blue-delalllotteryinfo-bg) !important;
-                }
-            }
-
-            width: 345px;
-            height: 423px;
-            // @include toc-images-background;
-            background-image: var(--lottery-main-bg) !important;
-            background-size: 100% 100%;
-        }
-        :deep(.nutbig-marquee) {
-            margin-top: 95px;
-        }
-        :deep(.bgContent) {
-            background: none;
-        }
-        :deep(.marqueeBg) {
-            background: none !important;
-        }
-        :deep(.start) {
-            @include lottery-btn-bg;
-
-            background: var(--lottery-btn-default) no-repeat;
-            position: relative;
+            color: #333;
+            line-height: 12px;
+            flex-grow: 1;
+          }
+          .btn {
             text-align: center;
-            color: white;
-            font-weight: 600;
-            font-size: 14px;
-            line-height: 98px;
-            top: 5px;
-            left: 4px;
-            display: flex;
-            align-items: center;
-            flex-direction: column;
-            justify-content: center;
-        }
-        :deep(.num-txt) {
-            line-height: 22px;
-            font-weight: 400;
-        }
-        :deep(.txt) {
-            line-height: 22px;
-        }
-        :deep(.disabledDraw) {
-            @include lottery-btn-bg;
+            box-sizing: border-box;
+            width: 78px;
+            padding: 0 5px;
+            height: 30px;
+            line-height: 30px;
+            background: #ffc10a;
+            border-radius: 16px;
+            @include flex-center;
 
-            background: var(--lottery-btn-disabled) no-repeat;
-            color: black;
-        }
-        :deep(ul) {
-            & li {
-                width: 100px;
-                height: 100px;
-                @include toc-images-background;
-
-                background-image: var(--marquee-item);
-            }
-            & .gift-1,
-            .gift-2,
-            .gift-3 {
-                top: 0;
-            }
-            & .gift-4,
-            .gift-8 {
-                top: 105px;
-            }
-            & .gift-5,
-            .gift-6,
-            .gift-7 {
-                top: 210px;
-            }
-            & .gift-1,
-            .gift-7,
-            .gift-8 {
-                left: 0;
-            }
-            & .gift-2,
-            .gift-6 {
-                left: 103px;
-            }
-            & .desc {
-                font-size: 14px;
-                font-weight: 400;
-                color: var(--lottery-desc-color);
-            }
-            & .gift-img {
-                width: 64px;
-                height: 48px;
-                & img {
-                    width: auto;
-                    height: auto;
-                    max-width: 100%;
-                    max-height: 100%;
-                }
-            }
-        }
-        :deep(.active) {
-            background: rgb(232 243 255 / 32%);
-            box-shadow: 0 2px 5px 0 rgb(232 243 255 / 32%);
-            border-radius: 6px;
-            color: #000;
+            display: block;
+            font-size: 12px;
+            font-family: PingFangSC-Medium, 'PingFang SC';
             font-weight: 500;
+            color: #fff;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            word-break: keep-all;
+            white-space: nowrap;
+            &.disable {
+              background-color: #aaa;
+            }
+          }
         }
+      }
     }
-    & .lottery-footer {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        margin-top: 29px;
-        padding-bottom: 50px;
-        & .lottery-tab {
-            display: flex;
-            justify-content: center;
-            align-items: flex-end;
-            font-size: 14px;
-            width: 320px;
-            height: 40px;
-            @include toc-images-background;
-
-            background-image: var(--receive-tab) !important;
-            .lottery-tab-item {
-                width: 100%;
-            }
-            &.lottery-tab-0 {
-                background-image: var(--blue-receive-tab-activation) !important;
-            }
-            &.lottery-tab-1 {
-                background-image: var(--blue-prize-tab-prize-activation) !important;
-            }
-            &.lottery-tab-2 {
-                background-image: var(--blue-my-tab-activation) !important;
-            }
-            .item {
-                height: 40px;
-                flex-grow: 1;
-                &.active {
-                    width: 36px;
-                    background-color: transparent;
-                }
-            }
-        }
-        & > .footer-content {
-            background-color: #fff;
-            width: 345px;
-            flex-shrink: 0;
-            min-height: 40px;
-            display: flex;
-            flex-direction: column;
-            border-radius: 10px;
-            .item {
-                padding-bottom: 10px;
-                padding-top: 10px;
-                display: flex;
-                width: 345px;
-                align-items: center;
-                .icon {
-                    padding-left: 10px;
-                    width: 40px;
-                    height: 40px;
-                    padding-right: 10px;
-                    flex-shrink: 0;
-                    img {
-                        width: 100%;
-                    }
-                }
-                .txt {
-                    font-size: 14px;
-                    font-family: PingFangSC-Medium, 'PingFang SC';
-                    font-weight: 500;
-                    color: #333;
-                    line-height: 14px;
-                    flex-grow: 1;
-                    .title {
-                        font-size: 14px;
-                        color: #333;
-                        line-height: 14px;
-                        margin-bottom: 3px;
-                        width: 205px;
-                        text-overflow: ellipsis;
-                        overflow: hidden;
-                        word-break: keep-all;
-                        white-space: nowrap;
-                    }
-                    .desc {
-                        font-size: 12px;
-                        font-weight: 400;
-                        color: #999;
-                        line-height: 12px;
-                        width: 205px;
-                        text-overflow: ellipsis;
-                        overflow: hidden;
-                        word-break: keep-all;
-                        white-space: nowrap;
-                    }
-                }
-                .right {
-                    padding-right: 20px;
-                    .txt {
-                        padding-bottom: 5px;
-                        font-size: 12px;
-                        font-family: PingFangSC-Regular, 'PingFang SC';
-                        font-weight: 400;
-                        color: #333;
-                        line-height: 12px;
-                        flex-grow: 1;
-                    }
-                    .btn {
-                        text-align: center;
-                        box-sizing: border-box;
-                        width: 78px;
-                        padding: 0 5px;
-                        height: 30px;
-                        line-height: 30px;
-                        background: #ffc10a;
-                        border-radius: 16px;
-                        @include flex-center;
-
-                        display: block;
-                        font-size: 12px;
-                        font-family: PingFangSC-Medium, 'PingFang SC';
-                        font-weight: 500;
-                        color: #fff;
-                        text-overflow: ellipsis;
-                        overflow: hidden;
-                        word-break: keep-all;
-                        white-space: nowrap;
-                        &.disable {
-                            background-color: #aaa;
-                        }
-                    }
-                }
-            }
-        }
-    }
+  }
 }
