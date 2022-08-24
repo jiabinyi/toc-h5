@@ -44,7 +44,7 @@
     .activity-time {
       padding-top: 83px;
       @include flex-center;
-      & > .content {
+      & .content {
         width: 181px;
         height: 23px;
         @include toc-images-background;
@@ -60,10 +60,12 @@
   }
   & .lottery-main {
     display: flex;
+    width: 345px;
+    height: 423px;
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    .lottery-content {
+    & .lottery-content {
       position: relative;
       width: 345px;
       height: 423px;
@@ -90,7 +92,7 @@
           height: 40px;
           @include toc-images-background;
 
-          background-image: var(--blue-delalllotteryinfo-bg) !important;
+          background-image: var(--blue-user-info-bg) !important;
         }
       }
     }
