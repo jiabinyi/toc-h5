@@ -1,5 +1,6 @@
 .lottery-container {
   position: relative;
+
   .rule-btn {
     z-index: 100;
     position: absolute;
@@ -18,12 +19,14 @@
     flex-direction: column;
     @include toc-images-background;
 
-    background-image: var(--blue-rule-btn);
+    background-image: url('/src/common/assets/images/blue/blue-rule-btn.png');
   }
+
   & .lottery-header {
     width: 100vw;
     height: 216px;
     position: relative;
+
     .participants-btn {
       position: absolute;
       top: 20px;
@@ -41,15 +44,17 @@
       padding-left: 10px;
       @include flex-center;
     }
+
     .activity-time {
       padding-top: 83px;
       @include flex-center;
+
       & .content {
         width: 181px;
         height: 23px;
         @include toc-images-background;
 
-        background-image: var(--blue-end-date-bg);
+        background-image: url('/src/common/assets/images/blue/blue-end-date-bg.png');
         font-size: 12px;
         font-family: PingFangSC-Medium, 'PingFang SC';
         font-weight: 500;
@@ -58,18 +63,21 @@
       }
     }
   }
+
   & .lottery-main {
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
+
     & .lottery-content {
       position: relative;
       width: 345px;
       height: 423px;
       @include toc-images-background;
 
-      background-image: var(--lottery-main-bg) !important;
+      background-image: url('/src/common/assets/images/blue/blue-lottery-bg.png') !important;
+
       .marquee-disable {
         position: absolute;
         left: 0;
@@ -78,6 +86,7 @@
         height: 100%;
         z-index: 11;
       }
+
       & .marquee {
         top: 30px;
         position: absolute;
@@ -85,28 +94,33 @@
         display: flex;
         justify-content: center;
         align-items: center;
+
         .marquee-item {
           width: 250px;
           height: 40px;
           @include toc-images-background;
 
-          background-image: var(--blue-user-info-bg) !important;
+          background-image: url('/src/common/assets/images/blue/user-info-bg.png') !important;
         }
       }
     }
+
     :deep(.nutbig-marquee) {
       margin-top: 95px;
     }
+
     :deep(.bgContent) {
       background: none;
     }
+
     :deep(.marqueeBg) {
       background: none !important;
     }
+
     :deep(.start) {
       @include lottery-btn-bg;
 
-      background: var(--lottery-btn-default) no-repeat;
+      background: url('/src/common/assets/images/blue/lottery-btn-default.png') no-repeat;
       position: relative;
       text-align: center;
       color: white;
@@ -120,58 +134,70 @@
       flex-direction: column;
       justify-content: center;
     }
+
     :deep(.num-txt) {
       line-height: 22px;
       font-weight: 400;
     }
+
     :deep(.txt) {
       line-height: 22px;
     }
+
     :deep(.disabledDraw) {
       @include lottery-btn-bg;
 
-      background: var(--lottery-btn-disabled) no-repeat;
+      background: url('/src/common/assets/images/blue/lottery-btn-disabled.png') no-repeat;
       color: black;
     }
+
     :deep(ul) {
       & li {
         width: 100px;
         height: 100px;
         @include toc-images-background;
 
-        background-image: var(--marquee-item);
+        background-image: url('/src/common/assets/images/blue/marquee-item-bg.png');
       }
+
       & .gift-1,
       .gift-2,
       .gift-3 {
         top: 0;
       }
+
       & .gift-4,
       .gift-8 {
         top: 105px;
       }
+
       & .gift-5,
       .gift-6,
       .gift-7 {
         top: 210px;
       }
+
       & .gift-1,
       .gift-7,
       .gift-8 {
         left: 0;
       }
+
       & .gift-2,
       .gift-6 {
         left: 103px;
       }
+
       & .desc {
         font-size: 14px;
         font-weight: 400;
         color: var(--lottery-desc-color);
       }
+
       & .gift-img {
         width: 64px;
         height: 48px;
+
         & img {
           width: auto;
           height: auto;
@@ -180,6 +206,7 @@
         }
       }
     }
+
     :deep(.active) {
       background: rgb(232 243 255 / 32%);
       box-shadow: 0 2px 5px 0 rgb(232 243 255 / 32%);
@@ -188,6 +215,7 @@
       font-weight: 500;
     }
   }
+
   & .lottery-footer {
     display: flex;
     flex-direction: column;
@@ -195,6 +223,7 @@
     align-items: center;
     margin-top: 29px;
     padding-bottom: 50px;
+
     & .lottery-tab {
       display: flex;
       justify-content: center;
@@ -204,29 +233,36 @@
       height: 40px;
       @include toc-images-background;
 
-      background-image: var(--receive-tab) !important;
+      background-image: url('/src/common/assets/images/blue/blue-receive-tab-activation.png') !important;
+
       .lottery-tab-item {
         width: 100%;
       }
+
       &.lottery-tab-0 {
-        background-image: var(--blue-receive-tab-activation) !important;
+        background-image: url('/src/common/assets/images/blue/blue-receive-tab-activation.png') !important;
       }
+
       &.lottery-tab-1 {
-        background-image: var(--blue-prize-tab-prize-activation) !important;
+        background-image: url('/src/common/assets/images/blue/blue-prize-tab-prize-activation.png') !important;
       }
+
       &.lottery-tab-2 {
-        background-image: var(--blue-my-tab-activation) !important;
+        background-image: url('/src/common/assets/images/blue/blue-my-tab-activation.png') !important;
       }
+
       .item {
         height: 40px;
         flex-grow: 1;
+
         &.active {
           width: 36px;
           background-color: transparent;
         }
       }
     }
-    & > .footer-content {
+
+    &>.footer-content {
       background-color: #fff;
       width: 345px;
       flex-shrink: 0;
@@ -234,22 +270,26 @@
       display: flex;
       flex-direction: column;
       border-radius: 10px;
+
       .item {
         padding-bottom: 10px;
         padding-top: 10px;
         display: flex;
         width: 345px;
         align-items: center;
+
         .icon {
           padding-left: 10px;
           width: 40px;
           height: 40px;
           padding-right: 10px;
           flex-shrink: 0;
+
           img {
             width: 100%;
           }
         }
+
         .txt {
           font-size: 14px;
           font-family: PingFangSC-Medium, 'PingFang SC';
@@ -257,6 +297,7 @@
           color: #333;
           line-height: 14px;
           flex-grow: 1;
+
           .title {
             font-size: 14px;
             color: #333;
@@ -268,6 +309,7 @@
             word-break: keep-all;
             white-space: nowrap;
           }
+
           .desc {
             font-size: 12px;
             font-weight: 400;
@@ -280,8 +322,10 @@
             white-space: nowrap;
           }
         }
+
         .right {
           padding-right: 20px;
+
           .txt {
             padding-bottom: 5px;
             font-size: 12px;
@@ -291,6 +335,7 @@
             line-height: 12px;
             flex-grow: 1;
           }
+
           .btn {
             text-align: center;
             box-sizing: border-box;
@@ -311,6 +356,7 @@
             overflow: hidden;
             word-break: keep-all;
             white-space: nowrap;
+
             &.disable {
               background-color: #aaa;
             }
