@@ -406,11 +406,11 @@ const prizeCurrent = ref({} as any)
 const { run: turnLuckDrawFunc } = useRequest(turnLuckDraw, {
   manual: true,
   onSuccess: (res: ResObjData) => {
+    getActive()
+    runCurActivityAccount()
+    getActivityTaskList()
     if (res) {
       activityData.value.turn_prize_vos.findIndex((prize: any, index: any) => {
-        getActivityTaskList()
-        getActive()
-        runCurActivityAccount()
         if (prize.id === res.data.id) {
           prizeCurrent.value = res.data
           prizeIndex.value = index
