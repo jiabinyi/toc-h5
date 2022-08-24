@@ -34,8 +34,8 @@
           v-if="showMarquee"
           :prize-list="activityData.turn_prize_vos"
           :prize-index="prizeIndex"
-          :speed="5"
-          :circle="40"
+          :speed="15"
+          :circle="20"
           @start-turns="startTurns"
           @end-turns="endTurns"
         >
@@ -286,6 +286,7 @@ const endTurns = () => {
     dialogData.value = prizeCurrent.value
     dialogVisible.value = true
   }
+  remoteGiftSelected()
 }
 
 interface ActivityData {
@@ -402,8 +403,10 @@ const { run: turnLuckDrawFunc } = useRequest(turnLuckDraw, {
     if (res) {
       activityData.value.turn_prize_vos.findIndex((prize: any, index: any) => {
         if (prize.id === res.data.id) {
-          prizeCurrent.value = res.data
-          prizeIndex.value = index
+          setTimeout(() => {
+            prizeCurrent.value = res.data
+            prizeIndex.value = index
+          }, 500)
           return true
         }
         return false
