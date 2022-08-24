@@ -303,8 +303,17 @@ const setLottery = () => {
   lotteryBtn[0].innerHTML = `<div class="txt">立即抽奖</div><div class="num-txt">(${
     curActivityAccountData.value?.activity_account?.loot_ticket_num ?? 0
   }次)</div>`
+  remoteGiftSelected()
 }
-
+// 去除默认抽中奖品样式
+let remoteGiftSelected = () => {
+  nextTick(() => {
+    let gift1 = document.querySelector('.gift-1.active') as ObjTy
+    if (gift1) {
+      gift1.setAttribute('class', 'gift-1')
+    }
+  })
+}
 // 中奖的奖品的index(此数据可根据后台返回的值重新赋值)
 const prizeIndex = ref(-1)
 const startTurns = () => {
@@ -439,6 +448,8 @@ const { run: runTurnLuckDrawCheck } = useRequest(turnLuckDrawCheck, {
       marqueeSpeed.value = 0
       marqueeCheckResult.value = res.result
     }
+    // marqueeSpeed.value = 0
+    // marqueeCheckResult.value = { code: 'error', msg: '22' }
   }
 })
 

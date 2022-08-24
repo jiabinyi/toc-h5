@@ -25,11 +25,11 @@
 </template>
 
 <script lang="ts" setup name="awardsMarquee">
-interface Props {
+export interface AwardProps {
   data: Array<any>
 }
-const props = defineProps<Props>()
-const { data } = toRefs(props)
+const { data } = defineProps<AwardProps>()
+
 // 隐藏姓
 const hideName: any = (name: any) => {
   if (!name) {

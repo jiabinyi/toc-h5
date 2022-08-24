@@ -108,5 +108,5 @@ export const turnLuckDrawCheck: PromiseFn = data => {
     data: {}
   }
 
-  return http.get(params)
+  return http.post(params)
 }
