@@ -10,6 +10,7 @@
           <div class="pic">
             <img :src="activityData.turn_activity.share_pic_url" />
           </div>
+
           <div class="prizes">
             <div class="item" v-for="(item, index) in data.turn_prize_vo_list.slice(0, 2)" :key="index">
               <img :src="item.pic_url" />
@@ -29,8 +30,10 @@
               </div>
               <div class="tip2">立即免费参与</div>
             </div>
-            <div class="qrcode" :class="{ showQRcodeImg: showQRcodeImg }">
-              <img :src="qrcodeImg" v-if="qrcodeImg" />
+            <div class="qrcode">
+              <nut-image :src="qrcodeImg" width="100" height="100" showError>
+                <template #error> <nut-icon name="loading"></nut-icon> </template>
+              </nut-image>
             </div>
           </div>
         </div>
@@ -117,7 +120,7 @@ const renderPoster = () => {
   dom.innerHTML = ''
   qrcodeImg.value = ''
   showQRcodeImg.value = false
-  proxy.$toast.loading('生成中...')
+  // proxy.$toast.loading('生成中...')
   runGetQRCode({
     sharePagePath: 'pages/common/pages/webview/webview',
     activityId: activityData.value.turn_activity.id,
@@ -164,6 +167,7 @@ defineExpose({ renderPoster })
  */
 const close = () => {
   qrcodeImg.value = ''
+  dom.innerHTML = ''
 }
 </script>
 <style lang="scss">
@@ -264,6 +268,12 @@ const close = () => {
       img {
         width: 67px;
         height: 67px;
+      }
+      .qrcode {
+        .nut-image {
+          width: 67px !important;
+          height: 67px !important;
+        }
       }
     }
   }
