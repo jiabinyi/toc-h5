@@ -66,6 +66,12 @@ const { run: runImmediatelyReceive } = useRequest(immediatelyReceive, {
   width: 316px;
   height: 398px;
   & .content {
+    &::before {
+      content: '';
+      display: table;
+      clear: both;
+    }
+    clear: both;
     position: relative;
     width: 100%;
     height: 100%;
@@ -75,7 +81,7 @@ const { run: runImmediatelyReceive } = useRequest(immediatelyReceive, {
   & .btn {
     width: 161px;
     height: 34px;
-    padding-top: 312px;
+    margin-top: 312px;
     margin-left: 78px;
   }
 }

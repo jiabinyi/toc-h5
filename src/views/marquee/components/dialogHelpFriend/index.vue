@@ -67,6 +67,12 @@ const { proxy } = getCurrentInstance() as any
 </script>
 <style lang="scss">
 .dialog-help-friend {
+  &::before {
+    content: '';
+    display: table;
+    clear: both;
+  }
+  clear: both;
   position: relative;
   display: block;
   width: 316px;
@@ -76,7 +82,7 @@ const { proxy } = getCurrentInstance() as any
   & .btn {
     width: 200px;
     height: 38px;
-    padding-top: 308px;
+    margin-top: 308px;
     margin-left: 70px;
   }
 }

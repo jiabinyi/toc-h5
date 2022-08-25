@@ -580,6 +580,8 @@ onMounted(() => {
   runDalkingLanternList()
   runCurActivityAccount()
 })
+dialogName.value = 'dialogNewUserAward'
+dialogVisible.value = true
 </script>
 <style lang="scss" scoped>
 @import './index.scss';

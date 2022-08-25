@@ -13,7 +13,7 @@
 
           <div class="prizes">
             <div class="item" v-for="(item, index) in data.turn_prize_vo_list.slice(0, 2)" :key="index">
-              <img :src="item.pic_url" />
+              <div class="img"><img :src="item.pic_url" /></div>
               <div class="ifo">
                 <div class="title">
                   {{ (item?.choice_prize_name ?? '') + '：' + item.prize_name }}
@@ -109,6 +109,7 @@ const { run: runGetQRCode } = useRequest(getQRCode, {
 })
 let dom = document.getElementById('canvas_pic') as HTMLElement
 let canvasID: HTMLElement
+
 /**
  * 生成海报第一步-获取二维码
  * @author yijiabin
@@ -128,6 +129,7 @@ const renderPoster = () => {
     envVersion: sessions.get('envVersion')
   })
 }
+
 /**
  * 生成海报第二部 base64转图片
  * @author yijiabin
@@ -224,9 +226,14 @@ const close = () => {
       .item {
         margin-top: 20px;
         display: flex;
-        img {
+        .img {
+          @include flex-center;
           width: 40px;
           height: 40px;
+        }
+        img {
+          width: 40px;
+          height: auto;
         }
         .ifo {
           display: flex;
