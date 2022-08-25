@@ -63,14 +63,17 @@
             <div class="icon">
               <img :src="item.task_icon_url" />
             </div>
-            <div class="txt">
+            <div class="content">
               <div class="title">
-                {{
-                  item.task_content_title.length > 12
-                    ? item.task_content_title.substr(0, 12) + '...'
-                    : item.task_content_title
-                }}
-                x{{ item.reward_type_value }}
+                <div class="name">
+                  {{
+                    item.task_content_title.length > 9
+                      ? item.task_content_title.substr(0, 9) + '...'
+                      : item.task_content_title
+                  }}
+                </div>
+                x
+                <div class="num">{{ item.reward_type_value }}</div>
               </div>
               <div class="desc">
                 {{ item.guide_copy }}

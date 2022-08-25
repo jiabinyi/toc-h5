@@ -286,7 +286,7 @@
           }
         }
 
-        .txt {
+        .content {
           font-size: 14px;
           font-weight: 500;
           color: #333;
@@ -298,11 +298,21 @@
             color: #333;
             line-height: 14px;
             margin-bottom: 3px;
-            width: 205px;
             text-overflow: ellipsis;
             overflow: hidden;
             word-break: keep-all;
             white-space: nowrap;
+            display: flex;
+
+            .name {
+              flex-grow: 1;
+            }
+
+            .num {
+              flex-shrink: 0;
+              padding-right: 5px;
+            }
+
           }
 
           .desc {
@@ -310,7 +320,7 @@
             font-weight: 400;
             color: #999;
             line-height: 12px;
-            width: 205px;
+            width: 195px;
             text-overflow: ellipsis;
             overflow: hidden;
             word-break: keep-all;
@@ -319,7 +329,9 @@
         }
 
         .right {
-          padding-right: 20px;
+          padding-right: 10px;
+          flex-shrink: 0;
+          box-sizing: border-box;
 
           .txt {
             padding-bottom: 5px;
