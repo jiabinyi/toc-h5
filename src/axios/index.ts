@@ -1,5 +1,6 @@
 import http from '@/axios/axios'
 import api from '@/axios/apiNames'
+import { sessions } from 'mosowejs'
 
 /**
  * 描述
@@ -18,12 +19,12 @@ export const getContact: PromiseFn = (data: ObjTy) => {
  * @returns {Promise} - http请求返回的promise对象
  */
 export const queryTurnActivity: PromiseFn = () => {
-  const params = { url: api.queryTurnActivity }
+  const params = { url: `${api.queryTurnActivity}/${sessions.get('appCode')}` }
   return http.get(params)
 }
 
 export const activityTaskList: PromiseFn = () => {
-  const params = { url: api.activityTaskList }
+  const params = { url: `${api.activityTaskList}/${sessions.get('appCode')}` }
   return http.get(params)
 }
 
@@ -35,7 +36,7 @@ export const queryTurnInviteFriends: PromiseFn = data => {
   return http.get(params)
 }
 export const myWinningList: PromiseFn = () => {
-  const params = { url: api.myWinningList }
+  const params = { url: `${api.myWinningList}/${sessions.get('appCode')}` }
   return http.get(params)
 }
 export const turnLuckDraw: PromiseFn = data => {
@@ -99,7 +100,7 @@ export const helpFriends: PromiseFn = data => {
  * @returns {any}
  */
 export const currentActivityAccount: PromiseFn = () => {
-  const params = { url: api.currentActivityAccount }
+  const params = { url: `${api.currentActivityAccount}/${sessions.get('appCode')}` }
   return http.get(params)
 }
 
@@ -110,7 +111,7 @@ export const currentActivityAccount: PromiseFn = () => {
  * @returns {any}
  */
 export const walkingLanternList: PromiseFn = () => {
-  const params = { url: api.walkingLanternList }
+  const params = { url: `${api.walkingLanternList}/${sessions.get('appCode')}` }
   return http.get(params)
 }
 
