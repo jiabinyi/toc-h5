@@ -1,15 +1,17 @@
 <template>
   <DialogCustom v-model:visible="visible" @close="emit('dialogNewUserAwardClose')">
     <div class="new-user-award-container">
-      <div class="content" @click="accept" />
+      <div class="content">
+        <div class="btn" @click="accept"></div>
+      </div>
     </div>
   </DialogCustom>
 </template>
 <script lang="ts" setup name="Home">
 import { immediatelyReceive } from '@/axios'
-
 import { sessions } from 'mosowejs'
 import { useRequest } from 'vue-request'
+
 // 弹窗 首次奖励
 import DialogCustom from '@/components/DialogCustom/index.vue'
 const props = defineProps({
@@ -33,7 +35,6 @@ const props = defineProps({
 const emit = defineEmits(['update:visible', 'dialogNewUserAwardClose'])
 const visible = useVModel(props, 'visible', emit)
 const activityData = useVModel(props, 'activityData')
-
 const accept = () => {
   runImmediatelyReceive({
     activityId: activityData.value.turn_activity.id,
@@ -65,10 +66,17 @@ const { run: runImmediatelyReceive } = useRequest(immediatelyReceive, {
   width: 316px;
   height: 398px;
   & .content {
+    position: relative;
     width: 100%;
     height: 100%;
     @include toc-images-background;
     background-image: url('#{$image-path}blue-dialog-new-user-award.png') !important;
+  }
+  & .btn {
+    width: 161px;
+    height: 34px;
+    padding-top: 312px;
+    margin-left: 78px;
   }
 }
 </style>
