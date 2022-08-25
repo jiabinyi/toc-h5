@@ -4,7 +4,7 @@
     class="awardsMarquee"
     direction="vertical"
     :speed="5"
-    :standTime="3000"
+    :standTime="2000"
     :background="`rgba(251, 248, 220, 0)`"
     :color="`#D9500B`"
     :height="30"

@@ -23,7 +23,7 @@ $image-path:"/src/common/assets/images/blue/";
     height: 100vh;
     @include toc-images-background;
 
-    background-image: url($image-path+'blue-index-bg.png');
+    background-image: url('#{$image-path}blue-index-bg.png');
   }
 
   --lottery-desc-color: #2055e2;
@@ -64,7 +64,7 @@ $image-path:"/src/common/assets/images/blue/";
       width: 14px;
       left: -1px;
       top: 2px;
-      background-image: url($image-path+'active-tab-bg.png');
+      background-image: url('#{$image-path}active-tab-bg.png');
     }
   }
 

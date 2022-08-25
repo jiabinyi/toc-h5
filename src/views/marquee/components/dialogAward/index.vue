@@ -39,7 +39,7 @@ const visible = useVModel(props, 'visible', emit)
   .content {
     @include toc-images-background;
 
-    background-image: url($image-path + 'blue-dialog-award-bg.png');
+    background-image: url('#{$image-path}blue-dialog-award-bg.png');
     background-size: 100% 100%;
     width: 316px;
     height: 322px;

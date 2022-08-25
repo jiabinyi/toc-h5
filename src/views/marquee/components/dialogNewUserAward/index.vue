@@ -68,7 +68,7 @@ const { run: runImmediatelyReceive } = useRequest(immediatelyReceive, {
     width: 100%;
     height: 100%;
     @include toc-images-background;
-    background-image: url($image-path + 'blue-dialog-new-user-award.png') !important;
+    background-image: url('#{$image-path}blue-dialog-new-user-award.png') !important;
   }
 }
 </style>
