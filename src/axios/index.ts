@@ -3,7 +3,7 @@ import api from '@/axios/apiNames'
 import { sessions } from 'mosowejs'
 
 /**
- * 描述
+ * 获取联系人
  * @date 2022-08-13
  * @param {ObjTy} data - 请求参数
  * @returns {Promise} - http请求返回的promise对象
@@ -14,7 +14,7 @@ export const getContact: PromiseFn = (data: ObjTy) => {
 }
 
 /**
- * 描述
+ * 【幸运大转盘】活动详情
  * @date 2022-08-13
  * @returns {Promise} - http请求返回的promise对象
  */
@@ -23,22 +23,47 @@ export const queryTurnActivity: PromiseFn = () => {
   return http.get(params)
 }
 
+/**
+ *【幸运大转盘】 领取免费次数任务列表
+ * @author yijiabin
+ * @date 2022-08-25
+ * @returns {any}
+ */
 export const activityTaskList: PromiseFn = () => {
   const params = { url: `${api.activityTaskList}/${sessions.get('appCode')}` }
   return http.get(params)
 }
 
+/**
+ * 【幸运大转盘】邀请朋友海报信息
+ * @author yijiabin
+ * @date 2022-08-25
+ * @param {any} params
+ * @returns {any}
+ */
 export const queryTurnInviteFriends: PromiseFn = data => {
-  const params = {
-    url: `${api.queryTurnInviteFriends}/${data.activityId}/${data.fissionType}`
-    // eslint-disable-next-line object-curly-newline
-  }
+  const params = { url: `${api.queryTurnInviteFriends}/${data.activityId}/${data.fissionType}` }
   return http.get(params)
 }
+
+/**
+ * 【幸运大转盘】我的奖品列表
+ * @author yijiabin
+ * @date 2022-08-25
+ * @returns {any}
+ */
 export const myWinningList: PromiseFn = () => {
   const params = { url: `${api.myWinningList}/${sessions.get('appCode')}` }
   return http.get(params)
 }
+
+/**
+ * 【幸运大转盘】抽奖
+ * @author yijiabin
+ * @date 2022-08-25
+ * @param {any} params
+ * @returns {any}
+ */
 export const turnLuckDraw: PromiseFn = data => {
   const params = {
     url: `${api.turnLuckDraw}/${data.activityId}/${data.custId}`,
@@ -49,11 +74,25 @@ export const turnLuckDraw: PromiseFn = data => {
   }
   return http.post(params)
 }
+
+/**
+ * 【幸运大转盘】获取用户信息
+ * @author yijiabin
+ * @date 2022-08-25
+ * @returns {any}
+ */
 export const getUserInfo: PromiseFn = () => {
   const params = { url: api.getUserInfo }
   return http.get(params)
 }
 
+/**
+ * 【幸运大转盘】获取二维码
+ * @author yijiabin
+ * @date 2022-08-25
+ * @param {any} data.sharePagePath
+ * @returns {any}
+ */
 export const getQRCode: PromiseFn = data => {
   const params = {
     url: api.getQRCode,
@@ -70,6 +109,13 @@ export const getQRCode: PromiseFn = data => {
   return http.get(params)
 }
 
+/**
+ * 【幸运大转盘】立即领取
+ * @author yijiabin
+ * @date 2022-08-25
+ * @param {any} params
+ * @returns {any}
+ */
 export const immediatelyReceive: PromiseFn = data => {
   const params = {
     url: `${api.immediatelyReceive}/${data.activityId}/${data.custId}`,
@@ -81,6 +127,13 @@ export const immediatelyReceive: PromiseFn = data => {
   return http.post(params)
 }
 
+/**
+ * 【幸运大转盘】幸运大转盘助力好友
+ * @author yijiabin
+ * @date 2022-08-25
+ * @param {any} params
+ * @returns {any}
+ */
 export const helpFriends: PromiseFn = data => {
   const params = {
     url: `${api.helpFriends}/${data.activityId}/${data.userId}/${data.helpUserId}`,
@@ -94,7 +147,7 @@ export const helpFriends: PromiseFn = data => {
 }
 
 /**
- * 描述
+ * 【幸运大转盘】当前活动的账户查询
  * @author yijiabin
  * @date 2022-08-25
  * @returns {any}
@@ -105,7 +158,7 @@ export const currentActivityAccount: PromiseFn = () => {
 }
 
 /**
- * 描述
+ * 【幸运大转盘】中奖者跑马灯
  * @author yijiabin
  * @date 2022-08-25
  * @returns {any}
@@ -116,7 +169,7 @@ export const walkingLanternList: PromiseFn = () => {
 }
 
 /**
- * 小程序-幸运大转盘抽奖校验
+ * 【幸运大转盘】幸运大转盘抽奖校验
  * @author yijiabin
  * @date 2022-08-25
  * @param {any} params
