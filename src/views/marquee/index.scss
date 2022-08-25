@@ -19,7 +19,7 @@
     flex-direction: column;
     @include toc-images-background;
 
-    background-image: url('/src/common/assets/images/blue/blue-rule-btn.png');
+    background-image: url($image-path+'blue-rule-btn.png');
   }
 
   & .lottery-header {
@@ -54,7 +54,7 @@
         height: 23px;
         @include toc-images-background;
 
-        background-image: url('/src/common/assets/images/blue/blue-end-date-bg.png');
+        background-image: url($image-path+'blue-end-date-bg.png');
         font-size: 12px;
         font-family: PingFangSC-Medium, 'PingFang SC';
         font-weight: 500;
@@ -76,7 +76,7 @@
       height: 423px;
       @include toc-images-background;
 
-      background-image: url('/src/common/assets/images/blue/blue-lottery-bg.png') !important;
+      background-image: url($image-path+'blue-lottery-bg.png') !important;
 
       .marquee-disable {
         position: absolute;
@@ -100,7 +100,7 @@
           height: 40px;
           @include toc-images-background;
 
-          background-image: url('/src/common/assets/images/blue/user-info-bg.png') !important;
+          background-image: url($image-path+'user-info-bg.png') !important;
         }
       }
     }
@@ -147,7 +147,7 @@
     :deep(.disabledDraw) {
       @include lottery-btn-bg;
 
-      background: url('/src/common/assets/images/blue/lottery-btn-disabled.png') no-repeat;
+      background: url($image-path+'lottery-btn-disabled.png') no-repeat;
       color: black;
     }
 
@@ -157,7 +157,7 @@
         height: 100px;
         @include toc-images-background;
 
-        background-image: url('/src/common/assets/images/blue/marquee-item-bg.png');
+        background-image: url($image-path+'marquee-item-bg.png');
       }
 
       & .gift-1,
@@ -233,22 +233,22 @@
       height: 40px;
       @include toc-images-background;
 
-      background-image: url('/src/common/assets/images/blue/blue-receive-tab-activation.png') !important;
+      background-image: url($image-path+'blue-receive-tab-activation.png') !important;
 
       .lottery-tab-item {
         width: 100%;
       }
 
       &.lottery-tab-0 {
-        background-image: url('/src/common/assets/images/blue/blue-receive-tab-activation.png') !important;
+        background-image: url($image-path+'blue-receive-tab-activation.png') !important;
       }
 
       &.lottery-tab-1 {
-        background-image: url('/src/common/assets/images/blue/blue-prize-tab-prize-activation.png') !important;
+        background-image: url($image-path+'blue-prize-tab-prize-activation.png') !important;
       }
 
       &.lottery-tab-2 {
-        background-image: url('/src/common/assets/images/blue/blue-my-tab-activation.png') !important;
+        background-image: url($image-path+'blue-my-tab-activation.png') !important;
       }
 
       .item {

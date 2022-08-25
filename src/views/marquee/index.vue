@@ -387,7 +387,11 @@ const { run: runTurnLuckDrawCheck } = useRequest(turnLuckDrawCheck, {
       marqueeCheckResult.value = res.result
     }
   },
-  onError: (res: ObjTy) => {}
+  onError: (res: ObjTy) => {
+    if (res.result && res.result.code !== 'systemBusy') {
+      marqueeCheckResult.value = res.result
+    }
+  }
 })
 
 // 当前获奖奖品
@@ -402,7 +406,7 @@ const { run: turnLuckDrawFunc } = useRequest(turnLuckDraw, {
     getActivityTaskList()
     if (res) {
       activityData.value.turn_prize_vos.findIndex((prize: any, index: any) => {
-        if (prize.id === res.data.id) {
+        if (index + 1 === Number(res.data.award_location)) {
           setTimeout(() => {
             prizeCurrent.value = res.data
             prizeIndex.value = index

@@ -70,6 +70,6 @@ const { proxy } = getCurrentInstance() as any
   height: 398px;
   @include toc-images-background;
 
-  background-image: url('/src/common/assets/images/blue/blue-dialog-help-marquee.png');
+  background-image: url($image-path + 'blue-dialog-help-marquee.png');
 }
 </style>
