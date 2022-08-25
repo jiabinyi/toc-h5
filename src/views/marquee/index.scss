@@ -7,18 +7,14 @@
     right: 0;
     top: 180px;
     font-size: 12px;
-    font-family: PingFangSC-Regular, 'PingFang SC';
     font-weight: 400;
     color: #fff;
     line-height: 16px;
     width: 46px;
     height: 44px;
-    box-shadow: 0 4px 8px 0 rgb(0 54 173 / 20%);
     @include flex-center;
-
     flex-direction: column;
     @include toc-images-background;
-
     background-image: url('#{$image-path}blue-rule-btn.png');
   }
 
@@ -32,12 +28,12 @@
       top: 20px;
       left: 0;
       font-size: 12px;
-      font-family: PingFangSC-Regular, 'PingFang SC';
+
       font-weight: 400;
       color: #fff;
       height: 26px;
       background: #3333337a;
-      box-shadow: 0 1px 2px 0 rgb(251 169 38 / 10%);
+      box-shadow: 0 1px 2px 0 rgba(251, 169, 381, 0.1);
       border-radius: 0 15px 15px 0;
       min-width: 21px;
       padding-right: 10px;
@@ -53,10 +49,8 @@
         width: 181px;
         height: 23px;
         @include toc-images-background;
-
         background-image: url('#{$image-path}blue-end-date-bg.png');
         font-size: 12px;
-        font-family: PingFangSC-Medium, 'PingFang SC';
         font-weight: 500;
         color: #fff;
         @include flex-center;
@@ -197,6 +191,8 @@
       & .gift-img {
         width: 64px;
         height: 48px;
+        display: flex;
+        align-items: center;
 
         & img {
           width: auto;
@@ -208,8 +204,8 @@
     }
 
     :deep(.active) {
-      background: rgb(232 243 255 / 32%);
-      box-shadow: 0 2px 5px 0 rgb(232 243 255 / 32%);
+      background: rgba(232, 243, 255, 0.32);
+      box-shadow: 0 2px 5px 0 rgba(232, 243, 255, 0.32);
       border-radius: 6px;
       color: #000;
       font-weight: 500;
@@ -292,7 +288,6 @@
 
         .txt {
           font-size: 14px;
-          font-family: PingFangSC-Medium, 'PingFang SC';
           font-weight: 500;
           color: #333;
           line-height: 14px;
@@ -329,7 +324,6 @@
           .txt {
             padding-bottom: 5px;
             font-size: 12px;
-            font-family: PingFangSC-Regular, 'PingFang SC';
             font-weight: 400;
             color: #333;
             line-height: 12px;
@@ -349,7 +343,6 @@
 
             display: block;
             font-size: 12px;
-            font-family: PingFangSC-Medium, 'PingFang SC';
             font-weight: 500;
             color: #fff;
             text-overflow: ellipsis;

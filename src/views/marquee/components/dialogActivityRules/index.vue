@@ -1,6 +1,6 @@
 <template>
   <DialogCustom v-model:visible="visible">
-    <div class="dialogActivityRules">
+    <div class="dialog-activity-rules">
       <div class="title">活动规则</div>
       <div class="content-main">
         <div class="content">
@@ -19,7 +19,7 @@
     </div>
   </DialogCustom>
 </template>
-<script lang="ts" setup name="Home">
+<script lang="ts" setup name="DialogActivityRules">
 // 弹窗外层组件-自定义
 import DialogCustom from '@/components/DialogCustom/index.vue'
 const props = defineProps({
@@ -39,7 +39,7 @@ const emit = defineEmits(['update:visible'])
 const visible = useVModel(props, 'visible', emit)
 </script>
 <style lang="scss">
-.dialogActivityRules {
+.dialog-activity-rules {
   width: 337px;
   min-height: 120px;
   background: #fff;
@@ -81,7 +81,7 @@ const visible = useVModel(props, 'visible', emit)
       width: 180px;
       height: 36px;
       background: #ffc10a;
-      box-shadow: 0 2px 4px 0 rgb(255 193 10 / 15%);
+      box-shadow: 0 2px 4px 0 rgb(255, 193, 10, 0.15);
       border-radius: 20px;
       font-size: 16px;
       font-weight: 500;

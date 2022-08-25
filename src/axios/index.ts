@@ -92,16 +92,35 @@ export const helpFriends: PromiseFn = data => {
   return http.post(params)
 }
 
+/**
+ * 描述
+ * @author yijiabin
+ * @date 2022-08-25
+ * @returns {any}
+ */
 export const currentActivityAccount: PromiseFn = () => {
   const params = { url: api.currentActivityAccount }
   return http.get(params)
 }
 
+/**
+ * 描述
+ * @author yijiabin
+ * @date 2022-08-25
+ * @returns {any}
+ */
 export const walkingLanternList: PromiseFn = () => {
   const params = { url: api.walkingLanternList }
   return http.get(params)
 }
-// 小程序-幸运大转盘抽奖校验
+
+/**
+ * 小程序-幸运大转盘抽奖校验
+ * @author yijiabin
+ * @date 2022-08-25
+ * @param {any} params
+ * @returns {any}
+ */
 export const turnLuckDrawCheck: PromiseFn = data => {
   const params = {
     url: `${api.turnLuckDrawCheck}/${data.activityId}/${data.userId}`,

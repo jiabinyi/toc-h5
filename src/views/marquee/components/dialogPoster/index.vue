@@ -1,6 +1,6 @@
 <template>
   <DialogCustom v-model:visible="visible" @close="close">
-    <div class="dialogPoster">
+    <div class="dialog-poster">
       <div class="canvas-wrap">
         <div class="canvas" id="canvas">
           <div class="sharer">
@@ -43,7 +43,7 @@
     </div>
   </DialogCustom>
 </template>
-<script lang="ts" setup name="Home">
+<script lang="ts" setup name="DialogPoster">
 import { getQRCode } from '@/axios'
 import { useRequest } from 'vue-request'
 import { useUserStore } from '@/store/modules/user.ts'
@@ -171,7 +171,7 @@ const close = () => {
 }
 </script>
 <style lang="scss">
-.dialogPoster {
+.dialog-poster {
   width: 285px;
   min-height: 420px;
   display: block;
@@ -192,7 +192,7 @@ const close = () => {
     }
 
     font-size: 14px;
-    font-family: PingFangSC-Medium, 'PingFang SC';
+
     font-weight: 500;
     color: #333;
     line-height: 14px;
@@ -236,14 +236,14 @@ const close = () => {
           margin-left: 15px;
           .title {
             font-size: 14px;
-            font-family: PingFangSC-Medium, 'PingFang SC';
+
             font-weight: 500;
             color: #333;
             line-height: 19px;
           }
           .num {
             font-size: 12px;
-            font-family: PingFangSC-Regular, 'PingFang SC';
+
             font-weight: 400;
             color: #999;
           }

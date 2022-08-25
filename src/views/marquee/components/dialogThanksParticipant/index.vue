@@ -1,6 +1,6 @@
 <template>
   <DialogCustom v-model:visible="visible">
-    <div class="dialogThanksParticipant">
+    <div class="dialog-thanks-participant">
       <div class="title">谢谢参与</div>
       <div class="content">
         <div class="content-txt-center">好运总是眷顾努力坚持的人</div>
@@ -11,7 +11,7 @@
     </div>
   </DialogCustom>
 </template>
-<script lang="ts" setup name="Home">
+<script lang="ts" setup name="DialogThanksParticipant">
 // 弹窗外层组件-自定义
 import DialogCustom from '@/components/DialogCustom/index.vue'
 const props = defineProps({
@@ -31,7 +31,7 @@ const emit = defineEmits(['update:visible'])
 const visible = useVModel(props, 'visible', emit)
 </script>
 <style lang="scss">
-.dialogThanksParticipant {
+.dialog-thanks-participant {
   border: 6px solid #ffc10a;
   width: 255px;
   min-height: 120px;
@@ -41,7 +41,7 @@ const visible = useVModel(props, 'visible', emit)
   .title {
     height: 80px;
     font-size: 16px;
-    font-family: PingFangSC-Semibold, PingFang SC;
+
     font-weight: 600;
     color: #333333;
     line-height: 16px;
@@ -52,14 +52,14 @@ const visible = useVModel(props, 'visible', emit)
     text-align: left;
     .content-title {
       font-size: 14px;
-      font-family: PingFangSC-Medium, PingFang SC;
+
       font-weight: 600;
       color: #333333;
       line-height: 28px;
     }
     .content-txt {
       font-size: 14px;
-      font-family: PingFangSC-Medium, PingFang SC;
+
       font-weight: 200;
       color: #777;
       line-height: 28px;
@@ -79,7 +79,7 @@ const visible = useVModel(props, 'visible', emit)
       box-shadow: 0px 2px 4px 0px rgba(255, 193, 10, 0.15);
       border-radius: 20px;
       font-size: 16px;
-      font-family: PingFangSC-Medium, PingFang SC;
+
       font-weight: 500;
       color: #ffffff;
       line-height: 36px;

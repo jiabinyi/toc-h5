@@ -1,6 +1,6 @@
 <template>
   <DialogCustom v-model:visible="visible" hideCloseBtn>
-    <div class="dialogAward">
+    <div class="dialog-award">
       <div class="content">
         <div class="img">
           <img @click="visible = false" :src="prize.pic_url" />
@@ -14,7 +14,7 @@
     </div>
   </DialogCustom>
 </template>
-<script lang="ts" setup name="Home">
+<script lang="ts" setup name="DialogAward">
 // 弹窗 首次奖励
 import DialogCustom from '@/components/DialogCustom/index.vue'
 const props = defineProps({
@@ -34,7 +34,7 @@ const emit = defineEmits(['update:visible'])
 const visible = useVModel(props, 'visible', emit)
 </script>
 <style lang="scss" scoped>
-.dialogAward {
+.dialog-award {
   text-align: center;
   .content {
     @include toc-images-background;
@@ -60,7 +60,7 @@ const visible = useVModel(props, 'visible', emit)
       width: 184px;
       height: 14px;
       font-size: 14px;
-      font-family: PingFangSC-Medium, 'PingFang SC';
+
       font-weight: 500;
       color: #fff;
       line-height: 14px;

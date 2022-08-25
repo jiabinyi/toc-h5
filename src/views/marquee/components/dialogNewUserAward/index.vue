@@ -7,7 +7,7 @@
     </div>
   </DialogCustom>
 </template>
-<script lang="ts" setup name="Home">
+<script lang="ts" setup name="DialogNewUserAward">
 import { immediatelyReceive } from '@/axios'
 import { sessions } from 'mosowejs'
 import { useRequest } from 'vue-request'

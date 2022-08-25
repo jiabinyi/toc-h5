@@ -156,6 +156,7 @@ import {
 
 import { sessions } from 'mosowejs'
 import { useRequest } from 'vue-request'
+
 // 弹窗 活动规则
 import dialogActivityRules from './components/dialogActivityRules/index.vue'
 // 组件 获奖人跑马灯

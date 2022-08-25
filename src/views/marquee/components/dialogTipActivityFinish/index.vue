@@ -1,6 +1,6 @@
 <template>
   <DialogCustom v-model:visible="visible" hideCloseBtn>
-    <div class="dialogTipActivityFinish">
+    <div class="dialog-tip-activity-finish">
       <div class="title">温馨提示</div>
       <div class="content">
         <div class="content-txt">
@@ -10,7 +10,7 @@
     </div>
   </DialogCustom>
 </template>
-<script lang="ts" setup name="Home">
+<script lang="ts" setup name="DialogTipActivityFinish">
 // 弹窗外层组件-自定义
 import DialogCustom from '@/components/DialogCustom/index.vue'
 const props = defineProps({
@@ -57,7 +57,7 @@ const goToHome = async () => {
 resume()
 </script>
 <style lang="scss" scoped>
-.dialogTipActivityFinish {
+.dialog-tip-activity-finish {
   padding-bottom: 20px;
   border: 0px solid #ffc10a;
   width: 255px;
@@ -68,7 +68,7 @@ resume()
   .title {
     height: 80px;
     font-size: 16px;
-    font-family: PingFangSC-Semibold, PingFang SC;
+
     font-weight: 600;
     color: #333333;
     line-height: 16px;
@@ -79,7 +79,7 @@ resume()
     text-align: left;
     .content-title {
       font-size: 14px;
-      font-family: PingFangSC-Medium, PingFang SC;
+
       font-weight: 600;
       color: #333333;
       line-height: 18px;
@@ -108,7 +108,7 @@ resume()
       box-shadow: 0px 2px 4px 0px rgba(255, 193, 10, 0.15);
       border-radius: 20px;
       font-size: 16px;
-      font-family: PingFangSC-Medium, PingFang SC;
+
       font-weight: 500;
       color: #ffffff;
       line-height: 36px;

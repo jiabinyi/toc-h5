@@ -1,7 +1,7 @@
 <template>
   <nut-noticebar
     v-if="data.length"
-    class="awardsMarquee"
+    class="awards-marquee"
     direction="vertical"
     :speed="5"
     :standTime="2000"
@@ -20,7 +20,7 @@
   </nut-noticebar>
 </template>
 
-<script lang="ts" setup name="awardsMarquee">
+<script lang="ts" setup name="AwardsMarquee">
 export interface AwardProps {
   data: Array<any>
 }
@@ -34,7 +34,7 @@ const hideName = (name: string): string => (name ? `${name.substring(0, 1)}***` 
 .marquee {
   width: 25px;
 }
-.awardsMarquee {
+.awards-marquee {
   margin-top: 5px;
   display: flex;
   height: 30px !important;
@@ -65,7 +65,7 @@ const hideName = (name: string): string => (name ? `${name.substring(0, 1)}***` 
         max-width: 181px;
         height: 17px;
         font-size: 12px;
-        font-family: PingFangSC-Medium, 'PingFang SC';
+
         font-weight: 500;
         color: #fff;
         line-height: 17px;

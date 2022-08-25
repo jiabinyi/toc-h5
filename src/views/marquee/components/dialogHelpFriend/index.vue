@@ -1,11 +1,11 @@
 <template>
   <DialogCustom v-model:visible="visible" @close="emit('dialogHelpFriendClose')">
-    <div class="dialogHelpFriend">
+    <div class="dialog-help-friend">
       <div class="btn" @click="accept"></div>
     </div>
   </DialogCustom>
 </template>
-<script lang="ts" setup name="Home">
+<script lang="ts" setup name="DialogHelpFriend">
 import { helpFriends } from '@/axios'
 
 import { sessions } from 'mosowejs'
@@ -66,7 +66,7 @@ const accept = () => {
 const { proxy } = getCurrentInstance() as any
 </script>
 <style lang="scss">
-.dialogHelpFriend {
+.dialog-help-friend {
   position: relative;
   display: block;
   width: 316px;
