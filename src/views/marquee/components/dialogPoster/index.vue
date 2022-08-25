@@ -97,7 +97,6 @@ const { run: runGetQRCode } = useRequest(getQRCode, {
       qrcodeImg.value = window.URL.createObjectURL(new Blob(binaryData))
       setTimeout(() => {
         renderPosterImage()
-        proxy.$toast.hide()
       }, 200)
     }
   },
@@ -148,6 +147,9 @@ const renderPosterImage = () => {
       image.src = canvas.toDataURL()
 
       dom?.appendChild(image)
+      setTimeout(() => {
+        proxy.$toast.hide()
+      }, 200)
     })
   }
 }
