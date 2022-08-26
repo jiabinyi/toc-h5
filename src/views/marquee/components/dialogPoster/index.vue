@@ -37,6 +37,11 @@
             </div>
           </div>
         </div>
+        <div id="cover">
+          <nut-image :src="''" width="100%" height="100%" showError>
+            <template #error> <nut-icon name="loading"></nut-icon> </template>
+          </nut-image>
+        </div>
         <div id="canvas_pic"></div>
       </div>
       <div class="foot-message">提示：长按保存分享图片</div>
@@ -294,6 +299,16 @@ const close = () => {
     img {
       width: 100%;
     }
+    z-index: 10;
+  }
+  #cover {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #fff;
+    z-index: 2;
   }
 }
 </style>
