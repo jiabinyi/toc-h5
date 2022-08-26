@@ -182,7 +182,7 @@ import dialogAward from './components/dialogAward/index.vue'
 // 弹窗 助力
 import dialogHelpFriend from './components/dialogHelpFriend/index.vue'
 
-const { proxy, appContext } = getCurrentInstance() as any
+const { proxy } = getCurrentInstance() as any
 
 const dayjs = proxy.$dayjs
 

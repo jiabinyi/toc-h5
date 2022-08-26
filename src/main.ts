@@ -18,8 +18,8 @@ dayjs.locale('zh-ch')
 app.config.globalProperties.$dayjs = dayjs
 app.config.globalProperties.$pxFlexible = (px: number) => {
   // 倍率
-  const radio=  document.body.offsetWidth / 375
-  return (px) * radio
+  const radio = document.body.offsetWidth / 375
+  return px * radio
 }
 
 app.use(router)

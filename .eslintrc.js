@@ -43,7 +43,7 @@ module.exports = {
     '@typescript-eslint/no-unused-vars': 'error',
     'vue/multi-word-component-names': 'off',
     // --以下是Possible Errors JS代码中的逻辑错误相关
-    'no-extra-parens': ['error', 'all', { enforceForArrowConditionals: true }], // 禁止不必要的括号
+    'no-extra-parens': ['error', 'all', { enforceForArrowConditionals: false }], // 禁止不必要的括号
     // "no-console": "error" // 不允许打印console.log
     'no-template-curly-in-string': 'error', // 禁止在常规字符串中出现模板字符串语法${xxx}
     // --以下是Best Practices 最佳实践
