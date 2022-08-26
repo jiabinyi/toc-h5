@@ -3,7 +3,7 @@
     v-if="data.length"
     class="awards-marquee"
     direction="vertical"
-    :speed="5"
+    :speed="proxy.$pxFlexible(5)"
     :standTime="2000"
     :background="`rgba(251, 248, 220, 0)`"
     :color="`#D9500B`"
