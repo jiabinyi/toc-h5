@@ -108,7 +108,7 @@
             <div class="icon">
               <img :src="item.pic_url" />
             </div>
-            <div class="txt">
+            <div class="content">
               <div class="title">{{ item.choice_prize_name }}：{{ item.prize_name }} x {{ 1 }}份</div>
               <div class="desc">
                 {{ dayjs(item?.win_time).format('YYYY年MM月  HH:mm') }}
