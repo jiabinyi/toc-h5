@@ -109,7 +109,12 @@
               <img :src="item.pic_url" />
             </div>
             <div class="content">
-              <div class="title">{{ item.choice_prize_name }}：{{ item.prize_name }} x {{ 1 }}份</div>
+              <div class="title">
+                {{ item.choice_prize_name }}：{{
+                  item.prize_name.length > 8 ? item.prize_name.substr(0, 8) + '...' : item.prize_name
+                }}
+                x {{ 1 }}份
+              </div>
               <div class="desc">
                 {{ dayjs(item?.win_time).format('YYYY年MM月  HH:mm') }}
               </div>
@@ -179,7 +184,7 @@ import dialogHelpFriend from './components/dialogHelpFriend/index.vue'
 
 const { proxy, appContext } = getCurrentInstance() as any
 
-const dayjs = appContext.config.globalProperties.$dayjs
+const dayjs = proxy.$dayjs
 
 import useGetQuery from '@/utils/hooks/useGetQuery'
 

@@ -7,7 +7,7 @@
     :standTime="2000"
     :background="`rgba(251, 248, 220, 0)`"
     :color="`#D9500B`"
-    :height="30"
+    :height="proxy.$pxFlexible(30)"
   >
     <div class="item" v-for="(item, index) in data" :key="index">
       <div class="user">
@@ -24,11 +24,10 @@
 export interface AwardProps {
   data: Array<any>
 }
-// eslint-disable-next-line vue/no-setup-props-destructure
 const { data } = defineProps<AwardProps>()
-
-// 隐藏姓
+// 隐藏名字
 const hideName = (name: string): string => (name ? `${name.substring(0, 1)}***` : '用户')
+const { proxy } = getCurrentInstance() as any
 </script>
 <style lang="scss" scoped>
 .marquee {

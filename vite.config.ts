@@ -11,10 +11,7 @@ const path = require('path')
 function resolve(dir: string) {
   return path.join(__dirname, dir)
 }
-function configCompressPlugin(
-  compress: 'gzip' | 'brotli' | 'none',
-  deleteOriginFile = true
-): Plugin | Plugin[] {
+function configCompressPlugin(compress: 'gzip' | 'brotli' | 'none', deleteOriginFile = true): Plugin | Plugin[] {
   const compressList = compress.split(',')
 
   const plugins: Plugin[] = []
@@ -82,8 +79,7 @@ export default defineConfig(({ mode, command }) => {
       preprocessorOptions: {
         scss: {
           // 配置 nutui 全局 scss 变量
-          additionalData:
-            '@import "@common/assets/theme/blue.scss";@import "@nutui/nutui/dist/styles/variables.scss";'
+          additionalData: '@import "@common/assets/theme/blue.scss";@import "@nutui/nutui/dist/styles/variables.scss";'
         }
       }
     },
