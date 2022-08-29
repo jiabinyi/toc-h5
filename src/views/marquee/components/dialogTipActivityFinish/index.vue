@@ -105,7 +105,7 @@ resume()
       width: 120px;
       height: 36px;
       background: #ffc10a;
-      box-shadow: 0px 2px 4px 0px rgba(255, 193, 10, 0.15);
+      box-shadow: 0px 2px 4px 0px #ffc10a26;
       border-radius: 20px;
       font-size: 16px;
 

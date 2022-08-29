@@ -220,6 +220,10 @@ const handleShowRules = () => {
 
 /**
  * 去分享
+ * @author yijiabin
+ * @date 2022-08-29
+ * @param {any} {}
+ * @returns {any}
  */
 const helpShareData = ref({})
 const goToShare = (item: any) => {
@@ -249,7 +253,13 @@ const tabs: Array<ObjTy> = [
 const handleActive = (index: number) => {
   tabIndex.value = index
 }
-// 设置转盘
+
+/**
+ * 设置转盘按钮
+ * @author yijiabin
+ * @date 2022-08-29
+ * @returns {any}
+ */
 const setLottery = () => {
   if (!showMarquee.value) {
     return
@@ -279,6 +289,14 @@ const startTurns = () => {
     custId: sessions.get('cust_id')
   })
 }
+
+/**
+ * 抽奖结果
+ * @author yijiabin
+ * @date 2022-08-29
+ * @returns {any}
+ */
+
 const endTurns = () => {
   getMyWinningList()
 
@@ -286,8 +304,8 @@ const endTurns = () => {
     activityId: activityData.value.turn_activity.id,
     userId: sessions.get('cust_id')
   })
+  // 判断是否谢谢参与
   if (String(prizeCurrent.value.choice_prize_name).replaceAll(/\s/g, '') === '谢谢参与') {
-    // proxy.$toast.text('喜从天降，运气爆棚，恭喜你中奖了！')
     dialogName.value = 'dialogThanksParticipant'
     dialogVisible.value = true
   } else {
@@ -297,7 +315,7 @@ const endTurns = () => {
   }
   remoteGiftSelected()
 }
-
+// 接口-常量-活动详情
 interface ActivityData {
   participants_num: number
   cust_win_records: Array<ObjTy>
@@ -309,7 +327,7 @@ interface ActivityData {
   end_time: any
 }
 
-// 获取当前活动内容信息
+// 常量-活动详情
 const activityData = ref({
   receive_flag: false,
   participants_num: 0,
@@ -369,7 +387,7 @@ const { run: getMyWinningList } = useRequest(myWinningList, {
 
 // 小程序-幸运大转盘分页获取我的中奖列表
 const walkingLanternListData = ref({} as any) // 变量-中奖列表
-const { run: runDalkingLanternList } = useRequest(walkingLanternList, {
+const { run: runWalkingLanternList } = useRequest(walkingLanternList, {
   manual: true,
   onSuccess: (res: ResObjData) => {
     if (res) {
@@ -383,7 +401,16 @@ const marqueeSpeed = ref(5)
 // 抽奖效验结果
 const marqueeCheckResult = ref({} as ObjTy)
 marqueeCheckResult.value = { code: 'Success' }
-// 幸运大转盘抽奖校验
+
+/**
+ * 幸运大转盘抽奖前校验
+ * @author yijiabin
+ * @date 2022-08-29
+ * @param {any} turnLuckDrawCheck
+ * @param {any} {manual:true
+ * @param {any} onSuccess:(res:ResObjData
+ * @returns {any}
+ */
 const { run: runTurnLuckDrawCheck } = useRequest(turnLuckDrawCheck, {
   manual: true,
   onSuccess: (res: ResObjData) => {
@@ -404,9 +431,17 @@ const { run: runTurnLuckDrawCheck } = useRequest(turnLuckDrawCheck, {
 })
 
 // 当前获奖奖品
-const prizeCurrent = ref({} as any)
+const prizeCurrent = ref({} as ObjTy)
 
-// 小程序-幸运大转盘抽奖
+/**
+ * 小程序-幸运大转盘抽奖
+ * @author yijiabin
+ * @date 2022-08-29
+ * @param {any} turnLuckDraw
+ * @param {any} {manual:true
+ * @param {any} onSuccess:(res:ResObjData
+ * @returns {any}
+ */
 const { run: turnLuckDrawFunc } = useRequest(turnLuckDraw, {
   manual: true,
   onSuccess: (res: ResObjData) => {
@@ -465,66 +500,24 @@ const activityFinished = () => {
   dialogName.value = 'dialogTipActivityFinish'
   dialogVisible.value = true
 }
-// 常量 是否已领取首次奖励
+// 常量-是否已领取首次奖励
 const NewUserAward = ref(false)
-// 常量 是否已助力
+// 常量-是否已助力
 const dialogHelpFriendHadPop = ref(false)
-// 请求-活动内容信息
+
+/**
+ * 请求-活动内容信息
+ * @author yijiabin
+ * @date 2022-08-29
+ * @param {any} queryTurnActivity
+ * @param {any} {manual:true
+ * @param {any} onSuccess:(res:ResObjData
+ * @returns {any}
+ */
 const { run: getActive } = useRequest(queryTurnActivity, {
   manual: true,
   onSuccess: (res: ResObjData) => {
-    if (res) {
-      const turn_prize_vos = res?.data?.turn_prize_vos?.map((item: ObjTy) => ({
-        prizeColor: '',
-        prizeName: item.prize_name,
-        prizeImg: item.prize_cover_url,
-        ...item
-      }))
-      // 活动详情
-      activityData.value = {
-        ...JSON.parse(JSON.stringify(activityData.value)),
-        ...res.data,
-        turn_prize_vos
-      }
-      // 幸运大转盘抽奖校验
-      runTurnLuckDrawCheck({
-        activityId: activityData.value.turn_activity.id,
-        userId: sessions.get('cust_id')
-      })
-      //  判断分享景来的活动是否已过期
-      if (sessions.get('activityId') !== '' && sessions.get('activityId') !== activityData.value.turn_activity.id) {
-        activityFinished()
-        return
-      }
-      // 活动结束 回首页
-      if (dayjs(activityData.value.turn_activity.end_time).valueOf() < new Date().getTime()) {
-        activityFinished()
-        return
-      }
-      // 显示抽奖盘
-      showMarquee.value = true
-
-      setTimeout(() => {
-        setLottery()
-      }, 100)
-      // 获取分享文案信息
-      getInviteIfo({
-        activityId: activityData.value.turn_activity.id,
-        fissionType: 1
-      })
-
-      // 判断是否需助力
-      if (getUrlParam('userId')?.length && !dialogHelpFriendHadPop.value) {
-        dialogName.value = 'dialogHelpFriend'
-        dialogVisible.value = true
-        dialogHelpFriendHadPop.value = true
-      } else if (activityData.value.receive_flag) {
-        if (activityData.value.join_flag && !NewUserAward.value) {
-          dialogName.value = 'dialogNewUserAward'
-          dialogVisible.value = true
-        }
-      }
-    }
+    afterGetActive(res)
   },
   onError: (error: any) => {
     if (error?.result?.code === 'MallFailure.CurrentTurnActivityNotExist') {
@@ -535,7 +528,74 @@ const { run: getActive } = useRequest(queryTurnActivity, {
   }
 })
 
-// 帮好友助力后
+/**
+ * 获取活动详情后数据处理与响应
+ * @author yijiabin
+ * @date 2022-08-29
+ * @param {any} res:ObjTy
+ * @returns {any}
+ */
+const afterGetActive = (res: ObjTy) => {
+  if (res) {
+    const turn_prize_vos = res?.data?.turn_prize_vos?.map((item: ObjTy) => ({
+      prizeColor: '',
+      prizeName: item.prize_name,
+      prizeImg: item.prize_cover_url,
+      ...item
+    }))
+    // 活动详情
+    activityData.value = {
+      ...JSON.parse(JSON.stringify(activityData.value)),
+      ...res.data,
+      turn_prize_vos
+    }
+    // 幸运大转盘抽奖校验
+    runTurnLuckDrawCheck({
+      activityId: activityData.value.turn_activity.id,
+      userId: sessions.get('cust_id')
+    })
+    //  判断分享景来的活动是否已过期
+    if (sessions.get('activityId') !== '' && sessions.get('activityId') !== activityData.value.turn_activity.id) {
+      activityFinished()
+      return
+    }
+    // 活动结束 回首页
+    if (dayjs(activityData.value.turn_activity.end_time).valueOf() < new Date().getTime()) {
+      activityFinished()
+      return
+    }
+    // 显示抽奖盘
+    showMarquee.value = true
+
+    setTimeout(() => {
+      setLottery()
+    }, 100)
+    // 获取分享文案信息
+    getInviteIfo({
+      activityId: activityData.value.turn_activity.id,
+      fissionType: 1
+    })
+
+    // 判断是否需助力
+    if (getUrlParam('userId')?.length && !dialogHelpFriendHadPop.value) {
+      dialogName.value = 'dialogHelpFriend'
+      dialogVisible.value = true
+      dialogHelpFriendHadPop.value = true
+    } else if (activityData.value.receive_flag) {
+      if (activityData.value.join_flag && !NewUserAward.value) {
+        dialogName.value = 'dialogNewUserAward'
+        dialogVisible.value = true
+      }
+    }
+  }
+}
+
+/**
+ * 帮好友助力后回调
+ * @author yijiabin
+ * @date 2022-08-29
+ * @returns {any}
+ */
 const dialogHelpFriendClose = () => {
   dialogVisible.value = false
   runCurActivityAccount()
@@ -551,17 +611,30 @@ const dialogHelpFriendClose = () => {
   }
 }
 
-// 领取免费次数
+/**
+ * 领取免费次数
+ * @author yijiabin
+ * @date 2022-08-29
+ * @returns {any}
+ */
 const dialogNewUserAwardClose = () => {
   NewUserAward.value = true
   getActive()
   runCurActivityAccount()
 }
-// 无法抽奖提示
+
+/**
+ * 无法抽奖提示
+ * @author yijiabin
+ * @date 2022-08-29
+ * @returns {any}
+ */
 const marqueeDisable = () => {
+  const shareTask = activityTaskListData.value[0]
+  // 判断是否抽奖次数是否0和活动分享是否有可用次数
   if (
     curActivityAccountData.value?.activity_account?.loot_ticket_num === 0 &&
-    activityTaskListData.value[0].be_help_num < activityTaskListData.value[0].cycle_daily_limit_num
+    shareTask.be_help_num < shareTask.cycle_daily_limit_num
   ) {
     proxy.$toast.text('做任务获取更多抽奖次数')
     return
@@ -569,23 +642,27 @@ const marqueeDisable = () => {
   proxy.$toast.text(marqueeCheckResult.value.msg)
 }
 
-// 查看订单详情
-const seeOrderDetail = async (prize: any) => {
-  let url = ''
-  if (prize.category_code === 'PACKAGE_GOODS') {
-    url = `/pages/subSetMeal/pages/orderMealDetail/orderMealDetail?order_no=${prize.order_code}&media_type=SUB_ORDER_NO`
-  } else {
-    url = `/pages/subTicket/pages/orderTicketDetail/orderTicketDetail?order_no=${prize.order_code}&media_type=SUB_ORDER_NO`
-  }
+/**
+ * 查看订单详情
+ * @author yijiabin
+ * @date 2022-08-29
+ * @param {any} prize:any
+ * @returns {any}
+ */
+const seeOrderDetail = async (prize: ObjTy) => {
+  const page =
+    prize.category_code === 'PACKAGE_GOODS' ? 'orderMealDetail/orderMealDetail' : 'orderTicketDetail/orderTicketDetail'
+  const url = `/pages/subTicket/pages/${page}?order_no=${prize.order_code}&media_type=SUB_ORDER_NO`
   console.log('url', url)
   const wx = await import('wechat-ts-sdk').then(module => module.default)
   wx.miniProgram.navigateTo({ url }) // 跳到小程序原生页面
 }
+
 onMounted(() => {
   getActive()
   getActivityTaskList()
   getMyWinningList()
-  runDalkingLanternList()
+  runWalkingLanternList()
   runCurActivityAccount()
 })
 </script>
