@@ -58,7 +58,7 @@ import html2canvas from 'html2canvas'
 // 弹窗
 import DialogCustom from '@/components/DialogCustom/index.vue'
 // 对象-组件代理
-const { proxy } = getCurrentInstance() as any
+const { proxy } = getCurrentInstance() as ObjTy
 const UserStore = useUserStore()
 const props = defineProps({
   // 变量-显示隐藏弹窗

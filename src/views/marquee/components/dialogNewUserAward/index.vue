@@ -43,7 +43,7 @@ const accept = () => {
   visible.value = false
 }
 // 对象-组件代理
-const { proxy } = getCurrentInstance() as any
+const { proxy } = getCurrentInstance() as ObjTy
 // 领取
 const { run: runImmediatelyReceive } = useRequest(immediatelyReceive, {
   manual: true,
@@ -54,7 +54,7 @@ const { run: runImmediatelyReceive } = useRequest(immediatelyReceive, {
     }
     visible.value = false
   },
-  onError: (error: any) => {
+  onError: (error: ObjTy) => {
     proxy.$toast.text(error.result.msg)
     visible.value = false
     emit('dialogNewUserAwardClose')

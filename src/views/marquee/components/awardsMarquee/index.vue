@@ -28,7 +28,7 @@ const Props = defineProps<AwardProps>()
 const { data } = toRefs(Props)
 // 隐藏名字
 const hideName = (name: string): string => (name ? `${name.substring(0, 1)}***` : '用户')
-const { proxy } = getCurrentInstance() as any
+const { proxy } = getCurrentInstance() as ObjTy
 </script>
 <style lang="scss" scoped>
 .marquee {

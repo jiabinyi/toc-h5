@@ -1,7 +1,7 @@
 <template>
   <DialogCustom v-model:visible="visible" @close="emit('dialogHelpFriendClose')">
     <div class="dialog-help-friend">
-      <div class="btn" @click="accept"></div>
+      <div class="btn" @click="helpFriend"></div>
     </div>
   </DialogCustom>
 </template>
@@ -55,7 +55,14 @@ const { run: runHelpFriends } = useRequest(helpFriends, {
     visible.value = false
   }
 })
-const accept = () => {
+
+/**
+ * 帮助好友
+ * @author yijiabin
+ * @date 2022-08-29
+ * @returns {any}
+ */
+const helpFriend = () => {
   runHelpFriends({
     activityId: activityData.value.turn_activity.id,
     helpUserId: getUrlParam('userId'),
