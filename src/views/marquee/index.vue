@@ -46,6 +46,7 @@
 
     <!--S 底部抽奖统计  -->
     <div class="lottery-footer">
+      <!-- tab -->
       <div class="lottery-tab">
         <div
           :class="['lottery-tab-item', { 'active-tab': tabIndex === index }]"
@@ -56,8 +57,9 @@
           <div class="lottery-tab-item-text">{{ tab.name }}</div>
         </div>
       </div>
+
       <!-- 领取免费次数 -->
-      <div class="footer-content" v-if="tabIndex === 0">
+      <div v-if="0" class="footer-content">
         <div v-for="(item, index) in activityTaskListData" :key="index">
           <div class="item" v-if="inviteIfoData?.open_flag === 0">
             <div class="icon">
@@ -100,41 +102,16 @@
           </nut-empty>
         </div>
       </div>
-
+      <!-- 任务列表 -->
+      <foot-task-list
+        :activityTaskList="activityTaskListData"
+        :inviteIfoData="inviteIfoData"
+        :activityData="activityData"
+        @goToShare="goToShare"
+        v-if="tabIndex === 0"
+      />
       <!-- 我的奖品 -->
-      <div class="footer-content" v-if="tabIndex === 1">
-        <div v-for="(item, index) in myWinningListData" :key="index">
-          <div class="item">
-            <div class="icon">
-              <img :src="item.pic_url" />
-            </div>
-            <div class="content">
-              <div class="title">
-                {{ item.choice_prize_name }}：{{
-                  item.prize_name.length > 8 ? item.prize_name.substr(0, 8) + '...' : item.prize_name
-                }}
-                x {{ 1 }}份
-              </div>
-              <div class="desc">
-                {{ dayjs(item?.win_time).format('YYYY年MM月  HH:mm') }}
-              </div>
-            </div>
-            <div class="right">
-              <div class="btn" v-if="!item.order_code && !item.overtime_flag" @click="placeOrder(item)">立即下单</div>
-              <div class="btn" v-if="item.order_code" @click="seeOrderDetail(item)">查看订单</div>
-              <div class="btn disable" v-if="!item.order_code && item.overtime_flag">超时未下单</div>
-            </div>
-          </div>
-        </div>
-
-        <div v-if="!myWinningListData.length">
-          <nut-empty description="暂无中奖信息~">
-            <template #image>
-              <img src="@/common/assets/images/blue/blue-no-data.png" />
-            </template>
-          </nut-empty>
-        </div>
-      </div>
+      <foot-award-list :myWinningList="myWinningListData" v-if="tabIndex === 1" />
     </div>
     <component
       :helpShareData="helpShareData"
@@ -164,7 +141,10 @@ import {
 
 import { sessions } from 'mosowejs'
 import { useRequest } from 'vue-request'
-
+// 组件 底部获奖奖品列表
+import footAwardList from './components/footAwardList/index.vue'
+// 组件 底部任务列表
+import footTaskList from './components/footTaskList/index.vue'
 // 弹窗 活动规则
 import dialogActivityRules from './components/dialogActivityRules/index.vue'
 // 组件 获奖人跑马灯
@@ -181,13 +161,9 @@ import dialogTipActivityFinish from './components/dialogTipActivityFinish/index.
 import dialogAward from './components/dialogAward/index.vue'
 // 弹窗 助力
 import dialogHelpFriend from './components/dialogHelpFriend/index.vue'
-
-const { proxy } = getCurrentInstance() as any
-
-const dayjs = proxy.$dayjs
-
 import useGetQuery from '@/utils/hooks/useGetQuery'
-
+const { proxy } = getCurrentInstance() as any
+const dayjs = proxy.$dayjs
 const { getUrlParam } = useGetQuery()
 
 // 变量-弹窗数据
@@ -450,14 +426,14 @@ const { run: turnLuckDrawFunc } = useRequest(turnLuckDraw, {
     getActivityTaskList()
     if (res) {
       activityData.value.turn_prize_vos.findIndex((prize: any, index: any) => {
-        if (index + 1 === Number(res.data.award_location)) {
+        const isThis = index + 1 === Number(res.data.award_location)
+        if (isThis) {
           setTimeout(() => {
             prizeCurrent.value = res.data
             prizeIndex.value = index
           }, 500)
-          return true
         }
-        return false
+        return isThis
       })
     }
   },
@@ -472,22 +448,6 @@ const { run: turnLuckDrawFunc } = useRequest(turnLuckDraw, {
     }, 100)
   }
 })
-
-/**
- * 下单
- * @author yijiabin
- * @date 2022-08-16
- * @param {any} {category_code
- * @param {any} goods_id}:any
- * @returns {any}
- */
-
-const placeOrder = async ({ category_code, goods_id, id, prize_goods_id }: ObjTy) => {
-  const url = `/pages/activity/pages/goodDetail/goodDetail?category_code=${category_code}&activityGoodId=${id}&goods_id=${goods_id}&type=marquee&prizeGoodsId=${prize_goods_id}`
-  console.log('url', url)
-  const wx = await import('wechat-ts-sdk').then(module => module.default)
-  wx.miniProgram.navigateTo({ url }) // 跳到小程序原生页面
-}
 
 /**
  * 活动结束-回首页
@@ -630,7 +590,7 @@ const dialogNewUserAwardClose = () => {
  * @returns {any}
  */
 const marqueeDisable = () => {
-  const shareTask = activityTaskListData.value[0]
+  const shareTask = activityTaskListData.value.find((item: ObjTy) => item.fission_type === 1) || {}
   // 判断是否抽奖次数是否0和活动分享是否有可用次数
   if (
     curActivityAccountData.value?.activity_account?.loot_ticket_num === 0 &&
@@ -640,22 +600,6 @@ const marqueeDisable = () => {
     return
   }
   proxy.$toast.text(marqueeCheckResult.value.msg)
-}
-
-/**
- * 查看订单详情
- * @author yijiabin
- * @date 2022-08-29
- * @param {any} prize:any
- * @returns {any}
- */
-const seeOrderDetail = async (prize: ObjTy) => {
-  const page =
-    prize.category_code === 'PACKAGE_GOODS' ? 'orderMealDetail/orderMealDetail' : 'orderTicketDetail/orderTicketDetail'
-  const url = `/pages/subTicket/pages/${page}?order_no=${prize.order_code}&media_type=SUB_ORDER_NO`
-  console.log('url', url)
-  const wx = await import('wechat-ts-sdk').then(module => module.default)
-  wx.miniProgram.navigateTo({ url }) // 跳到小程序原生页面
 }
 
 onMounted(() => {

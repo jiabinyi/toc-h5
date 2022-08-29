@@ -168,7 +168,7 @@
       }
     }
 
-    &>.footer-content {
+    & :deep(.footer-content) {
       background-color: #fff;
       width: 345px;
       flex-shrink: 0;
