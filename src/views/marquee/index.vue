@@ -46,7 +46,7 @@
 
     <!--S 底部抽奖统计  -->
     <div class="lottery-footer">
-      <!-- tab -->
+      <!-- tab s-->
       <div class="lottery-tab">
         <div
           :class="['lottery-tab-item', { 'active-tab': tabIndex === index }]"
@@ -58,51 +58,7 @@
         </div>
       </div>
 
-      <!-- 领取免费次数 -->
-      <div v-if="0" class="footer-content">
-        <div v-for="(item, index) in activityTaskListData" :key="index">
-          <div class="item" v-if="inviteIfoData?.open_flag === 0">
-            <div class="icon">
-              <img :src="item.task_icon_url" />
-            </div>
-            <div class="content">
-              <div class="title">
-                <div class="name">
-                  {{
-                    item.task_content_title.length > 9
-                      ? item.task_content_title.substr(0, 9) + '...'
-                      : item.task_content_title
-                  }}
-                </div>
-                x
-                <div class="num">{{ item.reward_type_value }}</div>
-              </div>
-              <div class="desc">
-                {{ item.guide_copy }}
-              </div>
-            </div>
-            <div class="right">
-              <div class="txt" v-if="item.be_help_num < item.cycle_daily_limit_num">
-                进行中 ({{ item.be_help_num }}/{{ item.cycle_daily_limit_num }})
-              </div>
-
-              <div class="txt" v-if="item.be_help_num >= item.cycle_daily_limit_num">任务已完成</div>
-
-              <div class="btn" @click="goToShare(item)" :class="{ disable: !activityData.join_flag }">
-                {{ item.button_copy }}
-              </div>
-            </div>
-          </div>
-        </div>
-        <div v-if="inviteIfoData?.open_flag !== 0">
-          <nut-empty description="暂无任务信息~">
-            <template #image>
-              <img src="@/common/assets/images/blue/blue-no-data.png" />
-            </template>
-          </nut-empty>
-        </div>
-      </div>
-      <!-- 任务列表 -->
+      <!-- 领取免费次数 s-->
       <foot-task-list
         :activityTaskList="activityTaskListData"
         :inviteIfoData="inviteIfoData"
@@ -110,9 +66,12 @@
         @goToShare="goToShare"
         v-if="tabIndex === 0"
       />
-      <!-- 我的奖品 -->
+      <!-- 我的奖品 s-->
       <foot-award-list :myWinningList="myWinningListData" v-if="tabIndex === 1" />
     </div>
+    <!--E 底部抽奖统计  -->
+
+    <!--S 动态组件  -->
     <component
       :helpShareData="helpShareData"
       :is="dialogComponents[dialogName]"
@@ -126,6 +85,7 @@
       @dialogHelpFriendClose="dialogHelpFriendClose"
     />
   </div>
+  <!--E 动态组件  -->
 </template>
 <script lang="ts" setup name="marquee">
 import {
