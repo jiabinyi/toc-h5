@@ -65,19 +65,6 @@ const { run: runImmediatelyReceive } = useRequest(immediatelyReceive, {
 .new-user-award-container {
   width: 316px;
   height: 398px;
-  & .content {
-    &::before {
-      content: '';
-      display: table;
-      clear: both;
-    }
-    clear: both;
-    position: relative;
-    width: 100%;
-    height: 100%;
-    @include toc-images-background;
-    background-image: url('#{$image-path}blue-dialog-new-user-award.png') !important;
-  }
   & .btn {
     width: 161px;
     height: 34px;

@@ -35,15 +35,7 @@ const visible = useVModel(props, 'visible', emit)
 </script>
 <style lang="scss" scoped>
 .dialog-award {
-  text-align: center;
   .content {
-    @include toc-images-background;
-
-    background-image: url('#{$image-path}blue-dialog-award-bg.png');
-    background-size: 100% 100%;
-    width: 316px;
-    height: 322px;
-    display: block;
     .img {
       box-sizing: border-box;
       padding-top: 200px;

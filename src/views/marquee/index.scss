@@ -1,22 +1,6 @@
 .lottery-container {
   position: relative;
 
-  .rule-btn {
-    z-index: 100;
-    position: absolute;
-    right: 0;
-    top: 180px;
-    font-size: 12px;
-    font-weight: 400;
-    color: #fff;
-    line-height: 16px;
-    width: 46px;
-    height: 44px;
-    @include flex-center;
-    flex-direction: column;
-    @include toc-images-background;
-    background-image: url('#{$image-path}blue-rule-btn.png');
-  }
 
   & .lottery-header {
     width: 100vw;
@@ -44,17 +28,6 @@
     .activity-time {
       padding-top: 83px;
       @include flex-center;
-
-      & .content {
-        width: 181px;
-        height: 23px;
-        @include toc-images-background;
-        background-image: url('#{$image-path}blue-end-date-bg.png');
-        font-size: 12px;
-        font-weight: 500;
-        color: #fff;
-        @include flex-center;
-      }
     }
   }
 
@@ -65,12 +38,7 @@
     flex-direction: column;
 
     & .lottery-content {
-      position: relative;
-      width: 345px;
-      height: 423px;
-      @include toc-images-background;
 
-      background-image: url('#{$image-path}blue-lottery-bg.png') !important;
 
       .marquee-disable {
         position: absolute;
@@ -89,13 +57,6 @@
         justify-content: center;
         align-items: center;
 
-        .marquee-item {
-          width: 250px;
-          height: 40px;
-          @include toc-images-background;
-
-          background-image: url('#{$image-path}user-info-bg.png') !important;
-        }
       }
     }
 
@@ -111,23 +72,7 @@
       background: none !important;
     }
 
-    :deep(.start) {
-      @include lottery-btn-bg;
 
-      background: url('/src/common/assets/images/blue/lottery-btn-default.png') no-repeat;
-      position: relative;
-      text-align: center;
-      color: white;
-      font-weight: 600;
-      font-size: 14px;
-      line-height: 98px;
-      top: 5px;
-      left: 4px;
-      display: flex;
-      align-items: center;
-      flex-direction: column;
-      justify-content: center;
-    }
 
     :deep(.num-txt) {
       line-height: 22px;
@@ -138,21 +83,10 @@
       line-height: 22px;
     }
 
-    :deep(.disabledDraw) {
-      @include lottery-btn-bg;
 
-      background: url('#{$image-path}lottery-btn-disabled.png') no-repeat;
-      color: black;
-    }
 
     :deep(ul) {
-      & li {
-        width: 100px;
-        height: 100px;
-        @include toc-images-background;
 
-        background-image: url('#{$image-path}marquee-item-bg.png');
-      }
 
       & .gift-1,
       .gift-2,
@@ -221,31 +155,7 @@
     padding-bottom: 50px;
 
     & .lottery-tab {
-      display: flex;
-      justify-content: center;
-      align-items: flex-end;
-      font-size: 14px;
-      width: 320px;
-      height: 40px;
-      @include toc-images-background;
 
-      background-image: url('#{$image-path}blue-receive-tab-activation.png') !important;
-
-      .lottery-tab-item {
-        width: 100%;
-      }
-
-      &.lottery-tab-0 {
-        background-image: url('#{$image-path}blue-receive-tab-activation.png') !important;
-      }
-
-      &.lottery-tab-1 {
-        background-image: url('#{$image-path}blue-prize-tab-prize-activation.png') !important;
-      }
-
-      &.lottery-tab-2 {
-        background-image: url('#{$image-path}blue-my-tab-activation.png') !important;
-      }
 
       .item {
         height: 40px;

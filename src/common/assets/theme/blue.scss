@@ -4,8 +4,6 @@
   background-size: cover !important;
 }
 
-$image-path:"/src/common/assets/images/blue/";
-
 @mixin toc-images-background {
   background-position: center 0;
   background-attachment: inherit;
@@ -13,72 +11,245 @@ $image-path:"/src/common/assets/images/blue/";
   background-size: cover;
 }
 
+@mixin flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+$image-path:"/src/common/assets/images";
+
 .blue-mode {
   margin: 0;
   padding: 0;
   background: #127bfe;
+  --lottery-desc-color: #2055e2;
+
 
   .index-bg {
     width: 100vw;
     height: 100vh;
     @include toc-images-background;
-
-    background-image: url('#{$image-path}blue-index-bg.png');
+    background-image: url('#{$image-path}/blue/blue-index-bg.png');
   }
 
-  --lottery-desc-color: #2055e2;
-
-
-  .lottery-tab-item {
+  // 幸运大转盘
+  .lottery-container {
     position: relative;
-    background: #60c2fa;
-    box-shadow: -1px -2px 2px 2px #93d5fc;
-    height: 30px;
-    line-height: 30px;
-    color: #fff;
-    border-radius: 8px 8px 0 0;
-    padding: 0 5px;
-    margin-left: 5px;
-    text-align: center;
-    border: 3px solid #60c2fa;
-    border-bottom: 4px solid #46abf9;
 
-    &:first-child {
-      margin-left: 0;
+    .rule-btn {
+      z-index: 100;
+      position: absolute;
+      right: 0;
+      top: 180px;
+      font-size: 12px;
+      font-weight: 400;
+      color: #fff;
+      line-height: 16px;
+      width: 46px;
+      height: 44px;
+      @include flex-center;
+      flex-direction: column;
+      @include toc-images-background;
+      background-image: url('#{$image-path}/blue/blue-rule-btn.png');
+    }
+
+    & .lottery-header {
+      .activity-time {
+        & .content {
+          width: 181px;
+          height: 23px;
+          @include toc-images-background;
+          background-image: url('#{$image-path}/blue/blue-end-date-bg.png');
+          font-size: 12px;
+          font-weight: 500;
+          color: #fff;
+          @include flex-center;
+        }
+      }
+    }
+
+
+    & .lottery-main {
+      & .lottery-content {
+        position: relative;
+        width: 345px;
+        height: 423px;
+        @include toc-images-background;
+
+        background-image: url('#{$image-path}/blue/blue-lottery-bg.png') !important;
+
+
+        & .marquee {
+          .marquee-item {
+            width: 250px;
+            height: 40px;
+            @include toc-images-background;
+
+            background-image: url('#{$image-path}/blue/user-info-bg.png') !important;
+          }
+        }
+      }
+    }
+
+    :deep(.start) {
+      @include lottery-btn-bg;
+      background: url('/src/common/assets/images/blue/lottery-btn-default.png') no-repeat;
+      position: relative;
+      text-align: center;
+      color: white;
+      font-weight: 600;
+      font-size: 14px;
+      line-height: 98px;
+      top: 5px;
+      left: 4px;
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    :deep(.disabledDraw) {
+      @include lottery-btn-bg;
+
+      background: url('#{$image-path}/blue/lottery-btn-disabled.png') no-repeat;
+      color: black;
+    }
+
+    :deep(ul) {
+      & li {
+        width: 100px;
+        height: 100px;
+        @include toc-images-background;
+
+        background-image: url('#{$image-path}/blue/marquee-item-bg.png');
+      }
+    }
+
+    & .lottery-footer {
+
+      & .lottery-tab {
+        display: flex;
+        justify-content: center;
+        align-items: flex-end;
+        font-size: 14px;
+        width: 320px;
+        height: 40px;
+        @include toc-images-background;
+
+        background-image: url('#{$image-path}/blue/blue-receive-tab-activation.png') !important;
+
+        .lottery-tab-item {
+          width: 100%;
+        }
+
+        &.lottery-tab-0 {
+          background-image: url('#{$image-path}/blue/blue-receive-tab-activation.png') !important;
+        }
+
+        &.lottery-tab-1 {
+          background-image: url('#{$image-path}/blue/blue-prize-tab-prize-activation.png') !important;
+        }
+
+        &.lottery-tab-2 {
+          background-image: url('#{$image-path}/blue/blue-my-tab-activation.png') !important;
+        }
+
+      }
+    }
+
+    .lottery-tab-item {
+      position: relative;
+      background: #60c2fa;
+      box-shadow: -1px -2px 2px 2px #93d5fc;
+      height: 30px;
+      line-height: 30px;
+      color: #fff;
+      border-radius: 8px 8px 0 0;
+      padding: 0 5px;
+      margin-left: 5px;
+      text-align: center;
+      border: 3px solid #60c2fa;
+      border-bottom: 4px solid #46abf9;
+
+      &:first-child {
+        margin-left: 0;
+      }
+    }
+
+    & .active-tab {
+      position: relative;
+      height: 36px;
+      line-height: 42px;
+      font-size: 16px;
+      font-weight: 600;
+
+      &::before {
+        content: '';
+        @include toc-images-background;
+
+        position: absolute;
+        height: 12px;
+        width: 14px;
+        left: -1px;
+        top: 2px;
+        background-image: url('#{$image-path}/blue/active-tab-bg.png');
+      }
+    }
+
+    & .footer-content {
+      width: 345px;
+      min-height: 200px;
+      margin: 0 auto;
+      background: #fff;
+      border-radius: 10px;
     }
   }
 
-  & .active-tab {
-    position: relative;
-    height: 36px;
-    line-height: 42px;
-    font-size: 16px;
-    font-weight: 600;
+  .new-user-award-container {
+    & .content {
+      &::before {
+        content: '';
+        display: table;
+        clear: both;
+      }
 
+      clear: both;
+      position: relative;
+      width: 100%;
+      height: 100%;
+      @include toc-images-background;
+      background-image: url('#{$image-path}/blue/blue-dialog-new-user-award.png') !important;
+    }
+  }
+
+  .dialog-help-friend {
     &::before {
       content: '';
+      display: table;
+      clear: both;
+    }
+
+    clear: both;
+    position: relative;
+    display: block;
+    width: 316px;
+    height: 398px;
+    @include toc-images-background;
+    background-image: url('#{$image-path}/blue/blue-dialog-help-marquee.png');
+  }
+
+  .dialog-award {
+
+    .content {
       @include toc-images-background;
 
-      position: absolute;
-      height: 12px;
-      width: 14px;
-      left: -1px;
-      top: 2px;
-      background-image: url('#{$image-path}active-tab-bg.png');
+      background-image: url('#{$image-path}/blue/blue-dialog-award-bg.png');
+      background-size: 100% 100%;
+      width: 316px;
+      height: 322px;
+      display: block
     }
   }
-
-  & .footer-content {
-    width: 345px;
-    min-height: 200px;
-    margin: 0 auto;
-    background: #fff;
-    border-radius: 10px;
-  }
-}
-
-@mixin flex-center {
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }

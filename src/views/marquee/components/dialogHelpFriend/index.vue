@@ -67,18 +67,6 @@ const { proxy } = getCurrentInstance() as any
 </script>
 <style lang="scss">
 .dialog-help-friend {
-  &::before {
-    content: '';
-    display: table;
-    clear: both;
-  }
-  clear: both;
-  position: relative;
-  display: block;
-  width: 316px;
-  height: 398px;
-  @include toc-images-background;
-  background-image: url('#{$image-path}blue-dialog-help-marquee.png');
   & .btn {
     width: 200px;
     height: 38px;
