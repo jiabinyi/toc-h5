@@ -274,6 +274,7 @@ const close = () => {
         flex-grow: 1;
         text-align: left;
         .hand {
+          margin-left: 4px;
           width: 19px;
           height: 10px;
         }
