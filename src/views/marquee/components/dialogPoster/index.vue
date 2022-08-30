@@ -25,7 +25,8 @@
           <div class="foot">
             <div class="tip">
               <div class="tip1">
-                长按识别二维码
+                <span>长按识别二维码</span>
+
                 <img :src="handImg" class="hand" />
               </div>
               <div class="tip2">立即免费参与</div>
