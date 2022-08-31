@@ -54,10 +54,10 @@ const visible = useVModel(props, 'visible', emit)
     @include flex-center;
   }
   .content-main {
-    height: 375px;
+    min-height: 275px;
     overflow-y: scroll;
     & .content {
-      padding: 0 11px 11px;
+      padding: 0 20px 11px;
       text-align: left;
       .content-title {
         font-size: 14px;
@@ -70,6 +70,9 @@ const visible = useVModel(props, 'visible', emit)
         font-weight: 200;
         color: #777;
         line-height: 28px;
+      }
+      &:last-child {
+        padding-bottom: 0px;
       }
     }
   }

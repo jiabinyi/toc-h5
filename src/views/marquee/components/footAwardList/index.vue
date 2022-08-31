@@ -75,4 +75,10 @@ const seeOrderDetail = async (prize: ObjTy) => {
   wx.miniProgram.navigateTo({ url }) // 跳到小程序原生页面
 }
 </script>
-<style lang="scss" scoped></style>
+<style lang="scss">
+.footer-content {
+  .nut-empty-image {
+    height: auto;
+  }
+}
+</style>
