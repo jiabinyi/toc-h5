@@ -185,6 +185,7 @@ const close = () => {
   display: block;
   background: #fff;
   border-radius: 8px;
+  overflow: hidden;
   .sharer {
     height: 60px;
     padding-left: 10px;

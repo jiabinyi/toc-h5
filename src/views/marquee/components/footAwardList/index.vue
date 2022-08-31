@@ -8,7 +8,7 @@
         <div class="content">
           <div class="title">
             {{ item.choice_prize_name }}：{{
-              item.prize_name.length > 8 ? item.prize_name.substr(0, 8) + '...' : item.prize_name
+              item.prize_name.length > 7 ? item.prize_name.substr(0, 5) + '...' : item.prize_name
             }}
             x {{ 1 }}份
           </div>

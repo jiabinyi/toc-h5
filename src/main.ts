@@ -11,7 +11,11 @@ import '@nutui/nutui/dist/style.css'
 import '@nutui/nutui-bingo/dist/style.css'
 import '@common/assets/styles/index.scss'
 import VConsole from 'vconsole'
-new VConsole()
+
+if (['test', 'dev', 'development'].includes(import.meta.env.MODE || '')) {
+  new VConsole()
+}
+console.log(import.meta.env)
 const app = createApp(App)
 
 dayjs.locale('zh-ch')
