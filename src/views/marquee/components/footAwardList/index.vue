@@ -54,7 +54,6 @@ const dayjs = proxy.$dayjs
 
 const placeOrder = async ({ category_code, goods_id, id, prize_goods_id }: ObjTy) => {
   const url = `/pages/activity/pages/goodDetail/goodDetail?category_code=${category_code}&activityGoodId=${id}&goods_id=${goods_id}&type=marquee&prizeGoodsId=${prize_goods_id}`
-  console.log('url', url)
   const wx = await import('wechat-ts-sdk').then(module => module.default)
   wx.miniProgram.navigateTo({ url }) // 跳到小程序原生页面
 }
@@ -70,7 +69,6 @@ const seeOrderDetail = async (prize: ObjTy) => {
   const page =
     prize.category_code === 'PACKAGE_GOODS' ? 'orderMealDetail/orderMealDetail' : 'orderTicketDetail/orderTicketDetail'
   const url = `/pages/subTicket/pages/${page}?order_no=${prize.order_code}&media_type=SUB_ORDER_NO`
-  console.log('url', url)
   const wx = await import('wechat-ts-sdk').then(module => module.default)
   wx.miniProgram.navigateTo({ url }) // 跳到小程序原生页面
 }
