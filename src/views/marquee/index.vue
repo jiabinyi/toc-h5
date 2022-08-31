@@ -209,9 +209,9 @@ const setLottery = () => {
 // 去除默认抽中奖品样式
 const remoteGiftSelected = () => {
   nextTick(() => {
-    const gift1 = document.querySelector('.gift-1.active') as ObjTy
+    const gift1 = document.querySelector('.nutbig-marquee  li.active') as ObjTy
     if (gift1) {
-      gift1.setAttribute('class', 'gift-1')
+      gift1.classList.remove('active')
     }
   })
 }
