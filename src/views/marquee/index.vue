@@ -465,7 +465,7 @@ const afterGetActive = (res: ObjTy) => {
     }))
     // 活动详情
     activityData.value = {
-      ...JSON.parse(JSON.stringify(activityData.value)),
+      ...toRefs(activityData.value),
       ...res.data,
       turn_prize_vos
     }
@@ -474,13 +474,15 @@ const afterGetActive = (res: ObjTy) => {
       activityId: activityData.value.turn_activity.id,
       userId: sessions.get('cust_id')
     })
+    const activityId = sessions.get('activityId')
     //  判断分享景来的活动是否已过期
-    if (sessions.get('activityId') !== '' && sessions.get('activityId') !== activityData.value.turn_activity.id) {
+    if (sessions.get('activityId') !== '' && activityId !== activityData.value.turn_activity.id) {
       activityFinished()
       return
     }
     // 活动结束 回首页
-    if (dayjs(activityData.value.turn_activity.end_time).valueOf() < new Date().getTime()) {
+    const now = new Date().getTime()
+    if (dayjs(activityData.value.turn_activity.end_time).valueOf() < now) {
       activityFinished()
       return
     }
