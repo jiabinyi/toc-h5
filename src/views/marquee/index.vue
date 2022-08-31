@@ -241,7 +241,8 @@ const endTurns = () => {
     userId: sessions.get('cust_id')
   })
   // 判断是否谢谢参与
-  if (String(prizeCurrent.value.choice_prize_name).replaceAll(/\s/g, '') === '谢谢参与') {
+  const choice_prize_name = String(prizeCurrent.value.choice_prize_name).replaceAll(/\s/g, '')
+  if (choice_prize_name === '谢谢参与') {
     dialogName.value = 'dialogThanksParticipant'
     dialogVisible.value = true
   } else {
