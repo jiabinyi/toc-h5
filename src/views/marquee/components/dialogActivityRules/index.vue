@@ -55,6 +55,7 @@ const visible = useVModel(props, 'visible', emit)
   }
   .content-main {
     min-height: 275px;
+    max-height: 276px;
     overflow-y: scroll;
     & .content {
       padding: 0 20px 11px;
