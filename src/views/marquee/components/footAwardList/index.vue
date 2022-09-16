@@ -18,7 +18,14 @@
         </div>
         <div class="right">
           <div class="btn" v-if="!item.order_code && !item.overtime_flag" @click="placeOrder(item)">立即下单</div>
-          <div class="btn" v-if="item.order_code" @click="seeOrderDetail(item)">查看订单</div>
+          <div
+            class="btn"
+            v-if="item.order_code && item.order_status !== 'PLACE_ORDER_FAIL'"
+            @click="seeOrderDetail(item)"
+          >
+            查看订单
+          </div>
+          <div class="btn disable" v-if="item.order_status === 'PLACE_ORDER_FAIL'">下单失败</div>
           <div class="btn disable" v-if="!item.order_code && item.overtime_flag">超时未下单</div>
         </div>
       </div>
